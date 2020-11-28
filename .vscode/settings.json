@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "d:\\myAPP\\Python39\\python.exe"
+    "python.pythonPath": "d:\\myAPP\\Python39\\python.exe",
+    "python.languageServer": "Jedi",
+    "python.linting.pylintEnabled": false
 }
