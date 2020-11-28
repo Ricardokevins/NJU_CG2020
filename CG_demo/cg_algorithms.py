@@ -161,7 +161,13 @@ def draw_ellipse(p_list):
     x=0
     y=ry
     p0=float(ry**2-rx**2*ry+rx**2/4)
+    
     temp_result=[]
+    temp_result.append((x,y))
+    temp_result.append((-x,y))
+    temp_result.append((x,-y))
+    temp_result.append((-x,-y))
+
     while (ry**2*x<rx**2*y):
         temp_result.append((x,y))
         if p0<0:
@@ -187,8 +193,8 @@ def draw_ellipse(p_list):
         result.append((cen_x+i[0],cen_y-i[1]))
         result.append((cen_x-i[0],cen_y+i[1]))
         result.append((cen_x-i[0],cen_y-i[1]))
-    print(rx,ry)
-    print(temp_result)
+    #print(rx,ry)
+    #print(temp_result)
     return result
 
 def get_bezier_point(t, step, control_point):
