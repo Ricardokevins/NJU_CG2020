@@ -67,7 +67,7 @@ class MyCanvas(QGraphicsView):
         # print("Hit!!@@@")
         self.status = ''
         self.updateScene([self.sceneRect()])
-        # print("Hit!!@#!@#@")
+
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         pos = self.mapToScene(event.localPos().toPoint())
@@ -77,25 +77,24 @@ class MyCanvas(QGraphicsView):
             self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
             self.scene().addItem(self.temp_item)
         elif self.status == 'ellipse':
+            #print("hit add item")
             self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
             self.scene().addItem(self.temp_item)
-        elif self.status == "selecting":
-            print("Hit !!!!!!!!!")
+        elif self.status == "selecting":  
             selected=self.scene().itemAt(pos,QTransform())
+            print("Hit !!!!!!!!!")
             print(selected)
-            index=0
-            pos=0
             for i in self.item_dict:
-                print(i)
-                print(index)
                 if self.item_dict[i]==selected:
-                    pos=index
-                    break
-                index+=1
-            print(pos)
-            self.selection_changed(pos)
+                    if self.selected_id!="":
+                        self.item_dict[self.selected_id].selected=False
+                        self.item_dict[self.selected_id].update()
+                        self.updateScene([self.sceneRect()])
+                    self.selected_id=i
+                    self.item_dict[i].selected=True
+                    self.item_dict[i].update()
+                    self.main_window.list_widget.setCurrentRow(int(i))
             print("Hit@@@@")
-        self.updateScene([self.sceneRect()])
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
@@ -105,7 +104,12 @@ class MyCanvas(QGraphicsView):
         if self.status == 'line':
             self.temp_item.p_list[1] = [x, y]
         if self.status == 'ellipse':
+            print("Hit here")
+            if self.temp_item==None:
+                exit()
             self.temp_item.p_list[1] = [x, y]
+        if self.status == " polygon":
+            self.temp_item.p_list[-1]=[x,y]
         self.updateScene([self.sceneRect()])
         super().mouseMoveEvent(event)
 
@@ -115,6 +119,7 @@ class MyCanvas(QGraphicsView):
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
         if self.status == 'ellipse':
+            print("Hit mouse release event")
             self.item_dict[self.temp_id] = self.temp_item
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
@@ -164,6 +169,7 @@ class MyItem(QGraphicsItem):
         elif self.item_type == 'polygon':
             pass
         elif self.item_type == 'ellipse':
+            print("Hit int paint ellipse")
             pass
         elif self.item_type == 'curve':
             pass
@@ -277,14 +283,16 @@ class MainWindow(QMainWindow):
         self.canvas_widget.clear_selection()
 
     def line_bresenham_action(self):
-        self.canvas_widget.start_draw_line('bresenham', self.get_id())
+        self.canvas_widget.start_draw_line('Bresenham', self.get_id())
         self.statusBar().showMessage('bresenham算法绘制线段')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
     def ellipse_action(self):
+        print("Hit in action")
         self.canvas_widget.start_draw_ellipse(self.get_id())
         self.statusBar().showMessage('绘制ellipse')
+        print("Hit in action")
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 

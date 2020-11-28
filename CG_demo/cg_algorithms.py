@@ -48,6 +48,8 @@ def draw_line(p_list, algorithm):
                     result.append((x, int(y)))
                     y += k
     elif algorithm == 'Bresenham':
+        print("Hit")
+        print(x0,y0,x1,y1)
         if x0 == x1:
             if y0<y1:
                 for y in range(y0, y1 + 1):
@@ -122,7 +124,6 @@ def draw_line(p_list, algorithm):
         pass
     else:
         print("Hit Error!!!!!!!",algorithm)
-        exit()
     return result
 
 
@@ -141,11 +142,14 @@ def draw_polygon(p_list, algorithm):
 
 
 def draw_ellipse(p_list):
-    """绘制椭圆（采用中点圆生成算法）
-
+    """
+    绘制椭圆（采用中点圆生成算法）
     :param p_list: (list of list of int: [[x0, y0], [x1, y1]]) 椭圆的矩形包围框左上角和右下角顶点坐标
     :return: (list of list of int: [[x_0, y_0], [x_1, y_1], [x_2, y_2], ...]) 绘制结果的像素点坐标列表
     """
+
+    print("Hit in algrithom")
+
     x0, y0 = p_list[0]
     x1, y1 = p_list[1]
     result = []
