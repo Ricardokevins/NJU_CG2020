@@ -1,0 +1,31 @@
+# test of curve
+resetCanvas 900 700
+setColor 0 255 0
+drawPolygon id1 0 0 100 200 200 0 300 200 400 0 500 200 600 100 DDA
+setColor 255 0 0
+drawCurve id2 0 0 100 200 200 0 300 200 400 0 500 200 600 100 Bezier
+setColor 0 0 255
+drawCurve id22 600 100 500 200 400 0 300 200 200 0 100 200 0 0 Bezier
+setColor 255 0 0
+drawCurve id3 0 0 100 200 200 0 300 200 400 0 500 200 600 100 B-spline
+setColor 0 0 255
+drawCurve id33 600 100 500 200 400 0 300 200 200 0 100 200 0 0 B-spline
+saveCanvas 1
+
+clip line1 50 50 170 170 Cohen-Sutherland
+
+# test of scale
+drawPolygon line5 215 353 365 353 365 453 215 453 bresenham
+drawPolygon line1 215 353 365 353 365 453 215 453 bresenham
+drawPolygon line3 215 353 365 353 365 453 215 453 bresenham
+scale line5 290 403 0.5
+
+# test of rotate
+resetCanvas 600 500
+setColor 0 0 255
+drawPolygon line5 215 353 365 353 365 453 215 453 bresenham
+drawPolygon line1 215 353 365 353 365 453 215 453 bresenham
+drawPolygon line3 215 353 365 353 365 453 215 453 bresenham
+rotate line1 290 403 45
+rotate line3 290 403 90
+

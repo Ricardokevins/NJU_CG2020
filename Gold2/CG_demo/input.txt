@@ -1,0 +1,5 @@
+resetCanvas 600 500
+setColor 0 0 255
+drawPolygon line1 235 373 385 373 385 473 235 473 DDA
+drawCurve line2 235 373 385 373 385 473 235 473 Bezier
+saveCanvas 3
