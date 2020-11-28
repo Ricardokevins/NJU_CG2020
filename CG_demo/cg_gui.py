@@ -14,7 +14,9 @@ from PyQt5.QtWidgets import (
     QListWidget,
     QHBoxLayout,
     QWidget,
-    QStyleOptionGraphicsItem)
+    QFileDialog,
+    QStyleOptionGraphicsItem,
+    QColorDialog)
 from PyQt5.QtGui import QPainter, QMouseEvent, QColor
 from PyQt5.QtCore import QRectF
 from PyQt5.QtGui import QTransform
@@ -83,8 +85,6 @@ class MyCanvas(QGraphicsView):
             self.scene().addItem(self.temp_item)
         elif self.status == "selecting":  
             selected=self.scene().itemAt(pos,QTransform())
-            print("Hit !!!!!!!!!")
-            print(selected)
             for i in self.item_dict:
                 if self.item_dict[i]==selected:
                     if self.selected_id!="":
@@ -95,7 +95,6 @@ class MyCanvas(QGraphicsView):
                     self.item_dict[i].selected=True
                     self.item_dict[i].update()
                     self.main_window.list_widget.setCurrentRow(int(i))
-            print("Hit@@@@")
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
@@ -105,9 +104,8 @@ class MyCanvas(QGraphicsView):
         if self.status == 'line':
             self.temp_item.p_list[1] = [x, y]
         if self.status == 'ellipse':
-            print("Hit here")
             if self.temp_item==None:
-                exit()
+                pass
             self.temp_item.p_list[1] = [x, y]
         if self.status == " polygon":
             self.temp_item.p_list[-1]=[x,y]
@@ -120,7 +118,6 @@ class MyCanvas(QGraphicsView):
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
         if self.status == 'ellipse':
-            print("Hit mouse release event")
             self.item_dict[self.temp_id] = self.temp_item
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
@@ -133,7 +130,6 @@ class MyCanvas(QGraphicsView):
         print(len(self.item_dict))
         for item in self.item_dict:
             self.scene().removeItem(self.item_dict[item])
-        print("Hit")
         self.updateScene([self.sceneRect()])
         self.item_dict={}
         self.selected_id=''
@@ -144,7 +140,7 @@ class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
     """
-    def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', parent: QGraphicsItem = None):
+    def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', color: QColor = QColor(0,0,0),parent: QGraphicsItem = None):
         """
         :param item_id: 图元ID
         :param item_type: 图元类型，'line'、'polygon'、'ellipse'、'curve'等
@@ -158,11 +154,12 @@ class MyItem(QGraphicsItem):
         self.p_list = p_list        # 图元参数
         self.algorithm = algorithm  # 绘制算法，'DDA'、'Bresenham'、'Bezier'、'B-spline'等
         self.selected = False
-
+        self.color=color
     def paint(self, painter: QPainter, option: QStyleOptionGraphicsItem, widget: Optional[QWidget] = ...) -> None:
         if self.item_type == 'line':
             item_pixels = alg.draw_line(self.p_list, self.algorithm)
             for p in item_pixels:
+                painter.setPen(self.color)
                 painter.drawPoint(*p)
             if self.selected:
                 painter.setPen(QColor(255, 0, 0))
@@ -170,9 +167,9 @@ class MyItem(QGraphicsItem):
         elif self.item_type == 'polygon':
             pass
         elif self.item_type == 'ellipse':
-            print("Hit int paint ellipse")
             item_pixels = alg.draw_ellipse(self.p_list)
             for p in item_pixels:
+                painter.setPen(self.color)
                 painter.drawPoint(*p)
             if self.selected:
                 painter.setPen(QColor(255, 0, 0))
@@ -211,7 +208,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.item_cnt = 0
-
+        self.col=QColor(0,0,0) # 设置画笔颜色的对应参数
         # 使用QListWidget来记录已有的图元，并用于选择图元。注：这是图元选择的简单实现方法，更好的实现是在画布中直接用鼠标选择图元
         self.list_widget = QListWidget(self)
         self.list_widget.setMinimumWidth(200)
@@ -256,6 +253,7 @@ class MainWindow(QMainWindow):
 
         # 连接信号和槽函数
         exit_act.triggered.connect(qApp.quit)
+        set_pen_act.triggered.connect(self.set_pen)
         mouese_select_act.triggered.connect(self.select_item_action)
         clear_canvas_act.triggered.connect(self.clear_canvas)
         save_canvas_act.triggered.connect(self.save_canvas)
@@ -301,10 +299,8 @@ class MainWindow(QMainWindow):
         self.canvas_widget.clear_selection()
 
     def ellipse_action(self):
-        print("Hit in action")
         self.canvas_widget.start_draw_ellipse(self.get_id())
         self.statusBar().showMessage('绘制ellipse')
-        print("Hit in action")
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
@@ -321,6 +317,22 @@ class MainWindow(QMainWindow):
 
     def save_canvas(self):
         self.statusBar().showMessage("保存画布")
+        self.list_widget.clearSelection()
+        self.canvas_widget.clear_selection()
+        self.statusBar().showMessage('保存画布')
+        dialog=QFileDialog()
+        filename=dialog.getSaveFileName(filter="Image Files(*.jpg *.png *.bmp)")
+        if filename[0]:
+            res=self.canvas_widget.grab(self.canvas_widget.sceneRect().toRect())
+            res.save(filename[0])
+
+    def set_pen(self):
+        self.statusBar().showMessage("设置画笔")
+        col = QColorDialog.getColor()
+        if col.isValid():
+            self.col=col
+        self.list_widget.clearSelection()
+        self.canvas_widget.clear_selection()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
