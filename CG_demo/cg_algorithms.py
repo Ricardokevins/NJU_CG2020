@@ -140,6 +140,14 @@ def draw_polygon(p_list, algorithm):
         result += line
     return result
 
+def draw_polygoning(p_list,algorithm):
+    # original version will connect all node 
+    # but it`s not correct in Drawing not finished
+    result = []
+    for i in range(1,len(p_list)):
+        line = draw_line([p_list[i - 1], p_list[i]], algorithm)
+        result += line
+    return result
 
 def draw_ellipse(p_list):
     """
