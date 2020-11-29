@@ -1,5 +1,16 @@
 {
     "python.pythonPath": "d:\\myAPP\\Python39\\python.exe",
     "python.languageServer": "Jedi",
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "files.autoSave": "onFocusChange",
+    "[json]": {
+
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace",
+        "gitlens.codeLens.scopes": [
+            "document"
+        ]
+    } 
 }

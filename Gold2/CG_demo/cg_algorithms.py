@@ -106,7 +106,6 @@ def draw_part_polygon(p_list, algorithm):
         result += line
     return result
 
-
 def draw_ellipse(p_list):
     """绘制椭圆（采用中点圆生成算法）
 
