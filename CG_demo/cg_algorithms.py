@@ -48,8 +48,6 @@ def draw_line(p_list, algorithm):
                     result.append((x, int(y)))
                     y += k
     elif algorithm == 'Bresenham':
-        print("Hit")
-        print(x0,y0,x1,y1)
         if x0 == x1:
             if y0<y1:
                 for y in range(y0, y1 + 1):
