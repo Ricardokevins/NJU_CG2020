@@ -37,7 +37,18 @@
     \item 修改遇到的算法模块的BUG
 \end{enumerate}
 
-
+目前已经实现的GUI部分
+\begin{enumerate}
+    \item 绘制直线，椭圆，多边形。
+    
+    \item 利用鼠标选中图元
+    
+    \item 平移，旋转
+    
+    \item 保存和清空画布
+    
+    \item 选择画笔颜色
+\end{enumerate}
 \section{GUI框架介绍}
 \subsection{概述}
 GUI框架主要是由如下的三个部分组成的
@@ -126,6 +137,22 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
 \end{figure}
 
 
+\subsection{绘制多边形}
+多边形的绘制相对的会复杂一些，多边形是由多条边组成的，初步的设计是让鼠标的左键
+不断的点击（拖动）选中新坐标点，然后鼠标右键表示作画结束，因此基本的实现思路就是
+不断的捕获左键的操作，然后把坐标点加入p\_list。
+
+注意到在作画结束之前，图形不一定是封闭的，于是原先写好的多边形绘制算法并不能
+直接使用，因此对应的做了一些修改，封装到draw\_polygoning函数，取消了最后一个
+点和第一个点的练接，直到捕获到右键之后说明作画结束，才会调用原来的绘制多边形函数
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{figure/draw.png}
+	\caption{绘图算法效果图}
+	\label{fig:DrawGUI}
+\end{figure}
+
 \subsection{画笔设置}
 之前已经提到了，框架代码在绘制的时候加上了设置颜色的操作，同理我可以在一开始的
 时候设置在菜单里让用户选择对应的颜色，等到用户选择好了颜色之后，我在类里加上
@@ -175,7 +202,7 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
 但是在GUI的使用的时候，由于椭圆是随着鼠标的移动而绘图的，所以这个时候一开始会出现左右两个端点在同一个位置的情况
 进一步的触发了BUG，发现这个BUG后进行修改，在计算之前就先加入左右端点即可
 
-
+ 
 \section{系统介绍}
 目前的CG2020图形学系统已经支持
 \begin{itemize}
@@ -184,9 +211,10 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
     \item 在GUI界面中使用鼠标直接的选中所需图元
     \item 命令行调用曲线生成算法，可选算法Bezier和B-spline
     \item 在命令行调用指令，对图元做平移，旋转，缩放，裁剪操作
-    \item 在GUI界面绘制椭圆
+    \item 在GUI界面绘制直线，多边形，椭圆
+    \item 在GUI界面操作图元平移
     \item 在GUI界面调整画笔
-    \item 在GUI界面选择和保存图
+    \item 在GUI界面保存画布
 \end{itemize}
 
 \section{总结}
@@ -200,7 +228,7 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
 \begin{thebibliography}{99}  
     \bibitem{ref1}《计算机图形学教程》孙正兴编 
     \bibitem{ref2} \href{https://www.google.com/imghp?hl=zh-CN&ogbl}{Google图片}
-    \bibitem{ref3} \href{https://blog.csdn.net/shenziheng1/article/details/54411098}{CSDN博客}
+    \bibitem{ref3} \href{https://build-system.fman.io/pyqt5-tutorial}{PyQT5 Tutorial}
     
 \end{thebibliography}
 

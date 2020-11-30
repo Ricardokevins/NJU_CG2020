@@ -69,8 +69,16 @@ class MyCanvas(QGraphicsView):
         self.status = 'translate'
         self.temp_item = self.item_dict[self.selected_id]
         self.temp_p_list =self.temp_item.p_list
+    
     def start_rotate(self):
-        pass
+        if self.selected_id=="":
+            print("Not select anything yet")
+            self.status=""
+            return 
+        self.status='rotate'
+        self.temp_item=self.item_dict[self.selected_id]
+        self.temp_p_list=self.temp_item.p_list
+        self.rotate_angle=0
 
     def start_scale(self):
         pass
@@ -159,7 +167,10 @@ class MyCanvas(QGraphicsView):
                     self.main_window.list_widget.setCurrentRow(int(i))
         elif self.status == "translate":
             self.start_point=[x,y]
-    
+        elif self.statu == "rotate":
+            # use left buttom to decide rotate center
+            # and use right buttom to caculate rotate angle
+            pass
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
