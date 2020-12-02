@@ -45,8 +45,9 @@ class MyCanvas(QGraphicsView):
         self.temp_id = ''
         self.temp_item = None
 
-        self.start_point=None
-        self.temp_p_list=[]
+        self.start_point = None
+        self.temp_p_list = []
+
     def start_draw_line(self, algorithm, item_id):
         self.status = 'line'
         self.temp_algorithm = algorithm
@@ -63,25 +64,32 @@ class MyCanvas(QGraphicsView):
         self.temp_algorithm = ''
 
     def start_translate(self):
-        if self.selected_id=='': # not selecting anything
-            self.status=''
-            return 
+        if self.selected_id == '':  # not selecting anything
+            self.status = ''
+            return
         self.status = 'translate'
         self.temp_item = self.item_dict[self.selected_id]
-        self.temp_p_list =self.temp_item.p_list
-    
+        self.temp_p_list = self.temp_item.p_list
+
     def start_rotate(self):
-        if self.selected_id=="":
+        if self.selected_id == "":
             print("Not select anything yet")
-            self.status=""
-            return 
-        self.status='rotate'
-        self.temp_item=self.item_dict[self.selected_id]
-        self.temp_p_list=self.temp_item.p_list
-        self.rotate_angle=0
+            self.status = ""
+            return
+        self.status = 'rotate'
+        self.temp_item = self.item_dict[self.selected_id]
+        self.temp_p_list = self.temp_item.p_list
+        self.rotate_angle = 0
+        # TODO:Here not complete yet
 
     def start_scale(self):
-        pass
+        if self.selected_id == "":
+            print("Not select anything yet")
+            self.status = ""
+            return
+        self.status = 'scale'
+        self.temp_item = self.item_dict[self.selected_id]
+        self.temp_p_list = self.temp_item.p_list
 
     def start_clip_cohen_sutherland(self):
         pass
@@ -166,11 +174,14 @@ class MyCanvas(QGraphicsView):
                     self.item_dict[i].update()
                     self.main_window.list_widget.setCurrentRow(int(i))
         elif self.status == "translate":
-            self.start_point=[x,y]
-        elif self.statu == "rotate":
+            self.start_point = [x, y]
+        elif self.status == "rotate":
             # use left buttom to decide rotate center
             # and use right buttom to caculate rotate angle
+            # TODO: Not implement here Attention
             pass
+        elif self.status == "scale":
+            self.start_point = [x, y]
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
@@ -192,7 +203,13 @@ class MyCanvas(QGraphicsView):
                 pass
             self.temp_item.p_list[-1] = [x, y]
         if self.status == "translate":
-            self.temp_item.p_list=alg.translate(self.temp_p_list,x-self.start_point[0],y-self.start_point[1])
+            self.temp_item.p_list = alg.translate(
+                self.temp_p_list, x-self.start_point[0], y-self.start_point[1])
+        if self.status == "scale":
+            xp = ((x-self.start_point[0])**2 +
+                   (y-self.start_point[1])**2)/10000
+            #print("缩放倍数：",xp)
+            self.temp_item.p_list = alg.scale(self.temp_p_list,self.start_point[0],self.start_point[1],xp)
         self.updateScene([self.sceneRect()])
         super().mouseMoveEvent(event)
 
@@ -216,15 +233,14 @@ class MyCanvas(QGraphicsView):
                 self.temp_item.p_list[-1] = [x, y]
                 # refresh Scene to see new item
                 self.updateScene([self.sceneRect()])
-
+        if self.status == "scale":
+            self.p_list=self.temp_item.p_list
         super().mouseReleaseEvent(event)
 
     def start_select(self):
         self.status = 'selecting'
 
     def clear_canvas(self):
-        # TODO:I notice some time A item is ignored
-        print(len(self.item_dict))
         for item in self.item_dict:
             self.scene().removeItem(self.item_dict[item])
         self.updateScene([self.sceneRect()])
@@ -421,48 +437,48 @@ class MainWindow(QMainWindow):
         return _id
 
     def line_naive_action(self):
-        if(self.item_cnt>0):
-            self.item_cnt-=1
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.canvas_widget.start_draw_line('Naive', self.get_id())
         self.statusBar().showMessage('Naive算法绘制线段')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
     def line_DDA_action(self):
-        if(self.item_cnt>0):
-            self.item_cnt-=1
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.canvas_widget.start_draw_line('DDA', self.get_id())
         self.statusBar().showMessage('DDA算法绘制线段')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
     def line_bresenham_action(self):
-        if(self.item_cnt>0):
-            self.item_cnt-=1
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.canvas_widget.start_draw_line('Bresenham', self.get_id())
         self.statusBar().showMessage('Bresenham算法绘制线段')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
     def ellipse_action(self):
-        if(self.item_cnt>0):
-            self.item_cnt-=1
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.canvas_widget.start_draw_ellipse(self.get_id())
         self.statusBar().showMessage('绘制椭圆')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
     def polygon_dda_action(self):
-        if(self.item_cnt>0):
-            self.item_cnt-=1
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.canvas_widget.start_draw_polygon('DDA', self.get_id())
         self.statusBar().showMessage('DDA算法绘制多边形')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
     def polygon_bresenham_action(self):
-        if(self.item_cnt>0):
-            self.item_cnt-=1
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.canvas_widget.start_draw_polygon('Bresenham', self.get_id())
         self.statusBar().showMessage('Bresenham算法绘制多边形')
         self.list_widget.clearSelection()

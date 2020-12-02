@@ -360,15 +360,15 @@ def scale(p_list, x, y, s):
     :param s: (float) 缩放倍数
     :return: (list of list of int: [[x_0, y_0], [x_1, y_1], [x_2, y_2], ...]) 变换后的图元参数
     """
-
+    temp_plist=[]
     s=float(s)
+    
     for i in p_list:
         x_0 = i[0] - x
         y_0 = i[1] - y
-        i[0] = int(x_0 * s) + x
-        i[1] = int(y_0 * s) + y
+        temp_plist.append((int(x_0 * s) + x,int(y_0 * s) + y))
 
-    return p_list
+    return temp_plist
 
 
 class CohenSutherland:
