@@ -403,7 +403,7 @@ class CohenSutherland:
             if code0 | code1==0:
                 return [[x0,y0],[x1,y1]]
             if code0 & code1!=0:
-                return []
+                return [[0,0],[0,0]]
             if code0==0:
                 outnode=code1
             if 1 & outnode!=0:
@@ -432,7 +432,7 @@ class CohenSutherland:
 def LiangBarsky(x1,y1,x2,y2,XL,YB, XR,YT):
     if x1-x2==0:
         if x1<XL or x1>XR:
-            return []
+            return [[0,0],[0,0]]
         else:
             ymin=max(YB,min(y1,y2))
             ymax=min(YT,max(y1,y2))
@@ -443,10 +443,10 @@ def LiangBarsky(x1,y1,x2,y2,XL,YB, XR,YT):
                 re_y2=int(ymax)
                 return [[re_x1,re_y1],[re_x2,re_y2]]
             else:
-                return []
+                return [[0,0],[0,0]]
     elif y1-y2==0:
         if x1<XL or x1>XR:
-            return []
+            return [[0,0],[0,0]]
         else:
             xmin=max(XL,min(x1,x2))
             xmax=min(XR,max(x1,x2))
@@ -457,7 +457,7 @@ def LiangBarsky(x1,y1,x2,y2,XL,YB, XR,YT):
                 re_x2=int(xmax)
                 return [[re_x1, re_y1], [re_x2, re_y2]]
             else:
-                return []
+                return [[0,0],[0,0]]
     else:
         p1 = -(x2 - x1)
         p2 = -p1
@@ -495,7 +495,7 @@ def LiangBarsky(x1,y1,x2,y2,XL,YB, XR,YT):
             re_y2 = int(y1 + umax * (y2 - y1))
             return [[re_x1, re_y1], [re_x2, re_y2]]
         else:
-            return []
+            return [[0,0],[0,0]]
 
 def clip(p_list, x_min, y_min, x_max, y_max, algorithm):
     """线段裁剪
@@ -508,15 +508,24 @@ def clip(p_list, x_min, y_min, x_max, y_max, algorithm):
     :param algorithm: (string) 使用的裁剪算法，包括'Cohen-Sutherland'和'Liang-Barsky'
     :return: (list of list of int: [[x_0, y_0], [x_1, y_1]]) 裁剪后线段的起点和终点坐标
     """
+    print( x_min, y_min, x_max, y_max)
+    if(x_min==x_max or y_min==y_max):
+        result=[[0,0],[0,0]]
+        return result
+    if x_min > x_max:
+        x_min, x_max = x_max, x_min
+    if y_min > y_max:
+        y_min, y_max = y_max, y_min
     if algorithm=="Cohen-Sutherland":
         solver=CohenSutherland(x_min, y_min, x_max, y_max)
         result=solver.solve(p_list)
+        #print(result)
         return result
     else:
         if algorithm=="Liang-Barsky":
-            print("sdas")
+            #print("sdas")
             result=LiangBarsky(p_list[0][0],p_list[0][1],p_list[1][0],p_list[1][1],x_min, y_min, x_max, y_max)
-            print(result)
+            #print(result)
             return result
         else:
             print("Not implement")

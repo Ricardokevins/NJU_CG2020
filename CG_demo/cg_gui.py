@@ -92,10 +92,29 @@ class MyCanvas(QGraphicsView):
         self.temp_p_list = self.temp_item.p_list
 
     def start_clip_cohen_sutherland(self):
-        pass
+        if self.selected_id == "":
+            print("Not select anything yet")
+            self.status = ""
+            return
+        if self.item_dict[self.selected_id].item_type != 'line':
+            self.status=""
+            return
+        self.status = 'clip_CS'
+        self.temp_item=self.item_dict[self.selected_id]
+        self.temp_p_list=self.temp_item.p_list
+        
 
     def start_clip_liang_barsky(self):
-        pass
+        if self.selected_id == "":
+            print("Not select anything yet")
+            self.status = ""
+            return
+        if self.item_dict[self.selected_id].item_type != 'line':
+            self.status=""
+            return
+        self.status = 'clip_LB'
+        self.temp_item=self.item_dict[self.selected_id]
+        self.temp_p_list=self.temp_item.p_list
 
     def finish_draw(self):
         self.temp_id = self.main_window.get_id()
@@ -182,6 +201,10 @@ class MyCanvas(QGraphicsView):
             pass
         elif self.status == "scale":
             self.start_point = [x, y]
+        elif self.status == 'clip_CS' or self.status == 'clip_LB':
+            self.start_point=[x, y]
+        else:
+            print("Hit unknown State")
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
@@ -207,9 +230,16 @@ class MyCanvas(QGraphicsView):
                 self.temp_p_list, x-self.start_point[0], y-self.start_point[1])
         if self.status == "scale":
             xp = ((x-self.start_point[0])**2 +
-                   (y-self.start_point[1])**2)/10000
-            #print("缩放倍数：",xp)
-            self.temp_item.p_list = alg.scale(self.temp_p_list,self.start_point[0],self.start_point[1],xp)
+                  (y-self.start_point[1])**2)/10000
+            # print("缩放倍数：",xp)
+            self.temp_item.p_list = alg.scale(
+                self.temp_p_list, self.start_point[0], self.start_point[1], xp)
+        if self.status == 'clip_LB' or self.status=='clip_CS':
+            if self.status == 'clip_LB':
+                self.temp_item.p_list=alg.clip(self.temp_p_list,self.start_point[0],self.start_point[1],x,y,"Liang-Barsky")
+            else:
+                self.temp_item.p_list=alg.clip(self.temp_p_list,self.start_point[0],self.start_point[1],x,y,"Cohen-Sutherland")
+
         self.updateScene([self.sceneRect()])
         super().mouseMoveEvent(event)
 
@@ -234,7 +264,10 @@ class MyCanvas(QGraphicsView):
                 # refresh Scene to see new item
                 self.updateScene([self.sceneRect()])
         if self.status == "scale":
-            self.p_list=self.temp_item.p_list
+            self.p_list = self.temp_item.p_list
+        if self.status == 'clip_LB' or self.status=='clip_CS':
+            self.p_list = self.temp_item.p_list
+
         super().mouseReleaseEvent(event)
 
     def start_select(self):
