@@ -63,6 +63,13 @@ class MyCanvas(QGraphicsView):
         self.temp_id = item_id
         self.temp_algorithm = ''
 
+    def start_draw_curve(self,algorithm,item_id):
+        self.status = 'curve'
+        self.temp_algorithm = algorithm
+        self.temp_id = item_id
+        self.temp_algorithm = ''
+  
+
     def start_translate(self):
         if self.selected_id == '':  # not selecting anything
             self.status = ''
@@ -443,6 +450,10 @@ class MainWindow(QMainWindow):
         polygon_dda_act.triggered.connect(self.polygon_dda_action)
         polygon_bresenham_act.triggered.connect(self.polygon_bresenham_action)
 
+        #曲线绘制算法的信号绑定
+        curve_bezier_act.triggered.connect(self.curve_bezier_action)
+        curve_b_spline_act.triggered.connect(self.curve_b_spline_action)
+
         # 关于编辑的算法信号绑定
         translate_act.triggered.connect(self.translate_action)
         rotate_act.triggered.connect(self.rotate_action)
@@ -517,6 +528,22 @@ class MainWindow(QMainWindow):
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
+    def curve_bezier_action(self):
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
+        self.canvas_widget.start_draw_curve('bezier', self.get_id())
+        self.statusBar().showMessage('Bezier算法绘制曲线')
+        self.list_widget.clearSelection()
+        self.canvas_widget.clear_selection()
+
+    def curve_b_spline_action(self):
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
+        self.canvas_widget.start_draw_curve('b_spline', self.get_id())
+        self.statusBar().showMessage('b_spline算法绘制曲线')
+        self.list_widget.clearSelection()
+        self.canvas_widget.clear_selection()
+
     def select_item_action(self):
         self.statusBar().showMessage("使用鼠标选择图元")
         self.canvas_widget.start_select()
@@ -525,7 +552,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("清空画布")
         self.list_widget.clear()
         self.canvas_widget.clear_canvas()
-
+        
     def save_canvas(self):
         self.statusBar().showMessage("保存画布")
         self.list_widget.clearSelection()

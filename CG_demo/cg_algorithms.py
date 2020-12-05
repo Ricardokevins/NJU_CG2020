@@ -508,7 +508,7 @@ def clip(p_list, x_min, y_min, x_max, y_max, algorithm):
     :param algorithm: (string) 使用的裁剪算法，包括'Cohen-Sutherland'和'Liang-Barsky'
     :return: (list of list of int: [[x_0, y_0], [x_1, y_1]]) 裁剪后线段的起点和终点坐标
     """
-    print( x_min, y_min, x_max, y_max)
+    #print( x_min, y_min, x_max, y_max)
     if(x_min==x_max or y_min==y_max):
         result=[[0,0],[0,0]]
         return result

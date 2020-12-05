@@ -12,7 +12,7 @@ if __name__ == '__main__':
     #input_file = sys.argv[1]
     #output_dir = sys.argv[2]
     #input_file='input.txt'
-    input_file = 'test.txt'
+    input_file = './curve.txt'
     output_dir='../img'
     os.makedirs(output_dir, exist_ok=True)
 

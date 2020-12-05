@@ -12,6 +12,9 @@ setColor 0 0 255
 drawCurve id33 600 100 500 200 400 0 300 200 200 0 100 200 0 0 B-spline
 saveCanvas 1
 
+
+
+
 clip line1 50 50 170 170 Cohen-Sutherland
 
 # test of scale

@@ -407,7 +407,7 @@ def clip(p_list, x_min, y_min, x_max, y_max, algorithm):
             result=[[xx0,yy0],[xx1,yy1]]
         else:
             result=[[0,0],[0,0]]     
-        
+    print(result)
     return result
 
 def polygon_clip(p_list, x_min, y_min, x_max, y_max):
