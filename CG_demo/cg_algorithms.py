@@ -229,71 +229,32 @@ def bezier(p_list):
     return result
 
 
-def deboox_cox(i, deg , t,knot):
-    '''
-    :param i=knot_i:
-    :param k=knot_i+deg:
-    :param t=t:
-    :return:
-    '''
-    if deg == 0:
-        if knot[i]<=t and t<=knot[i+1]:
+def deboox_cox(i, k, u):
+    if k == 1:
+        if i<=u and u<i+1:
             return 1
         else:
             return 0
     else:
-        temp1=knot[i+deg]-knot[i]
-        temp2=knot[i+deg+1]-knot[i+1]
-        if temp1==0 and temp2==0:
-            return 0
-        if temp1==0:
-            return (knot[i+deg+1]-t)/temp2*deboox_cox(i+1,deg-1,t,knot)
-        if temp2==0:
-            return (t-knot[i])/temp1*deboox_cox(i, deg-1 , t,knot)
-        return (t-knot[i])/temp1*deboox_cox(i, deg-1 , t,knot)+(knot[i+deg+1]-t)/temp2*deboox_cox(i+1,deg-1,t,knot)
+        return (u-i)/(k-1)*deboox_cox(i,k-1,u)+(i+k-u)/(k-1)*deboox_cox(i+1,k-1,u)
 
 def b_spline(p_list):
-    k = 3
+    k = 3 #4阶3次
     result=[]
     n = len(p_list)
-    du = float(1 / 1000)
-
-
-    num=n+k+1
-    knot=[]
-
-    for i in range(num):
-        knot.append(0)
-
-    for i in range(k+1):
-        knot[i]=0
-        knot[-i-1]=1
-
-
-    step=n-k+1
-    per_step=1/step
-
-    cur=0
-    for i in range(k+1,n):
-        cur+=per_step
-        knot[i]=cur
-
-
-    index=0
-    temp=[]
-    for i in range(10001):
-        temp.append(index)
-        index+=1/10000
-
-    for u in temp:
-        x1, y1 = 0, 0
+    step = float(1 / 1000)
+    u=k
+    # TODO: 这里需要重新理解B-spline后重构
+    while u<n:
+        x, y = 0, 0
         for i in range(0, n):
-            x0, y0 = p_list[i]
-            res = deboox_cox(i, k , u,knot)
-            x1 += x0 * res
-            y1 += y0 * res
+            # count the knot in range contribute
+            tempx, tempy = p_list[i]
+            res = deboox_cox(i, k+1 , u)
+            x += tempx * res
+            y += tempy * res
         result.append([round(x1), round(y1)])
-        u += du
+        u += step
     return result
 
 def draw_curve(p_list, algorithm):
