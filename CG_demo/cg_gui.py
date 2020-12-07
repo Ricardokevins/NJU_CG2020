@@ -26,6 +26,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
 
+# TODO: We need to set menu unchoosable to disable sudden status change while drawing polygon and curve
 
 class MyCanvas(QGraphicsView):
     """
