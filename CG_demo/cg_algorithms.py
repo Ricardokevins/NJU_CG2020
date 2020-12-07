@@ -306,14 +306,12 @@ def rotate(p_list, x, y, r):
 
     cos_val=math.cos(r)
     sin_val = math.sin(r)
-
+    temp_result=[]
     for i in p_list:
         x_0 = i[0] - x
         y_0 = i[1] - y
-        i[0]=int(x_0*cos_val-y_0*sin_val)+x
-        i[1]=int(x_0*sin_val+y_0*cos_val)+y
-
-    return p_list
+        temp_result.append([int(x_0*cos_val-y_0*sin_val)+x,int(x_0*sin_val+y_0*cos_val)+y])
+    return temp_result
 
 def scale(p_list, x, y, s):
     """缩放变换

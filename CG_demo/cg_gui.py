@@ -28,6 +28,7 @@ from PyQt5.QtCore import *
 
 # TODO: We need to set menu unchoosable to disable sudden status change while drawing polygon and curve
 
+
 class MyCanvas(QGraphicsView):
     """
     画布窗体类，继承自QGraphicsView，采用QGraphicsView、QGraphicsScene、QGraphicsItem的绘图框架
@@ -50,7 +51,7 @@ class MyCanvas(QGraphicsView):
         self.temp_p_list = []
 
         self.col = QColor(0, 0, 0)  # 设置画笔颜色的对应参数
-        
+
     def start_draw_line(self, algorithm, item_id):
         self.status = 'line'
         self.temp_algorithm = algorithm
@@ -88,7 +89,7 @@ class MyCanvas(QGraphicsView):
         self.temp_item = self.item_dict[self.selected_id]
         self.temp_p_list = self.temp_item.p_list
         self.rotate_angle = 0
-        # TODO:Here not complete yet
+        # TODO: Here not complete yet
 
     def start_scale(self):
         if self.selected_id == "":
@@ -161,15 +162,15 @@ class MyCanvas(QGraphicsView):
         y = int(pos.y())
 
         if self.status == 'line':
-            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
             self.scene().addItem(self.temp_item)
         elif self.status == 'ellipse':
-            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
             self.scene().addItem(self.temp_item)
         elif self.status == "polygon":
             # TODO:make menu not response to mouse which in case may lead to bug
             if self.temp_item == None:
-                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
+                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
                 self.scene().addItem(self.temp_item)
             else:
                 if self.mousePressDetect(event) == 1:
@@ -185,7 +186,7 @@ class MyCanvas(QGraphicsView):
                     self.updateScene([self.sceneRect()])
         elif self.status == 'curve':
             if self.temp_item == None:
-                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
+                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
                 self.scene().addItem(self.temp_item)
             else:
                 if self.mousePressDetect(event) == 1:
@@ -199,7 +200,6 @@ class MyCanvas(QGraphicsView):
                     # I will refresh scene to use drawPolygon instead
                     # drawPolygoning which will draw last edge
                     self.updateScene([self.sceneRect()])
-
         elif self.status == "selecting":
             selected = self.scene().itemAt(pos, QTransform())
             for i in self.item_dict:
@@ -218,13 +218,19 @@ class MyCanvas(QGraphicsView):
             # use left buttom to decide rotate center
             # and use right buttom to caculate rotate angle
             # TODO: Not implement here Attention
-            pass
+            if self.mousePressDetect(event) == 1:
+                self.start_point = [x, y]
+            else:
+                # finish rotating
+                self.p_list = self.temp_item.p_list
+                self.status = ''
         elif self.status == "scale":
             self.start_point = [x, y]
         elif self.status == 'clip_CS' or self.status == 'clip_LB':
             self.start_point = [x, y]
         else:
-            print("Hit unknown State",self.status)
+            print("Hit unknown State", self.status)
+        self.updateScene([self.sceneRect()])
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
@@ -241,7 +247,7 @@ class MyCanvas(QGraphicsView):
         if self.status == "polygon":
             # save the last position mouse stay
             # and make Item move as mouse did
-            # Here Hit crash at one time 
+            # Here Hit crash at one time
             # TODO: Pay Attention to every chance which temp_item may be None
             if self.temp_item == None:
                 pass
@@ -250,22 +256,24 @@ class MyCanvas(QGraphicsView):
         if self.status == "translate":
             self.temp_item.p_list = alg.translate(self.temp_p_list, x-self.start_point[0], y-self.start_point[1])
         if self.status == "scale":
-            xp = ((x-self.start_point[0])**2 +(y-self.start_point[1])**2)/10000
+            xp = ((x-self.start_point[0])**2 + (y-self.start_point[1])**2)/10000
             # print("缩放倍数：",xp)
             self.temp_item.p_list = alg.scale(
                 self.temp_p_list, self.start_point[0], self.start_point[1], xp)
         if self.status == 'clip_LB' or self.status == 'clip_CS':
             if self.status == 'clip_LB':
-                self.temp_item.p_list = alg.clip(self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Liang-Barsky")
+                self.temp_item.p_list = alg.clip(
+                    self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Liang-Barsky")
             else:
-                self.temp_item.p_list = alg.clip(self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Cohen-Sutherland")
+                self.temp_item.p_list = alg.clip(
+                    self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Cohen-Sutherland")
         if self.status == "curve":
             if self.temp_item == None:
                 print("Not creating anything")
                 pass
             else:
-                self.temp_item.p_list[-1]= [x, y]
-            
+                self.temp_item.p_list[-1] = [x, y]
+
         self.updateScene([self.sceneRect()])
         super().mouseMoveEvent(event)
 
@@ -312,6 +320,9 @@ class MyCanvas(QGraphicsView):
             # self.temp_item.p_list[-1] = [x, y]
             # self.updateScene([self.sceneRect()])
             # self.p_list = self.temp_item.p_list
+        if self.status == 'rotate':
+            self.temp_p_list == self.temp_item.p_list
+    
         super().mouseReleaseEvent(event)
 
     def start_select(self):
@@ -322,7 +333,7 @@ class MyCanvas(QGraphicsView):
             # print("Canvas set color successfully")
             # if col == QColor(0, 0, 0):
             #     print("Still black")
-            self.col=col
+            self.col = col
         else:
             print("Some thing wrong about color! Failed to set")
 
@@ -335,13 +346,29 @@ class MyCanvas(QGraphicsView):
         self.status = ''
         self.temp_item = None
 
+    def wheelEvent(self, event):
+        # delta fuction has been abandoned
+        #print(event.angleDelta().y())
+        if self.status == "rotate":
+            if self.start_point != None:
+                if event.angleDelta().y() > 0:
+                    self.rotate_angle += 1
+                else:
+                    self.rotate_angle -= 1
+                self.temp_item.p_list = alg.rotate(self.temp_p_list, self.start_point[0], self.start_point[1],self.rotate_angle)        
+                #print(self.temp_item.p_list)
+                #print(self.rotate_angle)
+            else:
+                print("Not choose Center Point now")
+        self.updateScene([self.sceneRect()])
+
 
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
     """
 
-    #def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', color: QColor = QColor(0, 0, 0), parent: QGraphicsItem = None):
+    # def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', color: QColor = QColor(0, 0, 0), parent: QGraphicsItem = None):
     def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', color: QColor = QColor(0, 0, 0), parent: QGraphicsItem = None):
         """
         :param item_id: 图元ID
@@ -390,14 +417,14 @@ class MyItem(QGraphicsItem):
                 painter.setPen(QColor(255, 0, 0))
                 painter.drawRect(self.boundingRect())
         elif self.item_type == 'curve':
-            
+
             item_pixels = alg.draw_curve(self.p_list, self.algorithm)
             for p in item_pixels:
                 painter.setPen(self.color)
                 painter.drawPoint(*p)
             if self.selected:
                 painter.setPen(QColor(255, 0, 0))
-                painter.drawRect(self.boundingRect()) 
+                painter.drawRect(self.boundingRect())
             #print("Hit drawing curve")
             pass
 
@@ -457,7 +484,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.item_cnt = 0
-        
+
         # 使用QListWidget来记录已有的图元，并用于选择图元。注：这是图元选择的简单实现方法，更好的实现是在画布中直接用鼠标选择图元
         self.list_widget = QListWidget(self)
         self.list_widget.setMinimumWidth(200)
