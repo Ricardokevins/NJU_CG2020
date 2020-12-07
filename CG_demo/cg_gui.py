@@ -63,12 +63,10 @@ class MyCanvas(QGraphicsView):
         self.temp_id = item_id
         self.temp_algorithm = ''
 
-    def start_draw_curve(self,algorithm,item_id):
+    def start_draw_curve(self, algorithm, item_id):
         self.status = 'curve'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
-        self.temp_algorithm = ''
-  
 
     def start_translate(self):
         if self.selected_id == '':  # not selecting anything
@@ -104,12 +102,11 @@ class MyCanvas(QGraphicsView):
             self.status = ""
             return
         if self.item_dict[self.selected_id].item_type != 'line':
-            self.status=""
+            self.status = ""
             return
         self.status = 'clip_CS'
-        self.temp_item=self.item_dict[self.selected_id]
-        self.temp_p_list=self.temp_item.p_list
-        
+        self.temp_item = self.item_dict[self.selected_id]
+        self.temp_p_list = self.temp_item.p_list
 
     def start_clip_liang_barsky(self):
         if self.selected_id == "":
@@ -117,11 +114,11 @@ class MyCanvas(QGraphicsView):
             self.status = ""
             return
         if self.item_dict[self.selected_id].item_type != 'line':
-            self.status=""
+            self.status = ""
             return
         self.status = 'clip_LB'
-        self.temp_item=self.item_dict[self.selected_id]
-        self.temp_p_list=self.temp_item.p_list
+        self.temp_item = self.item_dict[self.selected_id]
+        self.temp_p_list = self.temp_item.p_list
 
     def finish_draw(self):
         self.temp_id = self.main_window.get_id()
@@ -161,18 +158,31 @@ class MyCanvas(QGraphicsView):
         y = int(pos.y())
 
         if self.status == 'line':
-            self.temp_item = MyItem(self.temp_id, self.status, [
-                                    [x, y], [x, y]], self.temp_algorithm)
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
             self.scene().addItem(self.temp_item)
         elif self.status == 'ellipse':
-            self.temp_item = MyItem(self.temp_id, self.status, [
-                                    [x, y], [x, y]], self.temp_algorithm)
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
             self.scene().addItem(self.temp_item)
         elif self.status == "polygon":
             # TODO:make menu not response to mouse which in case may lead to bug
             if self.temp_item == None:
-                self.temp_item = MyItem(self.temp_id, self.status, [
-                    [x, y], [x, y]], self.temp_algorithm)
+                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
+                self.scene().addItem(self.temp_item)
+            else:
+                if self.mousePressDetect(event) == 1:
+                    self.temp_item.p_list.append([x, y])
+                else:
+                    self.list_widget.addItem(self.temp_id)
+                    self.temp_item.finish_draw = True
+                    self.item_dict[self.temp_id] = self.temp_item
+                    self.finish_draw()
+                    # as soon as press right buttom which means stop
+                    # I will refresh scene to use drawPolygon instead
+                    # drawPolygoning which will draw last edge
+                    self.updateScene([self.sceneRect()])
+        elif self.status == 'curve':
+            if self.temp_item == None:
+                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
                 self.scene().addItem(self.temp_item)
             else:
                 if self.mousePressDetect(event) == 1:
@@ -209,9 +219,9 @@ class MyCanvas(QGraphicsView):
         elif self.status == "scale":
             self.start_point = [x, y]
         elif self.status == 'clip_CS' or self.status == 'clip_LB':
-            self.start_point=[x, y]
+            self.start_point = [x, y]
         else:
-            print("Hit unknown State")
+            print("Hit unknown State",self.status)
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
@@ -236,17 +246,24 @@ class MyCanvas(QGraphicsView):
             self.temp_item.p_list = alg.translate(
                 self.temp_p_list, x-self.start_point[0], y-self.start_point[1])
         if self.status == "scale":
-            xp = ((x-self.start_point[0])**2 +
-                  (y-self.start_point[1])**2)/10000
+            xp = ((x-self.start_point[0])**2 +(y-self.start_point[1])**2)/10000
             # print("缩放倍数：",xp)
             self.temp_item.p_list = alg.scale(
                 self.temp_p_list, self.start_point[0], self.start_point[1], xp)
-        if self.status == 'clip_LB' or self.status=='clip_CS':
+        if self.status == 'clip_LB' or self.status == 'clip_CS':
             if self.status == 'clip_LB':
-                self.temp_item.p_list=alg.clip(self.temp_p_list,self.start_point[0],self.start_point[1],x,y,"Liang-Barsky")
+                self.temp_item.p_list = alg.clip(
+                    self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Liang-Barsky")
             else:
-                self.temp_item.p_list=alg.clip(self.temp_p_list,self.start_point[0],self.start_point[1],x,y,"Cohen-Sutherland")
-
+                self.temp_item.p_list = alg.clip(
+                    self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Cohen-Sutherland")
+        if self.status == "curve":
+            if self.temp_item == None:
+                print("Not creating anything")
+                pass
+            else:
+                self.temp_item.p_list[-1]= [x, y]
+            
         self.updateScene([self.sceneRect()])
         super().mouseMoveEvent(event)
 
@@ -272,9 +289,25 @@ class MyCanvas(QGraphicsView):
                 self.updateScene([self.sceneRect()])
         if self.status == "scale":
             self.p_list = self.temp_item.p_list
-        if self.status == 'clip_LB' or self.status=='clip_CS':
+        if self.status == 'clip_LB' or self.status == 'clip_CS':
             self.p_list = self.temp_item.p_list
-
+        if self.status == "curve":
+            if self.temp_item == None:
+                pass
+            else:
+                # try to catch last time mouse stay and draw
+                pos = self.mapToScene(event.localPos().toPoint())
+                x = int(pos.x())
+                y = int(pos.y())
+                self.temp_item.p_list[-1] = [x, y]
+                # refresh Scene to see new item
+                self.updateScene([self.sceneRect()])
+            # pos = self.mapToScene(event.localPos().toPoint())
+            # x = int(pos.x())
+            # y = int(pos.y())
+            # self.temp_item.p_list[-1] = [x, y]
+            # self.updateScene([self.sceneRect()])
+            # self.p_list = self.temp_item.p_list
         super().mouseReleaseEvent(event)
 
     def start_select(self):
@@ -341,6 +374,15 @@ class MyItem(QGraphicsItem):
                 painter.setPen(QColor(255, 0, 0))
                 painter.drawRect(self.boundingRect())
         elif self.item_type == 'curve':
+            
+            item_pixels = alg.draw_curve(self.p_list, self.algorithm)
+            for p in item_pixels:
+                painter.setPen(self.color)
+                painter.drawPoint(*p)
+            if self.selected:
+                painter.setPen(QColor(255, 0, 0))
+                painter.drawRect(self.boundingRect()) 
+            #print("Hit drawing curve")
             pass
 
     def boundingRect(self) -> QRectF:
@@ -353,10 +395,10 @@ class MyItem(QGraphicsItem):
             h = max(y0, y1) - y
             return QRectF(x - 1, y - 1, w + 2, h + 2)
         elif self.item_type == 'polygon':
-            xmin = -1
-            ymin = -1
-            xmax = 100000
-            ymax = 100000
+            xmax = -1
+            ymax = -1
+            xmin = 100000
+            ymin = 100000
             for i in range(len(self.p_list)):
                 tempx, tempy = self.p_list[i]
                 xmin = min(xmin, tempx)
@@ -375,7 +417,20 @@ class MyItem(QGraphicsItem):
             h = max(y0, y1) - y
             return QRectF(x - 1, y - 1, w + 2, h + 2)
         elif self.item_type == 'curve':
-            pass
+            xmax = -1
+            ymax = -1
+            xmin = 100000
+            ymin = 100000
+            for i in range(len(self.p_list)):
+                tempx, tempy = self.p_list[i]
+                xmin = min(xmin, tempx)
+                ymin = min(ymin, tempy)
+                xmax = max(xmax, tempx)
+                ymax = max(ymax, tempy)
+            w = xmax-xmin
+            h = ymax - ymin
+            #print(xmin-1, ymin-1, w+2, h+2)
+            return QRectF(xmin-1, ymin-1, w+2, h+2)
 
 
 class MainWindow(QMainWindow):
@@ -450,7 +505,7 @@ class MainWindow(QMainWindow):
         polygon_dda_act.triggered.connect(self.polygon_dda_action)
         polygon_bresenham_act.triggered.connect(self.polygon_bresenham_action)
 
-        #曲线绘制算法的信号绑定
+        # 曲线绘制算法的信号绑定
         curve_bezier_act.triggered.connect(self.curve_bezier_action)
         curve_b_spline_act.triggered.connect(self.curve_b_spline_action)
 
@@ -531,7 +586,7 @@ class MainWindow(QMainWindow):
     def curve_bezier_action(self):
         if(self.item_cnt > 0):
             self.item_cnt -= 1
-        self.canvas_widget.start_draw_curve('bezier', self.get_id())
+        self.canvas_widget.start_draw_curve('Bezier', self.get_id())
         self.statusBar().showMessage('Bezier算法绘制曲线')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
@@ -539,7 +594,7 @@ class MainWindow(QMainWindow):
     def curve_b_spline_action(self):
         if(self.item_cnt > 0):
             self.item_cnt -= 1
-        self.canvas_widget.start_draw_curve('b_spline', self.get_id())
+        self.canvas_widget.start_draw_curve('B-spline', self.get_id())
         self.statusBar().showMessage('b_spline算法绘制曲线')
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
@@ -552,7 +607,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("清空画布")
         self.list_widget.clear()
         self.canvas_widget.clear_canvas()
-        
+
     def save_canvas(self):
         self.statusBar().showMessage("保存画布")
         self.list_widget.clearSelection()

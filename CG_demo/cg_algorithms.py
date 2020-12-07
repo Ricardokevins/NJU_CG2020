@@ -223,7 +223,8 @@ def bezier(p_list):
         index+=dis
     length=len(p_list)
     for i in t_list:
-        x,y=get_bezier_point(i,length, p_list)
+        control_point=p_list.copy()
+        x,y=get_bezier_point(i,length, control_point)
         result.append((int(x+0.5),int(y+0.5)))
 
     return result
@@ -253,7 +254,7 @@ def b_spline(p_list):
             res = deboox_cox(i, k+1 , u)
             x += tempx * res
             y += tempy * res
-        result.append([round(x1), round(y1)])
+        result.append([round(x), round(y)])
         u += step
     return result
 
@@ -264,6 +265,7 @@ def draw_curve(p_list, algorithm):
     :param algorithm: (string) 绘制使用的算法，包括'Bezier'和'B-spline'（三次均匀B样条曲线，曲线不必经过首末控制点）
     :return: (list of list of int: [[x_0, y_0], [x_1, y_1], [x_2, y_2], ...]) 绘制结果的像素点坐标列表
     """
+    #print(algorithm)
     if algorithm=="Bezier":
         #print("Bezier")
         return bezier(p_list)
@@ -272,8 +274,9 @@ def draw_curve(p_list, algorithm):
         #print("B-spline")
         return b_spline(p_list)
     else:
-        print("Not implement")
-        return 0
+        print("Not implement Use Bezier as default")
+        return bezier(p_list)
+
 
 def translate(p_list, dx, dy):
     """平移变换

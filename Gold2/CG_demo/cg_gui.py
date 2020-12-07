@@ -480,8 +480,6 @@ class MyCanvas(QGraphicsView):
         self.updateScene([self.sceneRect()])
         #super(). wheelEvent(event)
 
-
-
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
