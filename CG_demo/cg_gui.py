@@ -48,6 +48,8 @@ class MyCanvas(QGraphicsView):
         self.start_point = None
         self.temp_p_list = []
 
+        self.col = QColor(0, 0, 0)  # 设置画笔颜色的对应参数
+        
     def start_draw_line(self, algorithm, item_id):
         self.status = 'line'
         self.temp_algorithm = algorithm
@@ -158,15 +160,15 @@ class MyCanvas(QGraphicsView):
         y = int(pos.y())
 
         if self.status == 'line':
-            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
             self.scene().addItem(self.temp_item)
         elif self.status == 'ellipse':
-            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
             self.scene().addItem(self.temp_item)
         elif self.status == "polygon":
             # TODO:make menu not response to mouse which in case may lead to bug
             if self.temp_item == None:
-                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
+                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
                 self.scene().addItem(self.temp_item)
             else:
                 if self.mousePressDetect(event) == 1:
@@ -182,7 +184,7 @@ class MyCanvas(QGraphicsView):
                     self.updateScene([self.sceneRect()])
         elif self.status == 'curve':
             if self.temp_item == None:
-                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm)
+                self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm,self.col)
                 self.scene().addItem(self.temp_item)
             else:
                 if self.mousePressDetect(event) == 1:
@@ -233,18 +235,19 @@ class MyCanvas(QGraphicsView):
         if self.status == 'ellipse':
             if self.temp_item == None:
                 print("Hit Here")
-                exit()
                 pass
             self.temp_item.p_list[1] = [x, y]
         if self.status == "polygon":
             # save the last position mouse stay
             # and make Item move as mouse did
+            # Here Hit crash at one time 
+            # TODO: Pay Attention to every chance which temp_item may be None
             if self.temp_item == None:
                 pass
-            self.temp_item.p_list[-1] = [x, y]
+            else:
+                self.temp_item.p_list[-1] = [x, y]
         if self.status == "translate":
-            self.temp_item.p_list = alg.translate(
-                self.temp_p_list, x-self.start_point[0], y-self.start_point[1])
+            self.temp_item.p_list = alg.translate(self.temp_p_list, x-self.start_point[0], y-self.start_point[1])
         if self.status == "scale":
             xp = ((x-self.start_point[0])**2 +(y-self.start_point[1])**2)/10000
             # print("缩放倍数：",xp)
@@ -252,11 +255,9 @@ class MyCanvas(QGraphicsView):
                 self.temp_p_list, self.start_point[0], self.start_point[1], xp)
         if self.status == 'clip_LB' or self.status == 'clip_CS':
             if self.status == 'clip_LB':
-                self.temp_item.p_list = alg.clip(
-                    self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Liang-Barsky")
+                self.temp_item.p_list = alg.clip(self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Liang-Barsky")
             else:
-                self.temp_item.p_list = alg.clip(
-                    self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Cohen-Sutherland")
+                self.temp_item.p_list = alg.clip(self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Cohen-Sutherland")
         if self.status == "curve":
             if self.temp_item == None:
                 print("Not creating anything")
@@ -270,6 +271,8 @@ class MyCanvas(QGraphicsView):
     def mouseReleaseEvent(self, event: QMouseEvent) -> None:
         if self.status == 'line':
             self.item_dict[self.temp_id] = self.temp_item
+            if self.temp_item.color == QColor(0, 0, 0):
+                print("Not settting to item")
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
         if self.status == 'ellipse':
@@ -313,6 +316,15 @@ class MyCanvas(QGraphicsView):
     def start_select(self):
         self.status = 'selecting'
 
+    def set_pen_color(self, col):
+        if col.isValid():
+            # print("Canvas set color successfully")
+            # if col == QColor(0, 0, 0):
+            #     print("Still black")
+            self.col=col
+        else:
+            print("Some thing wrong about color! Failed to set")
+
     def clear_canvas(self):
         for item in self.item_dict:
             self.scene().removeItem(self.item_dict[item])
@@ -328,6 +340,7 @@ class MyItem(QGraphicsItem):
     自定义图元类，继承自QGraphicsItem
     """
 
+    #def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', color: QColor = QColor(0, 0, 0), parent: QGraphicsItem = None):
     def __init__(self, item_id: str, item_type: str, p_list: list, algorithm: str = '', color: QColor = QColor(0, 0, 0), parent: QGraphicsItem = None):
         """
         :param item_id: 图元ID
@@ -342,6 +355,8 @@ class MyItem(QGraphicsItem):
         self.p_list = p_list        # 图元参数
         self.algorithm = algorithm  # 绘制算法，'DDA'、'Bresenham'、'Bezier'、'B-spline'等
         self.selected = False
+        if color == QColor(0, 0, 0):
+            print("Still use origin color")
         self.color = color
         self.finish_draw = False
 
@@ -441,7 +456,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.item_cnt = 0
-        self.col = QColor(0, 0, 0)  # 设置画笔颜色的对应参数
+        
         # 使用QListWidget来记录已有的图元，并用于选择图元。注：这是图元选择的简单实现方法，更好的实现是在画布中直接用鼠标选择图元
         self.list_widget = QListWidget(self)
         self.list_widget.setMinimumWidth(200)
@@ -622,10 +637,11 @@ class MainWindow(QMainWindow):
             res.save(filename[0])
 
     def set_pen(self):
+        # use this fuction to set pen's color
         self.statusBar().showMessage("设置画笔")
         col = QColorDialog.getColor()
         if col.isValid():
-            self.col = col
+            self.canvas_widget.set_pen_color(col)
         self.list_widget.clearSelection()
         self.canvas_widget.clear_selection()
 
