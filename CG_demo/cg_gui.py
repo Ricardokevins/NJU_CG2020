@@ -15,8 +15,17 @@ from PyQt5.QtWidgets import (
     QHBoxLayout,
     QWidget,
     QFileDialog,
+    QInputDialog,
+    QDialog,
     QStyleOptionGraphicsItem,
-    QColorDialog)
+    QFormLayout,
+    QLineEdit,
+    QColorDialog,
+    QPushButton,
+    QDialogButtonBox,
+    QMessageBox
+    )
+
 from PyQt5.QtGui import QPainter, QMouseEvent, QColor
 from PyQt5.QtCore import QRectF
 from PyQt5.QtGui import QTransform
@@ -141,6 +150,14 @@ class MyCanvas(QGraphicsView):
             self.item_dict[self.selected_id].update()
 
         self.selected_id = selected
+        if selected == '':
+            # TODO
+            # When I choose something through list 
+            # and direct use Reset canvas will Hit Here and cause crash
+            # current I don't how to deal with it 
+            # Just Use "return" to avoid crash
+            print("Hit Error with choose nothing!")
+            return 
         self.item_dict[selected].selected = True
         self.item_dict[selected].update()
 
@@ -484,16 +501,17 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.item_cnt = 0
-
+        self.width = 600
+        self.length = 600
         # 使用QListWidget来记录已有的图元，并用于选择图元。注：这是图元选择的简单实现方法，更好的实现是在画布中直接用鼠标选择图元
         self.list_widget = QListWidget(self)
         self.list_widget.setMinimumWidth(200)
 
         # 使用QGraphicsView作为画布
         self.scene = QGraphicsScene(self)
-        self.scene.setSceneRect(0, 0, 600, 600)
+        self.scene.setSceneRect(0, 0, self.width, self.length)
         self.canvas_widget = MyCanvas(self.scene, self)
-        self.canvas_widget.setFixedSize(600, 600)
+        self.canvas_widget.setFixedSize(self.width, self.length)
         self.canvas_widget.main_window = self
         self.canvas_widget.list_widget = self.list_widget
 
@@ -533,6 +551,7 @@ class MainWindow(QMainWindow):
         mouese_select_act.triggered.connect(self.select_item_action)
         clear_canvas_act.triggered.connect(self.clear_canvas)
         save_canvas_act.triggered.connect(self.save_canvas)
+        reset_canvas_act.triggered.connect(self.reset_canvas_action)
         self.list_widget.currentTextChanged.connect(
             self.canvas_widget.selection_changed)
 
@@ -577,7 +596,62 @@ class MainWindow(QMainWindow):
         _id = str(self.item_cnt)
         self.item_cnt += 1
         return _id
+    
+    def getInteger(self):
+        # one choose is to use this function for double time
+        # and get width and height in two time
+        # I will try to use dialog to get two interger at one time
+        i, okPressed = QInputDialog.getInt(self, "Get integer1","Percentage1:", 28, 0, 100, 1)
+        k, okPressed = QInputDialog.getInt(self, "Get integer2","Percentage2:", 28, 0, 100, 1)
+        if okPressed:
+            print(i,k)
 
+
+    def reset_canvas_action(self):
+        print("Reset canvas")
+        self.item_cnt=0
+        self.statusBar().showMessage('重置画布')
+        dialog = QDialog()
+        dialog.setWindowTitle('重置画布')
+        formlayout = QFormLayout(dialog)
+        widthEdit = QLineEdit()
+        heightEdit = QLineEdit()
+        formlayout.addRow("width", widthEdit)
+        formlayout.addRow("height", heightEdit)
+        box3 = QDialogButtonBox(QDialogButtonBox.Ok)
+        box3.accepted.connect(dialog.accept)
+        formlayout.addRow(box3)
+        if dialog.exec():
+            width = widthEdit.text()
+            height = heightEdit.text()
+            if len(width) == 0 or len(height) == 0:
+                QMessageBox.about(self, "Warning", "input number empty!   ")
+                return
+            if width.isdigit() and height.isdigit():
+                if int(width)<1000 and int(width)>100 and int(height)<1000 and int(height)>100:
+                    self.width = int(width)
+                    self.height = int(height)
+                else:
+                    QMessageBox.about(self, "Warning", "input number is out of range (100-1000 Only)!   ")
+                    return
+            else:
+                QMessageBox.about(self, "Warning", "input number is not integer!   ")
+                return
+            self.canvas_widget.clear_canvas()
+            self.list_widget.clearSelection()
+            self.canvas_widget.clear_selection()
+            self.list_widget.clear()
+
+            self.scene = QGraphicsScene(self)
+            self.scene.setSceneRect(0, 0, self.width, self.length)
+            self.canvas_widget.resize(self.width, self.length)
+            self.canvas_widget.setFixedSize(self.width, self.length)
+            self.canvas_widget.main_window = self
+            self.canvas_widget.list_widget = self.list_widget
+            self.statusBar().showMessage('空闲')
+            self.resize(self.width,self.height)
+
+            
     def line_naive_action(self):
         if(self.item_cnt > 0):
             self.item_cnt -= 1
