@@ -1,0 +1,15 @@
+2020-12-09 12:12:50 Start System
+2020-12-09 12:12:53 draw ellipse success  get item 0
+2020-12-09 12:13:00 Select change from 0 to 0
+2020-12-09 12:13:03 copy success select 0
+2020-12-09 12:13:08 paste success  get item 2
+2020-12-09 12:13:17 Select change from 1 to 1
+2020-12-09 12:13:22 translate 1 success
+2020-12-09 12:13:26 Select change from 0 to 0
+2020-12-09 12:13:30 translate 0 success
+2020-12-09 12:15:18 -----------------------------------
+2020-12-09 12:15:18 Start System
+2020-12-09 12:15:21 draw ellipse success  get item 0
+2020-12-09 12:15:23 draw curve success  get item 1
+2020-12-09 12:15:28 Select change from 0 to 0
+2020-12-09 12:15:30 Hit unknown State in Mousepressed 

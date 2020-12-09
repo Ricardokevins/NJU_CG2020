@@ -34,9 +34,27 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
-
+import time
 # TODO: We need to set menu unchoosable to disable sudden status change while drawing polygon and curve
 
+class Logger:
+    def __init__(self):
+        
+        self.path = 'log.txt'
+        self.log_info = []
+        self.print_flag = True
+        
+    def log(self, info):
+        timestamp = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        info = timestamp + ' '+info
+        if self.print_flag == True:
+            print(info)
+        self.log_info.append(info)
+        f = open(self.path, 'a')
+        f.write(info+'\n')
+        f.close()
+
+cglog = Logger()
 
 class MyCanvas(QGraphicsView):
     """
@@ -59,46 +77,54 @@ class MyCanvas(QGraphicsView):
         self.start_point = None
         self.temp_p_list = []
 
+        self.copy_board=None
         self.col = QColor(0, 0, 0)  # 设置画笔颜色的对应参数
-
+    
     def start_draw_line(self, algorithm, item_id):
         self.status = 'line'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
-
+        cglog.log("draw line success " + " get item {}".format(self.temp_id))
+        
     def start_draw_polygon(self, algorithm, item_id):
         self.status = 'polygon'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
+        cglog.log("draw polygon success " + " get item {}".format(self.temp_id))
 
     def start_draw_ellipse(self,  item_id):
         self.status = 'ellipse'
         self.temp_id = item_id
         self.temp_algorithm = ''
+        cglog.log("draw ellipse success " + " get item {}".format(self.temp_id))
+
 
     def start_draw_curve(self, algorithm, item_id):
         self.status = 'curve'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
+        cglog.log("draw curve success " + " get item {}".format(self.temp_id))
 
     def start_translate(self):
         if self.selected_id == '':  # not selecting anything
             self.status = ''
+            cglog.log("translate failed Not select anything yet")
             return
         self.status = 'translate'
         self.temp_item = self.item_dict[self.selected_id]
         self.temp_p_list = self.temp_item.p_list
+        cglog.log("translate {} success".format(self.selected_id))
 
     def start_rotate(self):
         if self.selected_id == "":
-            print("Not select anything yet")
+            cglog.log("rotate failed Not select anything yet")
             self.status = ""
             return
         self.status = 'rotate'
         self.temp_item = self.item_dict[self.selected_id]
         self.temp_p_list = self.temp_item.p_list
         self.rotate_angle = 0
-        # TODO: Here not complete yet
+        cglog.log("rotate {} success".format(self.selected_id))
 
     def start_scale(self):
         if self.selected_id == "":
@@ -111,27 +137,31 @@ class MyCanvas(QGraphicsView):
 
     def start_clip_cohen_sutherland(self):
         if self.selected_id == "":
-            print("Not select anything yet")
+            cglog.log("clip_CS failed Not select anything yet")
             self.status = ""
             return
         if self.item_dict[self.selected_id].item_type != 'line':
+            cglog.log("clip_CS failed Not line target")
             self.status = ""
             return
         self.status = 'clip_CS'
         self.temp_item = self.item_dict[self.selected_id]
         self.temp_p_list = self.temp_item.p_list
+        cglog.log("clip_CS {} success".format(self.selected_id))
 
     def start_clip_liang_barsky(self):
         if self.selected_id == "":
-            print("Not select anything yet")
+            cglog.log("clip_LB failed Not select anything yet")
             self.status = ""
             return
         if self.item_dict[self.selected_id].item_type != 'line':
+            cglog.log("clip_LB failed Not line target")
             self.status = ""
             return
         self.status = 'clip_LB'
         self.temp_item = self.item_dict[self.selected_id]
         self.temp_p_list = self.temp_item.p_list
+        cglog.log("clip_LB {} success".format(self.selected_id))
 
     def finish_draw(self):
         self.temp_id = self.main_window.get_id()
@@ -160,7 +190,7 @@ class MyCanvas(QGraphicsView):
             return 
         self.item_dict[selected].selected = True
         self.item_dict[selected].update()
-
+        cglog.log("Select change from {} to {}".format(self.selected_id,selected))
         self.status = ''
         self.updateScene([self.sceneRect()])
 
@@ -245,8 +275,26 @@ class MyCanvas(QGraphicsView):
             self.start_point = [x, y]
         elif self.status == 'clip_CS' or self.status == 'clip_LB':
             self.start_point = [x, y]
+        elif self.status == 'paste':
+            self.temp_item = MyItem(self.temp_id, self.copy_board.item_type, self.copy_board.p_list, self.copy_board.algorithm, self.col)
+            self.temp_item.finish_draw = True
+            centerx = 0
+            centery = 0
+            for i in self.copy_board.p_list:
+                centerx += i[0]
+                centery += i[1]
+            centerx = centerx / len(self.copy_board.p_list)
+            centery = centery / len(self.copy_board.p_list)
+            self.start_point = [x, y]
+            self.temp_item.p_list=alg.translate(self.copy_board.p_list,x-centerx,y-centery)
+            self.scene().addItem(self.temp_item)
+            self.item_dict[self.temp_id] = self.temp_item
+            cglog.log("paste success "+" get item {}".format(self.temp_id))
+            self.list_widget.addItem(self.temp_id)
+            self.finish_draw()
+            
         else:
-            print("Hit unknown State", self.status)
+            cglog.log("Hit unknown State in Mousepressed "+self.status)
         self.updateScene([self.sceneRect()])
         super().mousePressEvent(event)
 
@@ -351,8 +399,9 @@ class MyCanvas(QGraphicsView):
             # if col == QColor(0, 0, 0):
             #     print("Still black")
             self.col = col
+            cglog.log("Set color success "+" RGB {}{}{}".format(self.col.red(),self.col.green(),self.col.blue()))
         else:
-            print("Some thing wrong about color! Failed to set")
+            cglog.log("Set color success failed , color isn't vaild")
 
     def clear_canvas(self):
         for item in self.item_dict:
@@ -362,6 +411,7 @@ class MyCanvas(QGraphicsView):
         self.selected_id = ''
         self.status = ''
         self.temp_item = None
+        cglog.log("clear canvas success")
 
     def wheelEvent(self, event):
         # delta fuction has been abandoned
@@ -379,7 +429,24 @@ class MyCanvas(QGraphicsView):
                 print("Not choose Center Point now")
         self.updateScene([self.sceneRect()])
 
+    def copy_item(self):
+        if self.selected_id == '':
+            print("Not selecting anything")
+            self.status = ''
+            return
+        self.status = 'copy'
+        # temp save the item in copy board and wait for paste
+        self.copy_board = self.item_dict[self.selected_id]
+        cglog.log("copy success"+" select "+str(self.selected_id))
+        return
 
+    def paste_item(self):
+        if self.copy_board == None:
+            cglog.log("paste failed "+" select nothing ")
+            self.status = ''
+            return
+        self.status = 'paste'
+        
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
@@ -400,8 +467,6 @@ class MyItem(QGraphicsItem):
         self.p_list = p_list        # 图元参数
         self.algorithm = algorithm  # 绘制算法，'DDA'、'Bresenham'、'Bezier'、'B-spline'等
         self.selected = False
-        if color == QColor(0, 0, 0):
-            print("Still use origin color")
         self.color = color
         self.finish_draw = False
 
@@ -500,6 +565,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        cglog.log("-----------------------------------")
+        cglog.log("Start System")
         self.item_cnt = 0
         self.width = 600
         self.length = 600
@@ -522,7 +589,6 @@ class MainWindow(QMainWindow):
         reset_canvas_act = file_menu.addAction('重置画布')
         clear_canvas_act = file_menu.addAction('清空画布')
         save_canvas_act = file_menu.addAction('保存画布')
-        mouese_select_act = file_menu.addAction('选择图元')
         exit_act = file_menu.addAction('退出')
 
         draw_menu = menubar.addMenu('绘制')
@@ -545,10 +611,17 @@ class MainWindow(QMainWindow):
         clip_cohen_sutherland_act = clip_menu.addAction('Cohen-Sutherland')
         clip_liang_barsky_act = clip_menu.addAction('Liang-Barsky')
 
+        Additional_function_menu = menubar.addMenu('附加功能')
+        mouese_select_act = Additional_function_menu.addAction('鼠标选择图元')
+        copy_act = Additional_function_menu.addAction('复制')
+        paste_act=Additional_function_menu.addAction("粘贴")
+
         # 关于菜单和窗口操作的信号绑定
         exit_act.triggered.connect(qApp.quit)
         set_pen_act.triggered.connect(self.set_pen)
         mouese_select_act.triggered.connect(self.select_item_action)
+        copy_act.triggered.connect(self.copy_action)
+        paste_act.triggered.connect(self.paste_action)
         clear_canvas_act.triggered.connect(self.clear_canvas)
         save_canvas_act.triggered.connect(self.save_canvas)
         reset_canvas_act.triggered.connect(self.reset_canvas_action)
@@ -606,6 +679,13 @@ class MainWindow(QMainWindow):
         if okPressed:
             print(i,k)
 
+    def copy_action(self):
+        self.canvas_widget.copy_item()
+        self.statusBar().showMessage('复制操作')
+
+    def paste_action(self):
+        self.canvas_widget.paste_item()
+        self.statusBar().showMessage('粘贴操作')
 
     def reset_canvas_action(self):
         print("Reset canvas")
@@ -651,7 +731,6 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage('空闲')
             self.resize(self.width,self.height)
 
-            
     def line_naive_action(self):
         if(self.item_cnt > 0):
             self.item_cnt -= 1
