@@ -11,3 +11,30 @@
 2020-12-09 14:00:04 Select change from 1 to 1
 2020-12-09 14:00:09 translate 1 success
 2020-12-09 14:00:26 draw line success  get item 3
+2020-12-09 14:22:36 -----------------------------------
+2020-12-09 14:22:36 Start System
+2020-12-09 14:22:45 Set color success  RGB 085255
+2020-12-09 14:22:55 draw ellipse success  get item 0
+2020-12-09 14:23:04 Select change from 0 to 0
+2020-12-09 14:23:13 translate 0 success
+2020-12-09 14:23:22 draw curve success  get item 1
+2020-12-09 14:23:31 Select change from  to 1
+2020-12-09 14:23:32 Select change from 1 to 0
+2020-12-09 14:23:33 Select change from 0 to 1
+2020-12-09 14:23:34 Select change from 1 to 0
+2020-12-09 14:23:35 Select change from 0 to 1
+2020-12-09 14:23:36 Select change from 1 to 0
+2020-12-09 14:23:39 copy success select 0
+2020-12-09 14:23:43 paste success  get item 2
+2020-12-09 14:23:45 Select change from 0 to 2
+2020-12-09 14:23:53 translate 2 success
+2020-12-09 14:23:56 Select change from 2 to 0
+2020-12-09 14:23:57 Select change from 0 to 2
+2020-12-09 14:24:00 draw polygon success  get item 3
+2020-12-09 14:24:14 Set color success  RGB 0850
+2020-12-09 14:24:16 draw polygon success  get item 4
+2020-12-09 14:24:31 Select change from  to 5
+2020-12-09 14:24:32 Select change from 5 to 4
+2020-12-09 14:24:47 translate 4 success
+2020-12-09 14:24:51 copy success select 4
+2020-12-09 14:24:55 paste success  get item 6

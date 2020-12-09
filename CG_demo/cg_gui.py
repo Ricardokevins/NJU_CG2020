@@ -264,7 +264,6 @@ class MyCanvas(QGraphicsView):
         elif self.status == "rotate":
             # use left buttom to decide rotate center
             # and use right buttom to caculate rotate angle
-            # TODO: Not implement here Attention
             if self.mousePressDetect(event) == 1:
                 self.start_point = [x, y]
             else:
