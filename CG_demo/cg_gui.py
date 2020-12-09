@@ -178,7 +178,7 @@ class MyCanvas(QGraphicsView):
         if self.selected_id != '':
             self.item_dict[self.selected_id].selected = False
             self.item_dict[self.selected_id].update()
-
+        cglog.log("Select change from {} to {}".format(self.selected_id,selected))
         self.selected_id = selected
         if selected == '':
             # TODO
@@ -190,7 +190,7 @@ class MyCanvas(QGraphicsView):
             return 
         self.item_dict[selected].selected = True
         self.item_dict[selected].update()
-        cglog.log("Select change from {} to {}".format(self.selected_id,selected))
+        
         self.status = ''
         self.updateScene([self.sceneRect()])
 
@@ -345,8 +345,6 @@ class MyCanvas(QGraphicsView):
     def mouseReleaseEvent(self, event: QMouseEvent) -> None:
         if self.status == 'line':
             self.item_dict[self.temp_id] = self.temp_item
-            if self.temp_item.color == QColor(0, 0, 0):
-                print("Not settting to item")
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
         if self.status == 'ellipse':
