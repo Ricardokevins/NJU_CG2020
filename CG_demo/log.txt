@@ -38,3 +38,137 @@
 2020-12-09 14:24:47 translate 4 success
 2020-12-09 14:24:51 copy success select 4
 2020-12-09 14:24:55 paste success  get item 6
+2020-12-09 18:49:00 -----------------------------------
+2020-12-09 18:49:00 Start System
+2020-12-09 18:49:16 Set color success  RGB 2551700
+2020-12-09 18:49:19 draw polygon success  get item 0
+2020-12-09 18:49:28 draw line success  get item 1
+2020-12-09 18:49:32 draw ellipse success  get item 2
+2020-12-09 18:49:35 draw curve success  get item 3
+2020-12-09 18:49:41 Select change from  to 3
+2020-12-09 18:49:42 Select change from 3 to 2
+2020-12-09 18:49:43 Select change from 2 to 1
+2020-12-09 18:49:44 Select change from 1 to 0
+2020-12-09 18:49:46 Select change from 0 to 1
+2020-12-09 18:49:47 Select change from 1 to 2
+2020-12-09 18:49:48 Select change from 2 to 3
+2020-12-09 18:49:51 Select change from 2 to 2
+2020-12-09 18:49:54 copy success select 2
+2020-12-09 18:49:57 paste success  get item 4
+2020-12-09 18:49:59 Select change from 2 to 4
+2020-12-09 18:50:00 Select change from 4 to 3
+2020-12-09 18:50:01 Select change from 3 to 2
+2020-12-09 18:50:01 Select change from 2 to 1
+2020-12-09 18:50:02 Select change from 1 to 0
+2020-12-09 18:50:05 draw polygon success  get item 5
+2020-12-09 18:50:12 Set color success  RGB 01700
+2020-12-09 18:50:14 draw ellipse success  get item 6
+2020-12-09 18:50:16 translate failed Not select anything yet
+2020-12-09 18:50:17 Hit unknown State in Mousepressed 
+2020-12-09 18:50:21 Select change from  to 1
+2020-12-09 18:50:22 Select change from 1 to 0
+2020-12-09 18:50:26 translate 0 success
+2020-12-09 18:50:29 Select change from 0 to 5
+2020-12-09 18:50:30 Select change from 5 to 6
+2020-12-09 18:50:41 clear canvas success
+2020-12-09 18:50:41 Select change from  to 
+2020-12-09 18:50:56 draw ellipse success  get item 0
+2020-12-09 18:51:00 Set color success  RGB 170170255
+2020-12-09 18:51:02 draw polygon success  get item 1
+2020-12-09 18:51:15 Set color success  RGB 02550
+2020-12-09 18:51:17 draw ellipse success  get item 2
+2020-12-09 18:51:30 draw curve success  get item 3
+2020-12-09 18:51:34 Select change from  to 3
+2020-12-09 18:51:40 -----------------------------------
+2020-12-09 18:51:40 Start System
+2020-12-09 18:51:46 draw curve success  get item 0
+2020-12-09 18:51:49 Select change from  to 0
+2020-12-09 18:51:52 draw curve success  get item 1
+2020-12-09 18:52:06 draw curve success  get item 2
+2020-12-09 18:52:13 Select change from  to 1
+2020-12-09 18:52:14 Select change from 1 to 0
+2020-12-09 18:52:18 Select change from 0 to 1
+2020-12-09 18:52:20 Select change from 1 to 0
+2020-12-09 18:52:20 Select change from 0 to 1
+2020-12-09 18:56:44 -----------------------------------
+2020-12-09 18:56:44 Start System
+2020-12-09 18:56:50 draw curve success  get item 0
+2020-12-09 19:00:23 -----------------------------------
+2020-12-09 19:00:23 Start System
+2020-12-09 19:00:29 Set color success  RGB 170-170-255
+2020-12-09 19:00:33 draw polygon success  get item 0
+2020-12-09 19:00:41 draw line success  get item 1
+2020-12-09 19:00:45 draw ellipse success  get item 2
+2020-12-09 19:00:49 draw curve success  get item 3
+2020-12-09 19:00:58 Select change from  to 3
+2020-12-09 19:00:59 Select change from 3 to 2
+2020-12-09 19:00:59 Select change from 2 to 1
+2020-12-09 19:00:59 Select change from 1 to 0
+2020-12-09 19:01:00 Select change from 0 to 3
+2020-12-09 19:01:01 Select change from 3 to 2
+2020-12-09 19:01:01 Select change from 2 to 1
+2020-12-09 19:01:01 Select change from 1 to 0
+2020-12-09 19:01:02 Select change from 0 to 3
+2020-12-09 19:02:07 -----------------------------------
+2020-12-09 19:02:07 Start System
+2020-12-09 19:02:10 draw ellipse success  get item 0
+2020-12-09 19:02:13 draw curve success  get item 1
+2020-12-09 19:03:23 -----------------------------------
+2020-12-09 19:03:23 Start System
+2020-12-09 19:03:46 -----------------------------------
+2020-12-09 19:03:46 Start System
+2020-12-09 19:04:05 -----------------------------------
+2020-12-09 19:04:05 Start System
+2020-12-09 19:04:09 draw ellipse success  get item 0
+2020-12-09 19:04:16 draw polygon success  get item 1
+2020-12-09 19:04:20 draw curve success  get item 2
+2020-12-09 19:07:23 -----------------------------------
+2020-12-09 19:07:23 Start System
+2020-12-09 19:07:28 draw curve success  get item 0
+2020-12-09 19:09:06 Select change from 0 to 0
+2020-12-09 19:09:12 draw ellipse success  get item 1
+2020-12-09 19:09:17 Select change from  to 1
+2020-12-09 19:09:30 Select change from 1 to 0
+2020-12-09 19:09:31 Select change from 0 to 1
+2020-12-09 19:09:32 Select change from 1 to 0
+2020-12-09 19:09:34 Select change from 0 to 1
+2020-12-09 19:10:05 Select change from 1 to 0
+2020-12-09 19:10:08 translate 0 success
+2020-12-09 19:10:17 -----------------------------------
+2020-12-09 19:10:17 Start System
+2020-12-09 19:10:20 draw curve success  get item 0
+2020-12-09 19:10:24 Select change from  to 0
+2020-12-09 19:10:26 rotate 0 success
+2020-12-09 19:10:41 draw polygon success  get item 1
+2020-12-09 19:10:49 -----------------------------------
+2020-12-09 19:10:49 Start System
+2020-12-09 19:11:04 draw ellipse success  get item 0
+2020-12-09 19:11:05 Select change from  to 0
+2020-12-09 19:11:08 rotate 0 success
+2020-12-09 19:11:17 draw line success  get item 1
+2020-12-09 19:11:21 draw curve success  get item 2
+2020-12-09 19:11:25 Select change from  to 2
+2020-12-09 19:11:27 rotate 2 success
+2020-12-09 19:11:41 draw line success  get item 3
+2020-12-09 19:11:43 Select change from  to 3
+2020-12-09 19:11:44 Select change from 3 to 2
+2020-12-09 19:11:44 Select change from 2 to 1
+2020-12-09 19:45:27 -----------------------------------
+2020-12-09 19:45:27 Start System
+2020-12-09 19:45:31 draw polygon success  get item 0
+2020-12-10 00:58:11 -----------------------------------
+2020-12-10 00:58:11 Start System
+2020-12-10 00:58:14 draw ellipse success  get item 0
+2020-12-10 00:58:17 draw curve success  get item 1
+2020-12-10 00:58:28 draw polygon success  get item 2
+2020-12-10 00:58:35 Select change from  to 2
+2020-12-10 00:58:36 Select change from 2 to 1
+2020-12-10 00:58:36 Select change from 1 to 0
+2020-12-10 00:58:39 Set color success  RGB 170-170-255
+2020-12-10 00:58:41 draw ellipse success  get item 3
+2020-12-10 00:58:47 Set color success  RGB 0-255-0
+2020-12-10 00:58:49 draw ellipse success  get item 4
+2020-12-10 00:58:56 Set color success  RGB 85-0-255
+2020-12-10 00:59:00 draw polygon success  get item 5
+2020-12-10 00:59:59 Select change from  to 
+2020-12-10 00:59:59 clear canvas success

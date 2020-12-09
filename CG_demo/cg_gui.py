@@ -215,14 +215,17 @@ class MyCanvas(QGraphicsView):
             self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
             self.scene().addItem(self.temp_item)
         elif self.status == "polygon":
-            # TODO:make menu not response to mouse which in case may lead to bug
             if self.temp_item == None:
                 self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
                 self.scene().addItem(self.temp_item)
+                self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,True)
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,True)
             else:
                 if self.mousePressDetect(event) == 1:
                     self.temp_item.p_list.append([x, y])
                 else:
+                    self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,False)
+                    self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,False)
                     self.list_widget.addItem(self.temp_id)
                     self.temp_item.finish_draw = True
                     self.item_dict[self.temp_id] = self.temp_item
@@ -235,6 +238,8 @@ class MyCanvas(QGraphicsView):
             if self.temp_item == None:
                 self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
                 self.scene().addItem(self.temp_item)
+                self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,True)
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,True)   
             else:
                 if self.mousePressDetect(event) == 1:
                     self.temp_item.p_list.append([x, y])
@@ -243,6 +248,8 @@ class MyCanvas(QGraphicsView):
                     self.temp_item.finish_draw = True
                     self.item_dict[self.temp_id] = self.temp_item
                     self.finish_draw()
+                    self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,False)
+                    self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,False)
                     # as soon as press right buttom which means stop
                     # I will refresh scene to use drawPolygon instead
                     # drawPolygoning which will draw last edge
@@ -312,7 +319,6 @@ class MyCanvas(QGraphicsView):
             # save the last position mouse stay
             # and make Item move as mouse did
             # Here Hit crash at one time
-            # TODO: Pay Attention to every chance which temp_item may be None
             if self.temp_item == None:
                 pass
             else:
@@ -333,7 +339,6 @@ class MyCanvas(QGraphicsView):
                     self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Cohen-Sutherland")
         if self.status == "curve":
             if self.temp_item == None:
-                print("Not creating anything")
                 pass
             else:
                 self.temp_item.p_list[-1] = [x, y]
@@ -376,12 +381,8 @@ class MyCanvas(QGraphicsView):
                 self.temp_item.p_list[-1] = [x, y]
                 # refresh Scene to see new item
                 self.updateScene([self.sceneRect()])
-            # pos = self.mapToScene(event.localPos().toPoint())
-            # x = int(pos.x())
-            # y = int(pos.y())
-            # self.temp_item.p_list[-1] = [x, y]
-            # self.updateScene([self.sceneRect()])
-            # self.p_list = self.temp_item.p_list
+                
+                
         if self.status == 'rotate':
             self.temp_p_list == self.temp_item.p_list
     
@@ -396,7 +397,7 @@ class MyCanvas(QGraphicsView):
             # if col == QColor(0, 0, 0):
             #     print("Still black")
             self.col = col
-            cglog.log("Set color success "+" RGB {}{}{}".format(self.col.red(),self.col.green(),self.col.blue()))
+            cglog.log("Set color success "+" RGB {}-{}-{}".format(self.col.red(),self.col.green(),self.col.blue()))
         else:
             cglog.log("Set color success failed , color isn't vaild")
 
@@ -496,8 +497,10 @@ class MyItem(QGraphicsItem):
                 painter.setPen(QColor(255, 0, 0))
                 painter.drawRect(self.boundingRect())
         elif self.item_type == 'curve':
-
-            item_pixels = alg.draw_curve(self.p_list, self.algorithm)
+            if(len(self.p_list)<=3 and self.algorithm=='B-spline'):
+                item_pixels = alg.draw_polygoning(self.p_list, 'DDA')
+            else:
+                item_pixels = alg.draw_curve(self.p_list, self.algorithm)
             for p in item_pixels:
                 painter.setPen(self.color)
                 painter.drawPoint(*p)
@@ -580,15 +583,15 @@ class MainWindow(QMainWindow):
         self.canvas_widget.list_widget = self.list_widget
 
         # 设置菜单栏
-        menubar = self.menuBar()
-        file_menu = menubar.addMenu('文件')
+        self.menubar = self.menuBar()
+        file_menu = self.menubar.addMenu('文件')
         set_pen_act = file_menu.addAction('设置画笔')
         reset_canvas_act = file_menu.addAction('重置画布')
         clear_canvas_act = file_menu.addAction('清空画布')
         save_canvas_act = file_menu.addAction('保存画布')
         exit_act = file_menu.addAction('退出')
 
-        draw_menu = menubar.addMenu('绘制')
+        draw_menu = self.menubar.addMenu('绘制')
         line_menu = draw_menu.addMenu('线段')
         line_naive_act = line_menu.addAction('Naive')
         line_dda_act = line_menu.addAction('DDA')
@@ -600,7 +603,7 @@ class MainWindow(QMainWindow):
         curve_menu = draw_menu.addMenu('曲线')
         curve_bezier_act = curve_menu.addAction('Bezier')
         curve_b_spline_act = curve_menu.addAction('B-spline')
-        edit_menu = menubar.addMenu('编辑')
+        edit_menu = self.menubar.addMenu('编辑')
         translate_act = edit_menu.addAction('平移')
         rotate_act = edit_menu.addAction('旋转')
         scale_act = edit_menu.addAction('缩放')
@@ -608,10 +611,10 @@ class MainWindow(QMainWindow):
         clip_cohen_sutherland_act = clip_menu.addAction('Cohen-Sutherland')
         clip_liang_barsky_act = clip_menu.addAction('Liang-Barsky')
 
-        Additional_function_menu = menubar.addMenu('附加功能')
-        mouese_select_act = Additional_function_menu.addAction('鼠标选择图元')
-        copy_act = Additional_function_menu.addAction('复制')
-        paste_act=Additional_function_menu.addAction("粘贴")
+        self.Additional_function_menu = self.menubar.addMenu('附加功能')
+        mouese_select_act = self.Additional_function_menu.addAction('鼠标选择图元')
+        copy_act =self. Additional_function_menu.addAction('复制')
+        paste_act=self.Additional_function_menu.addAction("粘贴")
 
         # 关于菜单和窗口操作的信号绑定
         exit_act.triggered.connect(qApp.quit)
