@@ -97,8 +97,7 @@ class MyCanvas(QGraphicsView):
         self.temp_id = item_id
         self.temp_algorithm = ''
         cglog.log("draw ellipse success " + " get item {}".format(self.temp_id))
-
-
+    
     def start_draw_curve(self, algorithm, item_id):
         self.status = 'curve'
         self.temp_algorithm = algorithm
@@ -186,7 +185,7 @@ class MyCanvas(QGraphicsView):
             # and direct use Reset canvas will Hit Here and cause crash
             # current I don't how to deal with it 
             # Just Use "return" to avoid crash
-            print("Hit Error with choose nothing!")
+            cglog.log("selection change Hit Error with choose nothing!")
             return 
         self.item_dict[selected].selected = True
         self.item_dict[selected].update()
@@ -444,7 +443,34 @@ class MyCanvas(QGraphicsView):
             self.status = ''
             return
         self.status = 'paste'
+    
+    def undo_item(self):
+        pass
+
+    def delete_item(self):
+        if self.selected_id == '':
+            cglog.log("delete failed Not selecting anything")
+            self.status = ''
+            return
+        self.status = ''
         
+        temp = self.selected_id
+        self.selected_id=''
+
+        self.scene().removeItem(self.item_dict[str(temp)])
+        del self.item_dict[str(temp)]
+        
+        item = self.list_widget.takeItem(int(temp))
+        
+        self.list_widget.removeItemWidget(item)
+        self.updateScene([self.sceneRect()])
+        
+        self.status=''
+        self.temp_item = None
+        if(self.main_window.item_cnt>0):
+            self.main_window.item_cnt -= 1
+
+
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
@@ -611,10 +637,14 @@ class MainWindow(QMainWindow):
         clip_cohen_sutherland_act = clip_menu.addAction('Cohen-Sutherland')
         clip_liang_barsky_act = clip_menu.addAction('Liang-Barsky')
 
+        #拓展功能的定义位置
         self.Additional_function_menu = self.menubar.addMenu('附加功能')
         mouese_select_act = self.Additional_function_menu.addAction('鼠标选择图元')
         copy_act =self. Additional_function_menu.addAction('复制')
         paste_act=self.Additional_function_menu.addAction("粘贴")
+        undo_act=self.Additional_function_menu.addAction("撤销")
+        delete_act=self.Additional_function_menu.addAction("删除")
+
 
         # 关于菜单和窗口操作的信号绑定
         exit_act.triggered.connect(qApp.quit)
@@ -622,6 +652,8 @@ class MainWindow(QMainWindow):
         mouese_select_act.triggered.connect(self.select_item_action)
         copy_act.triggered.connect(self.copy_action)
         paste_act.triggered.connect(self.paste_action)
+        undo_act.triggered.connect(self.undo_action)
+        delete_act.triggered.connect(self.delete_action)
         clear_canvas_act.triggered.connect(self.clear_canvas)
         save_canvas_act.triggered.connect(self.save_canvas)
         reset_canvas_act.triggered.connect(self.reset_canvas_action)
@@ -686,6 +718,14 @@ class MainWindow(QMainWindow):
     def paste_action(self):
         self.canvas_widget.paste_item()
         self.statusBar().showMessage('粘贴操作')
+
+    def undo_action(self):
+        self.canvas_widget.undo_item()
+        self.statusBar().showMessage('撤销操作')
+
+    def delete_action(self):
+        self.canvas_widget.delete_item()
+        self.statusBar().showMessage('删除操作')
 
     def reset_canvas_action(self):
         print("Reset canvas")

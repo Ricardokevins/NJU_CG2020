@@ -771,7 +771,7 @@ class MainWindow(QMainWindow):
         box3.rejected.connect(dialog.reject)
         formlayout.addRow(box3)
         
-        if dialog.exec()
+        if dialog.exec():
             if(box1.value()<100 or box1.value()>1000 or box2.value()<100 or box2.value()>1000):
                 QMessageBox.about(self, "提示", "修改失败,请保证输入的数字大于等于100小于等于1000")
             else:
