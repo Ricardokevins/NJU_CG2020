@@ -156,6 +156,7 @@ class MyCanvas(QGraphicsView):
         if(item_id<=1):
             return
         item_id-=2
+        print(temp_id)
         self.scene().removeItem(self.item_dict[str(item_id)])
         del self.item_dict[str(item_id)]
         item = self.list_widget.takeItem(item_id)

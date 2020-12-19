@@ -181,15 +181,15 @@ class MyCanvas(QGraphicsView):
         self.selected_id = selected
         if selected == '':
             # TODO
-            # When I choose something through list 
+            # When I choose something through list
             # and direct use Reset canvas will Hit Here and cause crash
-            # current I don't how to deal with it 
+            # current I don't how to deal with it
             # Just Use "return" to avoid crash
-            cglog.log("selection change Hit Error with choose nothing!")
-            return 
+            cglog.log("selection change And reset to choose nothing!")
+            return
         self.item_dict[selected].selected = True
         self.item_dict[selected].update()
-        
+
         self.status = ''
         self.updateScene([self.sceneRect()])
 
@@ -461,8 +461,19 @@ class MyCanvas(QGraphicsView):
         del self.item_dict[str(temp)]
         
         item = self.list_widget.takeItem(int(temp))
+        cglog.log("remove {} from listwidget".format(temp))
+
+        # Test to fix bug in delete
+        temp_dict = {}
+        self.list_widget.clear()
         
-        self.list_widget.removeItemWidget(item)
+
+        for index,i in enumerate(self.item_dict):
+            temp_dict[str(index)] = self.item_dict[i]
+            self.list_widget.addItem(str(index))
+        self.item_dict = temp_dict
+
+        #self.list_widget.removeItemWidget(item)
         self.updateScene([self.sceneRect()])
         
         self.status=''
