@@ -332,7 +332,8 @@ class CohenSutherland:
         self.x_min=x_min
         self.y_min=y_min
         self.x_max=x_max
-        self.y_max=y_max
+        self.y_max = y_max
+        #print(self.x_min,self.x_max)
 
     def encoder(self,x,y):
         c = 0
@@ -356,31 +357,43 @@ class CohenSutherland:
         y=0
         #print(code0,code1)
         while True:
+            # directly get result :)
+            
             if (code0 | code1)==0:
                 return [[x0,y0],[x1,y1]]
+            # directly drop result :)
             if (code0 & code1)!=0:
                 return [[0,0],[0,0]]
-            if code0==0:
-                outnode=code1
+            if code0==0:# if point0 in the window, we choose point1 as the outpoint
+                outnode = code1
+            else:
+                outnode = code0
+            #print(code0,code1,outnode)
+            # See if point0 is on the left side of window
             if 1 & outnode!=0:
                 x = self.x_min
-                y = y0 + (y1 - y0) * (self.x_min - x0) / (x1 - x0)
-            elif 2 & outnode!=0:
+                y = int(float(y0) + float((y1 - y0) * (self.x_min - x0) / (x1 - x0)) + 0.5)
+            # See the outpoint is on the right side of the window
+            elif 2 & outnode != 0:
                 x = self.x_max
-                y = y0 + (y1 - y0) * (self.x_max - x0) / (x1 - x0)
+                y = int(float(y0) + float((y1 - y0) * (self.x_max - x0) / (x1 - x0)) + 0.5)
+            # See if on the down side
             elif 4 & outnode!=0:
                 y= self.y_min
                 x = x0 + ( x1 - x0) * (self.y_min - y0) / (y1 - y0)
+            # See if on the up side
             elif 8 & outnode!=0:
                 y = self.y_max
                 x = x0 + (x1 - x0) * (self.y_max - y0) / (y1 - y0)
             x=int(x)
             y=int(y)
-            if outnode==code0:
+            if outnode == code0:
+                #print("cut point0",x,y)
                 x0=x
                 y0=y
                 code0=self.encoder(x0,y0)
             else:
+                #print("cut point1",x,y)
                 x1=x
                 y1=y
                 code1 = self.encoder(x1, y1)
