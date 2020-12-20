@@ -93,7 +93,7 @@ def draw_line(p_list, algorithm):
                         x += sign
                         result.append((x, y))
                         p += 2 * delta_x - 2 * delta_y                   
-    print(result)
+    #print(result)
     return result
 
 

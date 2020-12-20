@@ -778,6 +778,8 @@ class MainWindow(QMainWindow):
             else:
                 self.w = box1.value()
                 self.h = box2.value()
+            print(self.w)
+            print(self.h)
             self.canvas_widget.clear_canvas()
             self.list_widget.clearSelection()
             self.canvas_widget.clear_selection()

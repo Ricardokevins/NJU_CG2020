@@ -35,7 +35,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
 import time
-# TODO: We need to set menu unchoosable to disable sudden status change while drawing polygon and curve
+
 
 class Logger:
     def __init__(self):
@@ -297,9 +297,12 @@ class MyCanvas(QGraphicsView):
             cglog.log("paste success "+" get item {}".format(self.temp_id))
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
-            
         else:
-            cglog.log("Hit unknown State in Mousepressed "+self.status)
+            if self.status == '':
+                pass
+                #cglog.log("Hit Empty State in Mousepressed ")
+            else:
+                cglog.log("Hit unknown State in Mousepressed "+self.status)
         self.updateScene([self.sceneRect()])
         super().mousePressEvent(event)
 
@@ -605,20 +608,25 @@ class MainWindow(QMainWindow):
         cglog.log("-----------------------------------")
         cglog.log("Start System")
         self.item_cnt = 0
-        self.width = 600
-        self.length = 600
+        # if not to set much larger Canvas will lead to 
+        # can not draw beyond original place
+        self.width = 2000
+        self.height = 2000
+        # self.width = 600
+        # self.height = 600
         # 使用QListWidget来记录已有的图元，并用于选择图元。注：这是图元选择的简单实现方法，更好的实现是在画布中直接用鼠标选择图元
         self.list_widget = QListWidget(self)
         self.list_widget.setMinimumWidth(200)
 
         # 使用QGraphicsView作为画布
         self.scene = QGraphicsScene(self)
-        self.scene.setSceneRect(0, 0, self.width, self.length)
+        self.scene.setSceneRect(0, 0, self.width, self.height)
         self.canvas_widget = MyCanvas(self.scene, self)
-        self.canvas_widget.setFixedSize(self.width, self.length)
+        self.canvas_widget.setFixedSize(self.width, self.height)
         self.canvas_widget.main_window = self
         self.canvas_widget.list_widget = self.list_widget
-
+        self.canvas_widget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.canvas_widget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         # 设置菜单栏
         self.menubar = self.menuBar()
         file_menu = self.menubar.addMenu('文件')
@@ -700,13 +708,25 @@ class MainWindow(QMainWindow):
         # 设置主窗口的布局
         self.hbox_layout = QHBoxLayout()
         self.hbox_layout.addWidget(self.canvas_widget)
+        
         self.hbox_layout.addWidget(self.list_widget, stretch=1)
         self.central_widget = QWidget()
         self.central_widget.setLayout(self.hbox_layout)
         self.setCentralWidget(self.central_widget)
         self.statusBar().showMessage('空闲')
-        self.resize(600, 600)
+        self.resize(self.width, self.height)
         self.setWindowTitle('CG Demo')
+
+        self.width=600
+        self.height=600
+        self.scene = QGraphicsScene(self)
+        self.scene.setSceneRect(0, 0, self.width, self.height)
+        self.canvas_widget.resize(self.width, self.height)
+        self.canvas_widget.setFixedSize(self.width, self.height)
+        self.statusBar().showMessage('空闲')
+        self.setMaximumHeight(self.height)
+        self.setMaximumWidth(self.width)
+        self.resize(self.width, self.height)
 
     def get_id(self):
         _id = str(self.item_cnt)
@@ -768,18 +788,24 @@ class MainWindow(QMainWindow):
             else:
                 QMessageBox.about(self, "Warning", "input number is not integer!   ")
                 return
+            #print(self.width,self.height)
+            self.w = self.width
+            self.h = self.height
+            
+
             self.canvas_widget.clear_canvas()
             self.list_widget.clearSelection()
             self.canvas_widget.clear_selection()
             self.list_widget.clear()
 
             self.scene = QGraphicsScene(self)
-            self.scene.setSceneRect(0, 0, self.width, self.length)
-            self.canvas_widget.resize(self.width, self.length)
-            self.canvas_widget.setFixedSize(self.width, self.length)
-            self.canvas_widget.main_window = self
-            self.canvas_widget.list_widget = self.list_widget
+            self.scene.setSceneRect(0, 0, self.width, self.height)
+            self.canvas_widget.resize(self.width, self.height)
+            self.canvas_widget.setFixedSize(self.width, self.height)
+
             self.statusBar().showMessage('空闲')
+            self.setMaximumHeight(self.height)
+            self.setMaximumWidth(self.width)
             self.resize(self.width,self.height)
 
     def line_naive_action(self):

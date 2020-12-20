@@ -1,0 +1,137 @@
+2020-12-20 10:24:34 -----------------------------------
+2020-12-20 10:24:34 Start System
+2020-12-20 10:24:38 draw ellipse success  get item 0
+2020-12-20 10:24:42 draw polygon success  get item 1
+2020-12-20 10:24:50 draw polygon success  get item 2
+2020-12-20 10:24:57 Select change from  to 1
+2020-12-20 10:24:59 Select change from  to 2
+2020-12-20 10:24:59 remove 1 from listwidget
+2020-12-20 10:24:59 Select change from 2 to 
+2020-12-20 10:24:59 selection change And reset to choose nothing!
+2020-12-20 10:25:00 Select change from  to 0
+2020-12-20 10:25:02 Select change from  to 1
+2020-12-20 10:25:02 remove 0 from listwidget
+2020-12-20 10:25:02 Select change from 1 to 
+2020-12-20 10:25:02 selection change And reset to choose nothing!
+2020-12-20 10:25:07 Select change from  to 0
+2020-12-20 10:25:07 draw curve success  get item 1
+2020-12-20 10:25:20 draw curve success  get item 2
+2020-12-20 10:25:31 Select change from  to 2
+2020-12-20 10:25:34 Select change from  to 1
+2020-12-20 10:25:34 remove 2 from listwidget
+2020-12-20 10:25:34 Select change from 1 to 
+2020-12-20 10:25:34 selection change And reset to choose nothing!
+2020-12-20 10:25:35 Select change from  to 0
+2020-12-20 10:25:37 Select change from  to 1
+2020-12-20 10:25:37 remove 0 from listwidget
+2020-12-20 10:25:37 Select change from 1 to 
+2020-12-20 10:25:37 selection change And reset to choose nothing!
+2020-12-20 10:25:38 Select change from  to 0
+2020-12-20 10:25:40 translate 0 success
+2020-12-20 10:26:02 clip_CS failed Not line target
+2020-12-20 10:26:02 Hit unknown State in Mousepressed 
+2020-12-20 10:26:03 Hit unknown State in Mousepressed 
+2020-12-20 10:26:06 rotate 0 success
+2020-12-20 10:26:17 Hit unknown State in Mousepressed 
+2020-12-20 10:26:20 Hit unknown State in Mousepressed 
+2020-12-20 10:26:23 draw line success  get item 1
+2020-12-20 10:26:27 Select change from  to 4
+2020-12-20 10:26:28 Select change from 4 to 3
+2020-12-20 10:26:28 Select change from 3 to 2
+2020-12-20 10:26:29 Select change from 2 to 1
+2020-12-20 10:26:29 Select change from 1 to 0
+2020-12-20 10:26:31 Select change from  to 1
+2020-12-20 10:26:31 remove 0 from listwidget
+2020-12-20 10:26:31 Select change from 1 to 
+2020-12-20 10:26:31 selection change And reset to choose nothing!
+2020-12-20 10:26:32 Select change from  to 1
+2020-12-20 10:26:33 Select change from  to 2
+2020-12-20 10:26:33 remove 1 from listwidget
+2020-12-20 10:26:33 Select change from 2 to 
+2020-12-20 10:26:33 selection change And reset to choose nothing!
+2020-12-20 10:27:22 -----------------------------------
+2020-12-20 10:27:22 Start System
+2020-12-20 10:27:30 clear canvas success
+2020-12-20 10:32:45 -----------------------------------
+2020-12-20 10:32:45 Start System
+2020-12-20 10:32:53 clear canvas success
+2020-12-20 10:33:25 -----------------------------------
+2020-12-20 10:33:25 Start System
+2020-12-20 10:33:34 clear canvas success
+2020-12-20 10:35:27 -----------------------------------
+2020-12-20 10:35:27 Start System
+2020-12-20 10:35:39 clear canvas success
+2020-12-20 10:37:40 -----------------------------------
+2020-12-20 10:37:40 Start System
+2020-12-20 10:38:04 -----------------------------------
+2020-12-20 10:38:04 Start System
+2020-12-20 10:38:10 clear canvas success
+2020-12-20 10:39:53 -----------------------------------
+2020-12-20 10:39:53 Start System
+2020-12-20 10:41:20 -----------------------------------
+2020-12-20 10:41:20 Start System
+2020-12-20 10:41:27 clear canvas success
+2020-12-20 10:41:45 -----------------------------------
+2020-12-20 10:41:45 Start System
+2020-12-20 10:41:53 clear canvas success
+2020-12-20 10:43:09 -----------------------------------
+2020-12-20 10:43:09 Start System
+2020-12-20 10:43:14 clear canvas success
+2020-12-20 10:43:18 draw ellipse success  get item 0
+2020-12-20 10:43:20 rotate failed Not select anything yet
+2020-12-20 10:43:21 Hit unknown State in Mousepressed 
+2020-12-20 10:43:24 draw ellipse success  get item 1
+2020-12-20 10:47:26 -----------------------------------
+2020-12-20 10:47:26 Start System
+2020-12-20 10:47:44 -----------------------------------
+2020-12-20 10:47:44 Start System
+2020-12-20 10:47:58 clear canvas success
+2020-12-20 10:48:03 draw ellipse success  get item 0
+2020-12-20 11:05:07 -----------------------------------
+2020-12-20 11:05:07 Start System
+2020-12-20 11:05:18 clear canvas success
+2020-12-20 11:05:19 draw ellipse success  get item 0
+2020-12-20 11:06:36 -----------------------------------
+2020-12-20 11:06:36 Start System
+2020-12-20 11:07:21 -----------------------------------
+2020-12-20 11:07:21 Start System
+2020-12-20 11:07:31 clear canvas success
+2020-12-20 11:07:34 draw ellipse success  get item 0
+2020-12-20 11:07:37 draw ellipse success  get item 1
+2020-12-20 11:09:45 -----------------------------------
+2020-12-20 11:09:45 Start System
+2020-12-20 11:09:56 -----------------------------------
+2020-12-20 11:09:56 Start System
+2020-12-20 11:10:07 -----------------------------------
+2020-12-20 11:10:07 Start System
+2020-12-20 11:10:21 draw ellipse success  get item 0
+2020-12-20 11:10:31 -----------------------------------
+2020-12-20 11:10:31 Start System
+2020-12-20 11:10:36 clear canvas success
+2020-12-20 11:10:41 draw ellipse success  get item 0
+2020-12-20 11:12:03 -----------------------------------
+2020-12-20 11:12:03 Start System
+2020-12-20 11:12:08 clear canvas success
+2020-12-20 11:12:52 -----------------------------------
+2020-12-20 11:12:52 Start System
+2020-12-20 11:12:59 clear canvas success
+2020-12-20 11:14:03 -----------------------------------
+2020-12-20 11:14:03 Start System
+2020-12-20 11:14:38 -----------------------------------
+2020-12-20 11:14:38 Start System
+2020-12-20 11:14:44 clear canvas success
+2020-12-20 11:14:47 draw ellipse success  get item 0
+2020-12-20 11:14:53 clear canvas success
+2020-12-20 11:14:56 draw ellipse success  get item 0
+2020-12-20 11:15:02 Select change from  to 0
+2020-12-20 11:15:05 translate 0 success
+2020-12-20 11:15:13 rotate 0 success
+2020-12-20 11:15:27 draw line success  get item 1
+2020-12-20 11:15:29 Select change from  to 1
+2020-12-20 11:15:31 rotate 1 success
+2020-12-20 11:15:39 Select change from 1 to 0
+2020-12-20 11:15:40 Select change from 0 to 1
+2020-12-20 11:15:40 Hit unknown State in Mousepressed 
+2020-12-20 11:15:41 Hit unknown State in Mousepressed 
+2020-12-20 11:15:42 Hit unknown State in Mousepressed 
+2020-12-20 11:15:42 Hit unknown State in Mousepressed 
