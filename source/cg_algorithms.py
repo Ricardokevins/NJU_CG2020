@@ -124,7 +124,6 @@ def draw_line(p_list, algorithm):
         print("Hit Error!!!!!!!",algorithm)
     return result
 
-
 def draw_polygon(p_list, algorithm):
     """绘制多边形
 
@@ -211,7 +210,6 @@ def get_bezier_point(t, step, control_point):
         step-=1
     return control_point[0]
 
-
 def bezier(p_list):
     num=len(p_list)*5000
     dis=1/num
@@ -228,7 +226,6 @@ def bezier(p_list):
         result.append((int(x+0.5),int(y+0.5)))
 
     return result
-
 
 def deboox_cox(i, k, u):
     if k == 1:
@@ -277,7 +274,6 @@ def draw_curve(p_list, algorithm):
         print("Not implement Use Bezier as default")
         return bezier(p_list)
 
-
 def translate(p_list, dx, dy):
     """平移变换
 
@@ -290,7 +286,6 @@ def translate(p_list, dx, dy):
     for x,y in p_list:
         temp_plist.append((x+dx,y+dy))
     return temp_plist
-
 
 def rotate(p_list, x, y, r):
     """旋转变换（除椭圆外）
@@ -332,7 +327,6 @@ def scale(p_list, x, y, s):
 
     return temp_plist
 
-
 class CohenSutherland:
     def __init__(self,x_min, y_min, x_max, y_max):
         self.x_min=x_min
@@ -360,11 +354,11 @@ class CohenSutherland:
         outnode=code0
         x=0
         y=0
-
+        #print(code0,code1)
         while True:
-            if code0 | code1==0:
+            if (code0 | code1)==0:
                 return [[x0,y0],[x1,y1]]
-            if code0 & code1!=0:
+            if (code0 & code1)!=0:
                 return [[0,0],[0,0]]
             if code0==0:
                 outnode=code1

@@ -39,3 +39,15 @@ setColor 0 0 255
 drawCurve curve3 250 400 300 300 350 400 400 300 B-spline
 drawCurve curve4 250 200 300 50 350 250 400 100 450 200 B-spline
 saveCanvas 5
+resetCanvas 900 700
+setColor 0 255 0
+drawPolygon id1 0 0 100 200 200 0 300 200 400 0 500 200 600 100 DDA
+setColor 255 0 0
+drawCurve id2 0 0 100 200 200 0 300 200 400 0 500 200 600 100 Bezier
+setColor 0 0 255
+drawCurve id22 600 100 500 200 400 0 300 200 200 0 100 200 0 0 Bezier
+setColor 255 0 0
+drawCurve id3 0 0 100 200 200 0 300 200 400 0 500 200 600 100 B-spline
+setColor 0 0 255
+drawCurve id33 600 100 500 200 400 0 300 200 200 0 100 200 0 0 B-spline
+saveCanvas 6

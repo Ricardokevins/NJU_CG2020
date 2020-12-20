@@ -9,11 +9,8 @@ from PIL import Image
 
 
 if __name__ == '__main__':
-    #input_file = sys.argv[1]
-    #output_dir = sys.argv[2]
-    #input_file='input.txt'
-    input_file = './curve.txt'
-    output_dir='../img'
+    input_file = sys.argv[1]
+    output_dir = sys.argv[2]
     os.makedirs(output_dir, exist_ok=True)
 
     item_dict = {}
@@ -37,20 +34,19 @@ if __name__ == '__main__':
                     if item_type == 'line':
                         pixels = alg.draw_line(p_list, algorithm)
                         for x, y in pixels:
-                            canvas[height - 1 - y, x] = color
+                            canvas[y, x] = color
                     elif item_type == 'Polygon':
                         pixels = alg.draw_polygon(p_list, algorithm)
                         for x, y in pixels:
-                            canvas[height - 1 - y, x] = color
+                            canvas[y, x] = color
                     elif item_type == 'ellipse':
                         pixels = alg.draw_ellipse(p_list)
                         for x, y in pixels:
-                            canvas[height - 1 - y, x] = color
+                            canvas[y, x] = color
                     elif item_type == 'curve':
-                        print(algorithm)
                         pixels = alg.draw_curve(p_list, algorithm)
                         for x, y in pixels:
-                            canvas[height - 1 - y, x] = color
+                            canvas[y, x] = color
                 Image.fromarray(canvas).save(os.path.join(output_dir, save_name + '.bmp'), 'bmp')
             elif line[0] == 'setColor':
                 pen_color[0] = int(line[1])

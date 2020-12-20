@@ -1,0 +1,1 @@
+python cg_cli.py ../testcase/input.txt ../img

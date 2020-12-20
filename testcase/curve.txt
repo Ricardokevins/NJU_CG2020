@@ -1,0 +1,7 @@
+resetCanvas 600 600
+setColor 0 255 0
+drawLine line1 0 0 500 250 DDA
+setColor 255 0 0
+clip line1 50 50 400 200 Cohen-Sutherland
+drawPolygon polygon1 50 50 50 200 400 200 400 50 DDA
+saveCanvas 1
