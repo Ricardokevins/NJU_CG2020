@@ -493,7 +493,7 @@ class MyCanvas(QGraphicsView):
 
 
 
-        
+
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
@@ -608,6 +608,23 @@ class MyItem(QGraphicsItem):
             return QRectF(xmin-1, ymin-1, w+2, h+2)
 
 
+    """对QDialog类重写，实现一些功能"""
+
+    def closeEvent(self, event):
+        """
+        重写closeEvent方法，实现dialog窗体关闭时执行一些代码
+        :param event: close()触发的事件
+        :return: None
+        """
+        reply = QtWidgets.QMessageBox.question(self,
+                                               '本程序',
+                                               "是否要退出程序？",
+                                               QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                               QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 class MainWindow(QMainWindow):
     """
     主窗口类
@@ -687,7 +704,7 @@ class MainWindow(QMainWindow):
 
 
         # 关于菜单和窗口操作的信号绑定
-        exit_act.triggered.connect(qApp.quit)
+        exit_act.triggered.connect(self.quit_box)
         set_pen_act.triggered.connect(self.set_pen)
         mouese_select_act.triggered.connect(self.select_item_action)
         copy_act.triggered.connect(self.copy_action)
@@ -944,8 +961,30 @@ class MainWindow(QMainWindow):
     def free_draw_action(self):
         self.statusBar().showMessage('自由绘制')
         self.canvas_widget.draw_free()
-        
+    
+    def quit_box(self):
+        reply = QMessageBox.question(self,
+                                               'CG System',
+                                               "是否要保存画布",
+                                               QMessageBox.Yes |QMessageBox.No,
+                                               QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.save_canvas()
+        qApp.quit()
+        # else:
+        #     event.ignore()
 
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self,'CG System',"是否要保存画布",
+                                               QMessageBox.Yes |QMessageBox.No,
+                                               QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.save_canvas()
+        qApp.quit()
+        #     event.accept()
+        # else:
+        #     event.ignore()
+            
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mw = MainWindow()
