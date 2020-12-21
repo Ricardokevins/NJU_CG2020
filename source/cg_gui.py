@@ -37,6 +37,10 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 import time
 
+# TODO：自由绘图
+# TODO：设置背景
+# TODO: 空的裁剪记得删除
+# TODO：感觉裁剪的Liang算法有问题
 
 class Logger:
     def __init__(self):
@@ -482,7 +486,14 @@ class MyCanvas(QGraphicsView):
         if(self.main_window.item_cnt>0):
             self.main_window.item_cnt -= 1
 
+    def draw_free(self,item_id):
+        self.status = 'free'
+        self.temp_id = item_id
+        self.temp_algorithm = ''
 
+
+
+        
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
@@ -528,6 +539,7 @@ class MyItem(QGraphicsItem):
                 painter.drawRect(self.boundingRect())
         elif self.item_type == 'ellipse':
             item_pixels = alg.draw_ellipse(self.p_list)
+            print(item_pixels)
             for p in item_pixels:
                 painter.setPen(self.color)
                 painter.drawPoint(*p)
@@ -608,21 +620,27 @@ class MainWindow(QMainWindow):
         self.item_cnt = 0
         # if not to set much larger Canvas will lead to 
         # can not draw beyond original place
-        self.width = 2000
-        self.height = 2000
-        # self.width = 600
-        # self.height = 600
+        # self.width = 2000
+        # self.height = 2000
+        self.width = 600
+        self.height = 600
         # 使用QListWidget来记录已有的图元，并用于选择图元。注：这是图元选择的简单实现方法，更好的实现是在画布中直接用鼠标选择图元
         self.list_widget = QListWidget(self)
         self.list_widget.setMinimumWidth(200)
 
         # 使用QGraphicsView作为画布
         self.scene = QGraphicsScene(self)
-        self.scene.setSceneRect(0, 0, self.width, self.height)
+        self.scene.setSceneRect(0, 0, 600, 600)
         self.canvas_widget = MyCanvas(self.scene, self)
-        self.canvas_widget.setFixedSize(self.width, self.height)
+        self.canvas_widget.setFixedSize(600, 600)
         self.canvas_widget.main_window = self
         self.canvas_widget.list_widget = self.list_widget
+        # self.scene = QGraphicsScene(self)
+        # self.scene.setSceneRect(0, 0, self.width, self.height)
+        # self.canvas_widget = MyCanvas(self.scene, self)
+        # self.canvas_widget.setFixedSize(self.width, self.height)
+        # self.canvas_widget.main_window = self
+        # self.canvas_widget.list_widget = self.list_widget
         self.canvas_widget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.canvas_widget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         # 设置菜单栏
@@ -664,6 +682,8 @@ class MainWindow(QMainWindow):
         paste_act.setShortcut("Ctrl+V")
         delete_act = self.Additional_function_menu.addAction("删除")
         delete_act.setShortcut("Ctrl+D")
+        free_draw_act = self.Additional_function_menu.addAction("自由绘制")
+        free_draw_act.setShortcut("Ctrl+F")
 
 
         # 关于菜单和窗口操作的信号绑定
@@ -673,6 +693,8 @@ class MainWindow(QMainWindow):
         copy_act.triggered.connect(self.copy_action)
         paste_act.triggered.connect(self.paste_action)
         delete_act.triggered.connect(self.delete_action)
+        free_draw_act.triggered.connect(self.free_draw_action)
+
         clear_canvas_act.triggered.connect(self.clear_canvas)
         save_canvas_act.triggered.connect(self.save_canvas)
         reset_canvas_act.triggered.connect(self.reset_canvas_action)
@@ -717,16 +739,16 @@ class MainWindow(QMainWindow):
         self.resize(self.width, self.height)
         self.setWindowTitle('CG Demo')
 
-        self.width=600
-        self.height=600
-        self.scene = QGraphicsScene(self)
-        self.scene.setSceneRect(0, 0, self.width, self.height)
-        self.canvas_widget.resize(self.width, self.height)
-        self.canvas_widget.setFixedSize(self.width, self.height)
-        self.statusBar().showMessage('空闲')
-        self.setMaximumHeight(self.height)
-        self.setMaximumWidth(self.width)
-        self.resize(self.width, self.height)
+        # self.width=600
+        # self.height=600
+        # self.scene = QGraphicsScene(self)
+        # self.scene.setSceneRect(0, 0, self.width, self.height)
+        # self.canvas_widget.resize(self.width, self.height)
+        # self.canvas_widget.setFixedSize(self.width, self.height)
+        # self.statusBar().showMessage('空闲')
+        # self.setMaximumHeight(self.height)
+        # self.setMaximumWidth(self.width)
+        # self.resize(self.width, self.height)
 
     def get_id(self):
         _id = str(self.item_cnt)
@@ -784,9 +806,9 @@ class MainWindow(QMainWindow):
             else:
                 QMessageBox.about(self, "Warning", "input number is not integer!   ")
                 return
-            #print(self.width,self.height)
-            self.w = self.width
-            self.h = self.height
+            # print(self.width,self.height)
+            # self.w = self.width
+            # self.h = self.height
             
 
             self.canvas_widget.clear_canvas()
@@ -794,7 +816,7 @@ class MainWindow(QMainWindow):
             self.canvas_widget.clear_selection()
             self.list_widget.clear()
 
-            self.scene = QGraphicsScene(self)
+            #self.scene = QGraphicsScene(self)
             self.scene.setSceneRect(0, 0, self.width, self.height)
             self.canvas_widget.resize(self.width, self.height)
             self.canvas_widget.setFixedSize(self.width, self.height)
@@ -919,6 +941,10 @@ class MainWindow(QMainWindow):
         self.canvas_widget.start_clip_liang_barsky()
         self.statusBar().showMessage('裁剪liang_barsky')
 
+    def free_draw_action(self):
+        self.statusBar().showMessage('自由绘制')
+        self.canvas_widget.draw_free()
+        
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
