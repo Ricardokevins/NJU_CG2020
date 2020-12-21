@@ -302,6 +302,9 @@ class MyCanvas(QGraphicsView):
             cglog.log("paste success "+" get item {}".format(self.temp_id))
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
+        elif self.status == 'free':
+            self.temp_item = MyItem(self.temp_id, self.status, [[x, y]], self.temp_algorithm, self.col)
+            self.scene().addItem(self.temp_item)
         else:
             if self.status == '':
                 pass
@@ -349,7 +352,11 @@ class MyCanvas(QGraphicsView):
                 pass
             else:
                 self.temp_item.p_list[-1] = [x, y]
-
+        if self.status == 'free':
+            if self.temp_item == None:
+                print("Hit Here")
+                pass
+            self.temp_item.p_list.append([x, y])
         self.updateScene([self.sceneRect()])
         super().mouseMoveEvent(event)
 
@@ -387,12 +394,14 @@ class MyCanvas(QGraphicsView):
                 y = int(pos.y())
                 self.temp_item.p_list[-1] = [x, y]
                 # refresh Scene to see new item
-                self.updateScene([self.sceneRect()])
-                
-                
+                self.updateScene([self.sceneRect()])              
         if self.status == 'rotate':
             self.temp_p_list == self.temp_item.p_list
-    
+        if self.status == 'free':
+            self.item_dict[self.temp_id] = self.temp_item
+            self.list_widget.addItem(self.temp_id)
+            self.finish_draw()
+        
         super().mouseReleaseEvent(event)
 
     def start_select(self):
@@ -491,9 +500,6 @@ class MyCanvas(QGraphicsView):
         self.temp_id = item_id
         self.temp_algorithm = ''
 
-
-
-
 class MyItem(QGraphicsItem):
     """
     自定义图元类，继承自QGraphicsItem
@@ -559,6 +565,15 @@ class MyItem(QGraphicsItem):
                 painter.drawRect(self.boundingRect())
             #print("Hit drawing curve")
             pass
+        elif self.item_type == 'free':
+            item_pixels = alg.draw_polygoning(self.p_list, 'DDA')
+            #item_pixels =self.p_list
+            for p in item_pixels:
+                painter.setPen(self.color)
+                painter.drawPoint(*p)
+            if self.selected:
+                painter.setPen(QColor(255, 0, 0))
+                painter.drawRect(self.boundingRect())
 
     def boundingRect(self) -> QRectF:
         if self.item_type == 'line':
@@ -606,8 +621,21 @@ class MyItem(QGraphicsItem):
             h = ymax - ymin
             #print(xmin-1, ymin-1, w+2, h+2)
             return QRectF(xmin-1, ymin-1, w+2, h+2)
-
-
+        elif self.item_type == 'free':
+            xmax = -1
+            ymax = -1
+            xmin = 100000
+            ymin = 100000
+            for i in range(len(self.p_list)):
+                tempx, tempy = self.p_list[i]
+                xmin = min(xmin, tempx)
+                ymin = min(ymin, tempy)
+                xmax = max(xmax, tempx)
+                ymax = max(ymax, tempy)
+            w = xmax-xmin
+            h = ymax - ymin
+            #print(xmin-1, ymin-1, w+2, h+2)
+            return QRectF(xmin-1, ymin-1, w+2, h+2)
     """对QDialog类重写，实现一些功能"""
 
     def closeEvent(self, event):
@@ -959,8 +987,10 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage('裁剪liang_barsky')
 
     def free_draw_action(self):
+        if(self.item_cnt > 0):
+            self.item_cnt -= 1
         self.statusBar().showMessage('自由绘制')
-        self.canvas_widget.draw_free()
+        self.canvas_widget.draw_free(self.get_id())
     
     def quit_box(self):
         reply = QMessageBox.question(self,
