@@ -135,3 +135,52 @@
 2020-12-20 11:15:41 Hit unknown State in Mousepressed 
 2020-12-20 11:15:42 Hit unknown State in Mousepressed 
 2020-12-20 11:15:42 Hit unknown State in Mousepressed 
+2020-12-21 21:15:01 -----------------------------------
+2020-12-21 21:15:01 Start System
+2020-12-21 21:15:26 -----------------------------------
+2020-12-21 21:15:26 Start System
+2020-12-21 21:16:18 -----------------------------------
+2020-12-21 21:16:18 Start System
+2020-12-21 21:16:22 draw ellipse success  get item 0
+2020-12-21 21:16:24 Select change from  to 0
+2020-12-21 21:16:25 copy success select 0
+2020-12-21 21:16:32 paste success  get item 1
+2020-12-21 21:16:43 -----------------------------------
+2020-12-21 21:16:43 Start System
+2020-12-21 21:16:47 draw ellipse success  get item 0
+2020-12-21 21:16:48 Select change from  to 0
+2020-12-21 21:16:54 copy success select 0
+2020-12-21 21:16:56 Hit unknown State in Mousepressed copy
+2020-12-21 21:16:57 copy success select 0
+2020-12-21 21:17:05 -----------------------------------
+2020-12-21 21:17:05 Start System
+2020-12-21 21:17:07 draw ellipse success  get item 0
+2020-12-21 21:17:09 Select change from  to 0
+2020-12-21 21:17:09 copy success select 0
+2020-12-21 21:17:13 paste success  get item 1
+2020-12-21 21:17:16 Select change from 0 to 1
+2020-12-21 21:17:16 Select change from 1 to 0
+2020-12-21 21:17:17 Select change from 0 to 1
+2020-12-21 21:17:17 Select change from 1 to 0
+2020-12-21 21:17:43 -----------------------------------
+2020-12-21 21:17:43 Start System
+2020-12-21 21:17:45 draw ellipse success  get item 0
+2020-12-21 21:17:46 Select change from  to 0
+2020-12-21 21:17:47 copy success select 0
+2020-12-21 21:17:50 Hit unknown State in Mousepressed copy
+2020-12-21 21:18:36 -----------------------------------
+2020-12-21 21:18:36 Start System
+2020-12-21 21:18:38 draw ellipse success  get item 0
+2020-12-21 21:18:39 Select change from  to 0
+2020-12-21 21:18:39 copy success select 0
+2020-12-21 21:18:40 Hit unknown State in Mousepressed copy
+2020-12-21 21:18:41 paste success  get item 1
+2020-12-21 21:18:42 Select change from 0 to 1
+2020-12-21 21:18:43 Select change from  to 0
+2020-12-21 21:18:43 remove 1 from listwidget
+2020-12-21 21:18:43 Select change from 0 to 
+2020-12-21 21:18:43 selection change And reset to choose nothing!
+2020-12-21 21:18:47 Select change from 0 to 0
+2020-12-21 21:18:48 Select change from  to 
+2020-12-21 21:18:48 selection change And reset to choose nothing!
+2020-12-21 21:18:48 remove 0 from listwidget

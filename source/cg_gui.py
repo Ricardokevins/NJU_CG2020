@@ -4,6 +4,7 @@
 import sys
 import cg_algorithms as alg
 from typing import Optional
+from PyQt5.QtGui import QKeySequence
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -447,9 +448,6 @@ class MyCanvas(QGraphicsView):
             return
         self.status = 'paste'
     
-    def undo_item(self):
-        pass
-
     def delete_item(self):
         if self.selected_id == '':
             cglog.log("delete failed Not selecting anything")
@@ -656,13 +654,16 @@ class MainWindow(QMainWindow):
         clip_cohen_sutherland_act = clip_menu.addAction('Cohen-Sutherland')
         clip_liang_barsky_act = clip_menu.addAction('Liang-Barsky')
 
-        #拓展功能的定义位置
+        #拓展功能的定义位置#.setShortcut("Ctrl+C")
+        # I bind the shortcut here which can be triggered here
         self.Additional_function_menu = self.menubar.addMenu('附加功能')
         mouese_select_act = self.Additional_function_menu.addAction('鼠标选择图元')
-        copy_act =self. Additional_function_menu.addAction('复制')
-        paste_act=self.Additional_function_menu.addAction("粘贴")
-        undo_act=self.Additional_function_menu.addAction("撤销")
-        delete_act=self.Additional_function_menu.addAction("删除")
+        copy_act = self.Additional_function_menu.addAction('复制')
+        copy_act.setShortcut("Ctrl+C")
+        paste_act = self.Additional_function_menu.addAction("粘贴")
+        paste_act.setShortcut("Ctrl+V")
+        delete_act = self.Additional_function_menu.addAction("删除")
+        delete_act.setShortcut("Ctrl+D")
 
 
         # 关于菜单和窗口操作的信号绑定
@@ -671,7 +672,6 @@ class MainWindow(QMainWindow):
         mouese_select_act.triggered.connect(self.select_item_action)
         copy_act.triggered.connect(self.copy_action)
         paste_act.triggered.connect(self.paste_action)
-        undo_act.triggered.connect(self.undo_action)
         delete_act.triggered.connect(self.delete_action)
         clear_canvas_act.triggered.connect(self.clear_canvas)
         save_canvas_act.triggered.connect(self.save_canvas)
@@ -749,10 +749,6 @@ class MainWindow(QMainWindow):
     def paste_action(self):
         self.canvas_widget.paste_item()
         self.statusBar().showMessage('粘贴操作')
-
-    def undo_action(self):
-        self.canvas_widget.undo_item()
-        self.statusBar().showMessage('撤销操作')
 
     def delete_action(self):
         self.canvas_widget.delete_item()
