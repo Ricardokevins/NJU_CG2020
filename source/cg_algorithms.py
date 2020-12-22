@@ -485,6 +485,7 @@ def clip(p_list, x_min, y_min, x_max, y_max, algorithm):
         x_min, x_max = x_max, x_min
     if y_min > y_max:
         y_min, y_max = y_max, y_min
+    print(x_min,y_min,x_max,y_max)
     if algorithm=="Cohen-Sutherland":
         solver=CohenSutherland(x_min, y_min, x_max, y_max)
         result=solver.solve(p_list)

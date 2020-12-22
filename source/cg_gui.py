@@ -37,7 +37,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 import time
 
-# TODO：自由绘图
+
 # TODO：设置背景
 # TODO: 空的裁剪记得删除
 # TODO：感觉裁剪的Liang算法有问题
@@ -284,6 +284,8 @@ class MyCanvas(QGraphicsView):
         elif self.status == "scale":
             self.start_point = [x, y]
         elif self.status == 'clip_CS' or self.status == 'clip_LB':
+            self.temp_item1 = MyItem(self.temp_id, "polygon", [[x, y], [x, y]], 'DDA', QColor(0, 0, 255))
+            self.scene().addItem(self.temp_item1)
             self.start_point = [x, y]
         elif self.status == 'paste':
             self.temp_item = MyItem(self.temp_id, self.copy_board.item_type, self.copy_board.p_list, self.copy_board.algorithm, self.col)
@@ -341,6 +343,11 @@ class MyCanvas(QGraphicsView):
             self.temp_item.p_list = alg.scale(
                 self.temp_p_list, self.start_point[0], self.start_point[1], xp)
         if self.status == 'clip_LB' or self.status == 'clip_CS':
+            x_1 = min(self.start_point[0], x)
+            x_2 = max(self.start_point[0], x)
+            y_1 = min(self.start_point[1], y)
+            y_2 = max(self.start_point[1], y)
+            self.temp_item1.p_list=[[x_1,y_1],[x_1,y_2],[x_2,y_2],[x_2,y_1],[x_1,y_1]]
             if self.status == 'clip_LB':
                 self.temp_item.p_list = alg.clip(
                     self.temp_p_list, self.start_point[0], self.start_point[1], x, y, "Liang-Barsky")
@@ -384,6 +391,7 @@ class MyCanvas(QGraphicsView):
             self.p_list = self.temp_item.p_list
         if self.status == 'clip_LB' or self.status == 'clip_CS':
             self.p_list = self.temp_item.p_list
+            self.scene().removeItem(self.temp_item1)
         if self.status == "curve":
             if self.temp_item == None:
                 pass
@@ -421,10 +429,14 @@ class MyCanvas(QGraphicsView):
         for item in self.item_dict:
             self.scene().removeItem(self.item_dict[item])
         self.updateScene([self.sceneRect()])
+        self.list_widget.clear()
+        self.temp_id=0
         self.item_dict = {}
         self.selected_id = ''
         self.status = ''
         self.temp_item = None
+        self.main_window.item_cnt = 0
+        
         cglog.log("clear canvas success")
 
     def wheelEvent(self, event):
@@ -545,7 +557,6 @@ class MyItem(QGraphicsItem):
                 painter.drawRect(self.boundingRect())
         elif self.item_type == 'ellipse':
             item_pixels = alg.draw_ellipse(self.p_list)
-            print(item_pixels)
             for p in item_pixels:
                 painter.setPen(self.color)
                 painter.drawPoint(*p)

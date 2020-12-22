@@ -332,3 +332,105 @@
 2020-12-22 00:56:55 Select change from 0 to 1
 2020-12-22 00:56:56 Select change from 1 to 0
 2020-12-22 00:56:57 Select change from 0 to 1
+2020-12-22 21:12:07 -----------------------------------
+2020-12-22 21:12:07 Start System
+2020-12-22 21:12:10 draw ellipse success  get item 0
+2020-12-22 21:12:12 draw line success  get item 0
+2020-12-22 21:12:16 Select change from 0 to 0
+2020-12-22 21:12:21 clip_CS 0 success
+2020-12-22 21:13:33 -----------------------------------
+2020-12-22 21:13:33 Start System
+2020-12-22 21:13:36 draw line success  get item 0
+2020-12-22 21:13:38 Select change from  to 0
+2020-12-22 21:13:41 clip_LB 0 success
+2020-12-22 21:15:17 -----------------------------------
+2020-12-22 21:15:17 Start System
+2020-12-22 21:15:20 draw line success  get item 0
+2020-12-22 21:15:21 Select change from  to 0
+2020-12-22 21:15:23 clip_CS 0 success
+2020-12-22 21:19:45 -----------------------------------
+2020-12-22 21:19:45 Start System
+2020-12-22 21:19:50 draw polygon success  get item 0
+2020-12-22 21:19:52 draw line success  get item 0
+2020-12-22 21:19:54 Select change from  to 0
+2020-12-22 21:19:57 clip_LB 0 success
+2020-12-22 21:22:02 -----------------------------------
+2020-12-22 21:22:02 Start System
+2020-12-22 21:22:05 draw polygon success  get item 0
+2020-12-22 21:22:10 clear canvas success
+2020-12-22 21:22:12 draw line success  get item 1
+2020-12-22 21:22:13 Select change from  to 1
+2020-12-22 21:22:21 clip_CS 1 success
+2020-12-22 21:24:01 -----------------------------------
+2020-12-22 21:24:01 Start System
+2020-12-22 21:24:05 draw line success  get item 0
+2020-12-22 21:24:10 Select change from  to 0
+2020-12-22 21:24:24 clip_LB 0 success
+2020-12-22 21:28:26 -----------------------------------
+2020-12-22 21:28:26 Start System
+2020-12-22 21:28:29 draw line success  get item 0
+2020-12-22 21:28:30 Select change from  to 0
+2020-12-22 21:28:33 clip_CS 0 success
+2020-12-22 21:31:34 -----------------------------------
+2020-12-22 21:31:34 Start System
+2020-12-22 21:31:37 draw line success  get item 0
+2020-12-22 21:31:38 Select change from  to 0
+2020-12-22 21:31:41 clip_CS 0 success
+2020-12-22 21:31:57 -----------------------------------
+2020-12-22 21:31:57 Start System
+2020-12-22 21:32:01 draw line success  get item 0
+2020-12-22 21:32:03 Select change from  to 0
+2020-12-22 21:32:04 clip_LB 0 success
+2020-12-22 21:35:33 -----------------------------------
+2020-12-22 21:35:33 Start System
+2020-12-22 21:35:35 draw line success  get item 0
+2020-12-22 21:35:37 Select change from  to 0
+2020-12-22 21:35:40 clip_LB 0 success
+2020-12-22 21:36:29 -----------------------------------
+2020-12-22 21:36:29 Start System
+2020-12-22 21:36:33 draw line success  get item 0
+2020-12-22 21:36:36 Select change from  to 0
+2020-12-22 21:36:38 clip_LB 0 success
+2020-12-22 21:38:22 -----------------------------------
+2020-12-22 21:38:22 Start System
+2020-12-22 21:38:24 draw line success  get item 0
+2020-12-22 21:38:25 Select change from  to 0
+2020-12-22 21:38:28 clip_LB 0 success
+2020-12-22 21:40:20 -----------------------------------
+2020-12-22 21:40:20 Start System
+2020-12-22 21:40:23 draw line success  get item 0
+2020-12-22 21:40:24 draw ellipse success  get item 1
+2020-12-22 21:40:26 Select change from  to 0
+2020-12-22 21:40:29 Select change from 0 to 
+2020-12-22 21:40:29 selection change And reset to choose nothing!
+2020-12-22 21:40:29 clear canvas success
+2020-12-22 21:40:30 draw ellipse success  get item 2
+2020-12-22 21:40:56 -----------------------------------
+2020-12-22 21:40:56 Start System
+2020-12-22 21:40:59 draw ellipse success  get item 0
+2020-12-22 21:41:01 draw curve success  get item 1
+2020-12-22 21:41:11 Select change from  to 1
+2020-12-22 21:41:13 Select change from 1 to 0
+2020-12-22 21:41:17 Select change from 0 to 
+2020-12-22 21:41:17 selection change And reset to choose nothing!
+2020-12-22 21:41:17 clear canvas success
+2020-12-22 21:41:19 draw ellipse success  get item 0
+2020-12-22 21:41:22 draw curve success  get item 1
+2020-12-22 21:41:26 draw ellipse success  get item 2
+2020-12-22 21:41:28 draw line success  get item 3
+2020-12-22 21:41:30 Select change from  to 3
+2020-12-22 21:41:32 clip_LB 3 success
+2020-12-22 21:42:08 Select change from 3 to 
+2020-12-22 21:42:08 selection change And reset to choose nothing!
+2020-12-22 21:42:08 clear canvas success
+2020-12-22 21:42:51 -----------------------------------
+2020-12-22 21:42:51 Start System
+2020-12-22 21:42:53 draw line success  get item 0
+2020-12-22 21:42:55 Select change from  to 0
+2020-12-22 21:42:57 clip_LB 0 success
+2020-12-22 21:43:56 -----------------------------------
+2020-12-22 21:43:56 Start System
+2020-12-22 21:43:57 draw ellipse success  get item 0
+2020-12-22 21:43:59 Select change from  to 0
+2020-12-22 21:44:00 draw ellipse success  get item 1
+2020-12-22 21:44:02 draw ellipse success  get item 2

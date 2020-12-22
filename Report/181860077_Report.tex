@@ -20,37 +20,74 @@
 
 
 \begin{document}
-\title{\textbf{《计算机图形学》系统报告}}
+\title{\textbf{《计算机图形学》九月报告}}
 \author{学号：181860077 姓名：佘帅杰，\href{mailto:3121416933@qq.com}{3121416933@qq.com}}
 \maketitle
 
 \section{综述}
-基本完整的实现了所有需要的任务，同时附加实现了部分的拓展功能
-\subsection{基本要求}
+\subsection{九月综述}
 \begin{enumerate}
-    \item 熟悉实验框架和所需的PyQt5知识
-    \item 实现了所有的绘图算法，包括直线绘制，多边形绘制，椭圆和曲线绘制
-    \item 实现了所有的图元操作算法，包括旋转，平移，缩放，裁剪
-    \item 在GUI里对各个事件进行处理，使用核心算法模块中的算法绘制图元或者是对图元进行操作
-    \item 实现了保存图元，设置画笔，重置画布等GUI标配功能
-\end{enumerate}
-\subsection{拓展功能}
-\begin{enumerate}
-    \item 实现了使用鼠标直接选中图元的操作，同时选中对象和右侧的列表一致
-    \item 实现了编辑器里实用的复制和粘贴功能，便于系统的使用
-    \item 有了对系统的编辑和使用，自然少不了手抖画错了，因此增加了删除功能，删除画错的部分
-    \item 在反复的操作过程中自然需要方便快捷的快捷键，对应的也进行了实现包括复制粘贴等功能在内的对应快捷键
+    \item 阅读框架代码，初步对代码结构有所了解，同时对pyQt5也有一定的了解
+    
+    \item 实现直线绘制算法DDA，Bresenham，同时加上功能调用使得GUI和Cli能够
+    正常的使用直线绘制算法
+    
+    \item 实现了利用中点圆绘制算法绘制椭圆和多边形，并在Cli中功能调用，正常使用
+
+    \item 添加算法正确性检查框架，使用多种方法对绘图正确性进行检查
+    
+    \item 基于GUI框架实现鼠标选中图元
 \end{enumerate}
 
-\section{实验框架阅读和理解}
+\subsection{十月综述}
+\begin{enumerate}
+    \item 实现Bezier曲线绘制算法
+    
+    \item 实现B-Spline曲线绘制算法
+    
+    \item 在CLI做对应的处理，加入曲线绘制算法的对应功能
+
+    \item 实现对图元的平移，旋转，缩放以及裁剪的操作，至此已经实现了所有算法模块里的内容
+    
+    \item 对CLI中添加对图元操作的相关支持
+\end{enumerate}
+
+\subsection{十一月综述}
+
+\begin{enumerate}
+    \item 着手阅读GUI的框架代码
+    
+    \item 着手阅读pyQT相关的模块和接口
+    
+    \item 着手实现GUI相关的功能
+    
+    \item 修改遇到的算法模块的BUG
+\end{enumerate}
+
+目前已经实现的GUI部分
+\begin{enumerate}
+    \item 绘制直线，椭圆，多边形。
+    
+    \item 利用鼠标选中图元
+    
+    \item 平移，旋转
+    
+    \item 保存和清空画布
+    
+    \item 选择画笔颜色
+\end{enumerate}
+
+
+\section{算法介绍}
+\subsection{框架代码分析}
 在实现之前自然要对拿到手的框架代码进行阅读和分析，可以显然的看到代码
 主要都分布在三个文件中，分别进行阅读和分析
-\subsection{cg\_algorithm.py}
+\subsubsection{cg\_algorithm.py}
 这个文件主要就是实现绘图代码的算法，每一个函数基本都代表这一个需要
 实现的功能或者是算法，每一个函数接受绘图所必须的点，一般都是以列表的
 形式给出，其他的参数一般就是一些可选参数（如：想要实现的后台算法种类）
 这一块结构比较简单，也是实现的核心和重点
-\subsection{cg\_cli.py}
+\subsubsection{cg\_cli.py}
 cli文件主要是负责解析命令行文件，并做出回应。基本的功能就是按行读取文件
 然后利用split分解命令行，并根据预设的指令的格式进行匹配并执行\\\\
 整体的主要代码逻辑如下
@@ -64,7 +101,7 @@ cli文件主要是负责解析命令行文件，并做出回应。基本的功�
     \item 收到的是resetCanvas指令，相对就会比较简单，就只需要重新设置
     画布的规格（高，宽）然后清空刚才提到的对象列表
 \end{enumerate}
-\subsection{cg\_GUI.py}
+\subsubsection{cg\_GUI.py}
 本模块就是对于之前的一些功能的集成，并对外提供图形化的界面进行使用。
 基本的模块由三块构成
 \begin{enumerate}
@@ -83,8 +120,6 @@ cli文件主要是负责解析命令行文件，并做出回应。基本的功�
     MainWindow把状态设置为"Selecting"，这个时候再用鼠标点击画布等操作，MyCanvas就会根据Selecting这个
     状态对对应的鼠标事件进行处理。）
 \end{enumerate}
-
-\section{算法介绍}
 \subsection{直线绘制算法}
 
 \subsubsection{Naive}
@@ -271,8 +306,6 @@ $$
 	\label{fig:Poly}
 \end{figure}
 
-
-%   %
 \subsection{中点圆绘制算法}
 \paragraph{算法原理}
 中点圆算法\\
@@ -420,6 +453,43 @@ $p_0=r_y^2-r_x^2r_y+\frac{r_x^2}{4}$\\\\
     \caption{鼠标选中图元测试实例} %  %大图名称
     \label{fig:1}  %图片引用标记
 \end{figure}
+
+
+
+
+
+
+\bibliography{xxx}
+
+\begin{thebibliography}{99}  
+    \bibitem{ref1}《计算机图形学教程》孙正兴编 
+    \bibitem{ref2} \href{https://www.google.com/imghp?hl=zh-CN&ogbl}{Google图片}
+\end{thebibliography}
+
+
+
+
+
+
+\title{\textbf{《计算机图形学》十月报告}}
+\author{学号：181860077 姓名：佘帅杰，\href{mailto:3121416933@qq.com}{3121416933@qq.com}}
+\maketitle
+
+
+
+\begin{enumerate}
+    \item 实现Bezier曲线绘制算法
+    
+    \item 实现B-Spline曲线绘制算法
+    
+    \item 在CLI做对应的处理，加入曲线绘制算法的对应功能
+
+    \item 实现对图元的平移，旋转，缩放以及裁剪的操作，至此已经实现了所有算法模块里的内容
+    
+    \item 对CLI中添加对图元操作的相关支持
+\end{enumerate}
+
+
 
 \subsection{曲线的参数化表示}
 在绘制曲线之前，首先需要了解怎么对曲线进行参数化的表示
@@ -763,82 +833,16 @@ saveCanvas 1\\
 	\label{fig:Liang-Barsky算法剪切}
 \end{figure}
 
-\section{系统介绍}
-目前的CG2020图形学系统已经支持
-\begin{itemize}
-    \item 命令行和GUI界面调用直线生成算法
-    \item 命令行调用多边形生成算法和中点圆生成算法
-    \item 在GUI界面中使用鼠标直接的选中所需图元
-\end{itemize}
-
-\section{总结}
-本次实验基本还是以摸清框架代码结构以及了解QT特性为主，实现的代码量并不大
-主要是实现了相对简单明了的直线生成算法以及相对复杂的多边形和中点圆生成算法，同时实现了图片检验模块，为后续的复杂
-图像生成的正确性检验做一些准备，最后实现的鼠标选中图元的操作，即是方便操作
-同时也是方便于后续复杂图元生成的时候测试和调试工作
-
-
-\section{综述}
-注：本次报告是增量式的报告，即本次的报告内内容就是这个月做的内容，不包含上个月已经报告过的任何内容
-
-\begin{enumerate}
-    \item 实现Bezier曲线绘制算法
-    
-    \item 实现B-Spline曲线绘制算法
-    
-    \item 在CLI做对应的处理，加入曲线绘制算法的对应功能
-
-    \item 实现对图元的平移，旋转，缩放以及裁剪的操作，至此已经实现了所有算法模块里的内容
-    
-    \item 对CLI中添加对图元操作的相关支持
-\end{enumerate}
 
 
 
-\section{系统介绍}
-目前的CG2020图形学系统已经支持
-\begin{itemize}
-    \item 命令行和GUI界面调用直线生成算法
-    \item 命令行调用多边形生成算法和中点圆生成算法
-    \item 在GUI界面中使用鼠标直接的选中所需图元
-    \item 命令行调用曲线生成算法，可选算法Bezier和B-spline
-    \item 在命令行调用指令，对图元做平移，旋转，缩放，裁剪操作
-\end{itemize}
-
-\section{总结}
-本次实验基本是在实现和完善算法模块，集中对需求的图形学绘制和图元操作算法
-进行研究和实现，至此已经实现了所有的算法函数，下一步是更加细致的查错和
-完善在GUI里对算法的调用和支持
+\title{\textbf{《计算机图形学》十一月报告}}
+\author{学号：181860077 姓名：佘帅杰，\href{mailto:3121416933@qq.com}{3121416933@qq.com}}
+\maketitle
 
 
 
-\section{综述}
-注：本次报告是增量式的报告，即本次的报告内内容就是这个月做的内容\\
-在上个月已经基本实现了算法部分的内容，这个月的工作主要可以概括到下面的四个方面
-\begin{enumerate}
-    \item 着手阅读GUI的框架代码
-    
-    \item 着手阅读pyQT相关的模块和接口
-    
-    \item 着手实现GUI相关的功能
-    
-    \item 修改遇到的算法模块的BUG
-\end{enumerate}
-
-目前已经实现的GUI部分
-\begin{enumerate}
-    \item 绘制直线，椭圆，多边形。
-    
-    \item 利用鼠标选中图元
-    
-    \item 平移，旋转
-    
-    \item 保存和清空画布
-    
-    \item 选择画笔颜色
-\end{enumerate}
-\section{GUI框架介绍}
-\subsection{概述}
+\subsection{GUI框架分析}
 GUI框架主要是由如下的三个部分组成的
 
 \begin{enumerate}
@@ -852,7 +856,7 @@ GUI框架主要是由如下的三个部分组成的
     更多的他代表了外层的窗口管理，负责和一些鼠标对菜单的操作的响应
 \end{enumerate}
 
-\subsection{具体函数分析}
+\subsubsection{具体函数分析}
 \subsubsection{MyCanvas}
 start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制并不是真正的绘制
 在画布上的绘制，而是开始准备绘制色湖之状态位，在每一次的刷新才会根据Item自己的操作
@@ -884,7 +888,6 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
 
 
 
-\section{具体实现}
 上面的解释是初步的在实现之前对框架代码的阅读理解，下面是具体的开发
 
 \subsection{绘制直线}
@@ -989,8 +992,8 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
 之前的曲线绘制没有考虑到左右两个端点是同一个点的情况，同样在测试样例里也没有这样
 但是在GUI的使用的时候，由于椭圆是随着鼠标的移动而绘图的，所以这个时候一开始会出现左右两个端点在同一个位置的情况
 进一步的触发了BUG，发现这个BUG后进行修改，在计算之前就先加入左右端点即可
-
- 
+  
+    
 \section{系统介绍}
 目前的CG2020图形学系统已经支持
 \begin{itemize}
@@ -1006,17 +1009,32 @@ start\_draw\_line类似的函数主要就是负责绘制，但是这里的绘制
 \end{itemize}
 
 \section{总结}
+\subsection{九月总结}
+本次实验基本还是以摸清框架代码结构以及了解QT特性为主，实现的代码量并不大
+主要是实现了相对简单明了的直线生成算法以及相对复杂的多边形和中点圆生成算法，同时实现了图片检验模块，为后续的复杂
+图像生成的正确性检验做一些准备，最后实现的鼠标选中图元的操作，即是方便操作
+同时也是方便于后续复杂图元生成的时候测试和调试工作
+
+\subsection{十月总结}
+本次实验基本是在实现和完善算法模块，集中对需求的图形学绘制和图元操作算法
+进行研究和实现，至此已经实现了所有的算法函数，下一步是更加细致的查错和
+完善在GUI里对算法的调用和支持
+
+\subsection{十一月总结}
 本次实验主要是对GUI的框架代码进行了相对深入的了解，在了解的同时
 逐步的开展相应的功能实现，主要围绕着绘图和绘图相关的实用功能。
 在实现的同时，检测和挖掘先前算法实现的种种BUG并修复
+
+
 \bibliography{xxx}
 
 \begin{thebibliography}{99}  
     \bibitem{ref1}《计算机图形学教程》孙正兴编 
     \bibitem{ref2} \href{https://www.google.com/imghp?hl=zh-CN&ogbl}{Google图片}
-    \bibitem{ref3} \href{https://blog.csdn.net/shenziheng1/article/details/54411098}{CSDN博客}
-    \bibitem{ref4} \href{https://build-system.fman.io/pyqt5-tutorial}{PyQT5 Tutorial}
+    \bibitem{ref3} \href{https://build-system.fman.io/pyqt5-tutorial}{PyQT5 Tutorial}
+    \bibitem{ref4} \href{https://blog.csdn.net/shenziheng1/article/details/54411098}{CSDN博客}
 \end{thebibliography}
 
 \end{document}
+
 \bibliographystyle{plain}
