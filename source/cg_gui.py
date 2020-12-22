@@ -38,9 +38,7 @@ from PyQt5.QtCore import *
 import time
 
 
-# TODO：设置背景
-# TODO: 空的裁剪记得删除
-# TODO：感觉裁剪的Liang算法有问题
+# TODO: 增加保存等等的快捷键
 
 class Logger:
     def __init__(self):
