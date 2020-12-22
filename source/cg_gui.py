@@ -72,7 +72,7 @@ class MyCanvas(QGraphicsView):
         self.list_widget = None
         self.item_dict = {}
         self.selected_id = ''
-
+        self.temp_item1=None
         self.prestatus = ''
         self.status = ''
         self.temp_algorithm = ''
@@ -89,24 +89,28 @@ class MyCanvas(QGraphicsView):
         self.status = 'line'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
+        self.temp_item = None
         cglog.log("draw line success " + " get item {}".format(self.temp_id))
         
     def start_draw_polygon(self, algorithm, item_id):
         self.status = 'polygon'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
+        self.temp_item = None
         cglog.log("draw polygon success " + " get item {}".format(self.temp_id))
 
     def start_draw_ellipse(self,  item_id):
         self.status = 'ellipse'
         self.temp_id = item_id
         self.temp_algorithm = ''
+        self.temp_item = None
         cglog.log("draw ellipse success " + " get item {}".format(self.temp_id))
     
     def start_draw_curve(self, algorithm, item_id):
         self.status = 'curve'
         self.temp_algorithm = algorithm
         self.temp_id = item_id
+        self.temp_item = None
         cglog.log("draw curve success " + " get item {}".format(self.temp_id))
 
     def start_translate(self):
@@ -211,7 +215,7 @@ class MyCanvas(QGraphicsView):
         pos = self.mapToScene(event.localPos().toPoint())
         x = int(pos.x())
         y = int(pos.y())
-
+        #print(self.status,self.temp_item)
         if self.status == 'line':
             self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
             self.scene().addItem(self.temp_item)
@@ -271,7 +275,10 @@ class MyCanvas(QGraphicsView):
                     self.item_dict[i].update()
                     self.main_window.list_widget.setCurrentRow(int(i))
         elif self.status == "translate":
-            self.start_point = [x, y]
+            if self.mousePressDetect(event) == 1:
+                self.start_point = [x, y]
+            
+
         elif self.status == "rotate":
             # use left buttom to decide rotate center
             # and use right buttom to caculate rotate angle
@@ -279,14 +286,31 @@ class MyCanvas(QGraphicsView):
                 self.start_point = [x, y]
             else:
                 # finish rotating
-                self.p_list = self.temp_item.p_list
+                self.temp_p_list = self.temp_item.p_list
                 self.status = ''
+
         elif self.status == "scale":
-            self.start_point = [x, y]
+            if self.mousePressDetect(event) == 1:
+                self.start_point = [x, y]
+            else:
+                self.temp_p_list = self.temp_item.p_list
         elif self.status == 'clip_CS' or self.status == 'clip_LB':
-            self.temp_item1 = MyItem(self.temp_id, "polygon", [[x, y], [x, y]], 'DDA', QColor(0, 0, 255))
-            self.scene().addItem(self.temp_item1)
-            self.start_point = [x, y]
+            if self.mousePressDetect(event) == 1:
+                if self.temp_item1 != None:
+                    self.scene().removeItem(self.temp_item1)
+                self.temp_item1 = MyItem(self.temp_id, "polygon", [[x, y], [x, y]], 'DDA', QColor(0, 0, 255))
+                self.scene().addItem(self.temp_item1)
+                self.start_point = [x, y]
+                self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,True)
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,True)
+            else:
+                self.temp_p_list = self.temp_item.p_list
+                self.scene().removeItem(self.temp_item1)
+                self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,False)
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents, False)
+                if (self.temp_p_list[0] == self.temp_p_list[1]) and (self.temp_p_list[1] == [0, 0]):
+                    self.delete_item()
+                #print("Pos",self.temp_p_list)
         elif self.status == 'paste':
             self.temp_item = MyItem(self.temp_id, self.copy_board.item_type, self.copy_board.p_list, self.copy_board.algorithm, self.col)
             self.temp_item.finish_draw = True
@@ -386,12 +410,7 @@ class MyCanvas(QGraphicsView):
                 y = int(pos.y())
                 self.temp_item.p_list[-1] = [x, y]
                 # refresh Scene to see new item
-                self.updateScene([self.sceneRect()])
-        if self.status == "scale":
-            self.p_list = self.temp_item.p_list
-        if self.status == 'clip_LB' or self.status == 'clip_CS':
-            self.p_list = self.temp_item.p_list
-            self.scene().removeItem(self.temp_item1)
+                self.updateScene([self.sceneRect()])    
         if self.status == "curve":
             if self.temp_item == None:
                 pass
@@ -403,13 +422,12 @@ class MyCanvas(QGraphicsView):
                 self.temp_item.p_list[-1] = [x, y]
                 # refresh Scene to see new item
                 self.updateScene([self.sceneRect()])              
-        if self.status == 'rotate':
-            self.temp_p_list == self.temp_item.p_list
         if self.status == 'free':
             self.item_dict[self.temp_id] = self.temp_item
             self.list_widget.addItem(self.temp_id)
             self.finish_draw()
-        
+        if self.status == 'translate':
+            self.temp_p_list =self.temp_item.p_list
         super().mouseReleaseEvent(event)
 
     def start_select(self):
@@ -436,7 +454,6 @@ class MyCanvas(QGraphicsView):
         self.status = ''
         self.temp_item = None
         self.main_window.item_cnt = 0
-        
         cglog.log("clear canvas success")
 
     def wheelEvent(self, event):
@@ -511,6 +528,7 @@ class MyCanvas(QGraphicsView):
         self.status = 'free'
         self.temp_id = item_id
         self.temp_algorithm = ''
+        self.temp_item = None
 
 class MyItem(QGraphicsItem):
     """
@@ -811,14 +829,7 @@ class MainWindow(QMainWindow):
         self.item_cnt += 1
         return _id
     
-    def getInteger(self):
-        # one choose is to use this function for double time
-        # and get width and height in two time
-        # I will try to use dialog to get two interger at one time
-        i, okPressed = QInputDialog.getInt(self, "Get integer1","Percentage1:", 28, 0, 100, 1)
-        k, okPressed = QInputDialog.getInt(self, "Get integer2","Percentage2:", 28, 0, 100, 1)
-        if okPressed:
-            print(i,k)
+
 
     def copy_action(self):
         self.canvas_widget.copy_item()
