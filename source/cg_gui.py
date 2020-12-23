@@ -77,6 +77,7 @@ class MyCanvas(QGraphicsView):
         self.temp_id = ''
         self.temp_item = None
 
+        self.rotating_flag=False
         self.start_point = None
         self.temp_p_list = []
 
@@ -275,18 +276,19 @@ class MyCanvas(QGraphicsView):
         elif self.status == "translate":
             if self.mousePressDetect(event) == 1:
                 self.start_point = [x, y]
-            
-
         elif self.status == "rotate":
             # use left buttom to decide rotate center
             # and use right buttom to caculate rotate angle
             if self.mousePressDetect(event) == 1:
-                self.start_point = [x, y]
+                if self.rotating_flag==False:
+                    self.start_point = [x, y]
+                    self.rotating_flag = True
+                else:
+                    pass
             else:
                 # finish rotating
                 self.temp_p_list = self.temp_item.p_list
                 self.status = ''
-
         elif self.status == "scale":
             if self.mousePressDetect(event) == 1:
                 self.start_point = [x, y]
