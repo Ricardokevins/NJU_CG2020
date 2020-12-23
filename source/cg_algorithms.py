@@ -296,10 +296,11 @@ def rotate(p_list, x, y, r):
     :param r: (int) 顺时针旋转角度（°）
     :return: (list of list of int: [[x_0, y_0], [x_1, y_1], [x_2, y_2], ...]) 变换后的图元参数
     """
+    r = 360 - r
     r/=180
     r*=math.pi
-
-    cos_val=math.cos(r)
+    
+    cos_val = math.cos(r)
     sin_val = math.sin(r)
     temp_result=[]
     for i in p_list:

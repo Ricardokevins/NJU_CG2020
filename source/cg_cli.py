@@ -101,6 +101,7 @@ if __name__ == '__main__':
                 x0 = int(line[2])
                 y0 = int(line[3])
                 r = int(line[4])
+                r=360-r
                 graph_type=item_dict[item_id][0]
                 control_point=item_dict[item_id][1]
                 algorithm=item_dict[item_id][2]
