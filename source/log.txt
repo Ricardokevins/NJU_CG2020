@@ -242,3 +242,161 @@
 2020-12-23 21:11:27 clear canvas success
 2020-12-23 21:11:30 draw ellipse success  get item 0
 2020-12-23 21:11:34 draw polygon success  get item 2
+2020-12-23 23:44:30 -----------------------------------
+2020-12-23 23:44:30 Start System
+2020-12-23 23:44:37 draw ellipse success  get item 0
+2020-12-23 23:44:40 Select change from  to 0
+2020-12-23 23:44:45 draw polygon success  get item 1
+2020-12-23 23:48:18 Select change from  to 
+2020-12-23 23:48:18 selection change And reset to choose nothing!
+2020-12-23 23:48:18 clear canvas success
+2020-12-23 23:49:51 draw ellipse success  get item 0
+2020-12-23 23:49:54 draw ellipse success  get item 1
+2020-12-23 23:49:55 clear canvas success
+2020-12-23 23:49:56 draw ellipse success  get item 0
+2020-12-23 23:51:41 Select change from 0 to 0
+2020-12-23 23:55:39 copy success select 0
+2020-12-23 23:55:46 paste success  get item 1
+2020-12-23 23:55:57 Select change from 0 to 1
+2020-12-23 23:56:01 paste success  get item 2
+2020-12-23 23:58:15 Select change from 1 to 0
+2020-12-23 23:58:18 paste success  get item 3
+2020-12-23 23:58:19 paste success  get item 4
+2020-12-23 23:58:21 Select change from 0 to 
+2020-12-23 23:58:21 selection change And reset to choose nothing!
+2020-12-23 23:58:21 clear canvas success
+2020-12-23 23:58:23 paste success  get item 0
+2020-12-24 00:00:13 -----------------------------------
+2020-12-24 00:00:13 Start System
+2020-12-24 00:00:17 paste failed  select nothing 
+2020-12-24 00:00:21 draw ellipse success  get item 0
+2020-12-24 00:00:24 Select change from  to 0
+2020-12-24 00:00:25 copy success select 0
+2020-12-24 00:00:26 paste success  get item 1
+2020-12-24 00:00:27 paste success  get item 2
+2020-12-24 00:00:27 paste success  get item 3
+2020-12-24 00:00:27 paste success  get item 4
+2020-12-24 00:00:28 paste success  get item 5
+2020-12-24 00:00:28 paste success  get item 6
+2020-12-24 00:00:28 paste success  get item 7
+2020-12-24 00:00:28 paste success  get item 8
+2020-12-24 00:00:28 paste success  get item 9
+2020-12-24 00:00:28 paste success  get item 10
+2020-12-24 00:00:28 paste success  get item 11
+2020-12-24 00:00:29 paste success  get item 12
+2020-12-24 00:00:29 paste success  get item 13
+2020-12-24 00:00:29 paste success  get item 14
+2020-12-24 00:00:29 paste success  get item 15
+2020-12-24 00:00:29 paste success  get item 16
+2020-12-24 00:00:29 paste success  get item 17
+2020-12-24 00:00:30 paste success  get item 18
+2020-12-24 00:00:30 paste success  get item 19
+2020-12-24 00:00:30 paste success  get item 20
+2020-12-24 00:00:30 paste success  get item 21
+2020-12-24 00:00:30 paste success  get item 22
+2020-12-24 00:00:30 paste success  get item 23
+2020-12-24 00:00:31 paste success  get item 24
+2020-12-24 00:00:31 paste success  get item 25
+2020-12-24 00:00:31 paste success  get item 26
+2020-12-24 00:00:31 paste success  get item 27
+2020-12-24 00:00:31 paste success  get item 28
+2020-12-24 00:00:32 paste success  get item 29
+2020-12-24 00:00:32 paste success  get item 30
+2020-12-24 00:00:32 paste success  get item 31
+2020-12-24 00:00:32 paste success  get item 32
+2020-12-24 00:00:32 paste success  get item 33
+2020-12-24 00:00:32 paste success  get item 34
+2020-12-24 00:00:32 paste success  get item 35
+2020-12-24 00:00:33 paste success  get item 36
+2020-12-24 00:00:33 paste success  get item 37
+2020-12-24 00:00:33 paste success  get item 38
+2020-12-24 00:00:33 paste success  get item 39
+2020-12-24 00:00:33 paste success  get item 40
+2020-12-24 00:00:33 paste success  get item 41
+2020-12-24 00:00:34 paste success  get item 42
+2020-12-24 00:00:34 paste success  get item 43
+2020-12-24 00:00:34 paste success  get item 44
+2020-12-24 00:00:34 paste success  get item 45
+2020-12-24 00:00:34 paste success  get item 46
+2020-12-24 00:00:36 Select change from 0 to 
+2020-12-24 00:00:36 selection change And reset to choose nothing!
+2020-12-24 00:00:36 clear canvas success
+2020-12-24 00:00:40 rotate failed Not select anything yet
+2020-12-24 00:00:45 draw ellipse success  get item 0
+2020-12-24 00:00:48 Select change from  to 0
+2020-12-24 00:00:50 copy success select 0
+2020-12-24 00:00:50 Hit unknown State in Mousepressed copy
+2020-12-24 00:00:52 paste success  get item 1
+2020-12-24 00:00:53 paste success  get item 2
+2020-12-24 00:00:53 paste success  get item 3
+2020-12-24 00:00:53 paste success  get item 4
+2020-12-24 00:00:53 paste success  get item 5
+2020-12-24 00:00:53 paste success  get item 6
+2020-12-24 00:00:53 paste success  get item 7
+2020-12-24 00:00:54 paste success  get item 8
+2020-12-24 00:00:54 paste success  get item 9
+2020-12-24 00:00:54 paste success  get item 10
+2020-12-24 00:02:04 -----------------------------------
+2020-12-24 00:02:04 Start System
+2020-12-24 00:02:07 draw ellipse success  get item 0
+2020-12-24 00:02:08 Select change from  to 0
+2020-12-24 00:02:10 copy success select 0
+2020-12-24 00:02:14 paste success  get item 1
+2020-12-24 00:02:14 paste success  get item 2
+2020-12-24 00:02:14 paste success  get item 3
+2020-12-24 00:02:15 paste success  get item 4
+2020-12-24 00:02:15 paste success  get item 5
+2020-12-24 00:04:15 Select change from  to 1
+2020-12-24 00:04:15 remove 0 from listwidget
+2020-12-24 00:04:15 Select change from 1 to 
+2020-12-24 00:04:15 selection change And reset to choose nothing!
+2020-12-24 00:11:28 clear canvas success
+2020-12-24 00:11:52 Select change from  to 14
+2020-12-24 00:11:54 Select change from  to 13
+2020-12-24 00:11:54 remove 14 from listwidget
+2020-12-24 00:11:54 Select change from 13 to 
+2020-12-24 00:11:54 selection change And reset to choose nothing!
+2020-12-24 00:11:54 Select change from  to 13
+2020-12-24 00:11:55 Select change from  to 12
+2020-12-24 00:11:55 remove 13 from listwidget
+2020-12-24 00:11:55 Select change from 12 to 
+2020-12-24 00:11:55 selection change And reset to choose nothing!
+2020-12-24 00:11:55 Select change from  to 12
+2020-12-24 00:11:55 Select change from  to 11
+2020-12-24 00:11:55 remove 12 from listwidget
+2020-12-24 00:11:55 Select change from 11 to 
+2020-12-24 00:11:55 selection change And reset to choose nothing!
+2020-12-24 00:11:55 Select change from  to 11
+2020-12-24 00:11:56 Select change from  to 10
+2020-12-24 00:11:56 remove 11 from listwidget
+2020-12-24 00:11:56 Select change from 10 to 
+2020-12-24 00:11:56 selection change And reset to choose nothing!
+2020-12-24 00:11:56 Select change from  to 10
+2020-12-24 00:11:56 Select change from  to 9
+2020-12-24 00:11:56 remove 10 from listwidget
+2020-12-24 00:11:56 Select change from 9 to 
+2020-12-24 00:11:56 selection change And reset to choose nothing!
+2020-12-24 00:11:57 Select change from  to 8
+2020-12-24 00:11:57 Select change from  to 9
+2020-12-24 00:11:57 remove 8 from listwidget
+2020-12-24 00:11:57 Select change from 9 to 
+2020-12-24 00:11:57 selection change And reset to choose nothing!
+2020-12-24 00:11:58 Select change from  to 8
+2020-12-24 00:11:58 Select change from  to 7
+2020-12-24 00:11:58 remove 8 from listwidget
+2020-12-24 00:11:58 Select change from 7 to 
+2020-12-24 00:11:58 selection change And reset to choose nothing!
+2020-12-24 00:12:47 Select change from  to 14
+2020-12-24 00:12:48 Select change from 14 to 12
+2020-12-24 00:12:49 Select change from 12 to 11
+2020-12-24 00:12:50 Select change from 11 to 10
+2020-12-24 00:12:50 Select change from 10 to 9
+2020-12-24 00:12:51 Select change from 9 to 8
+2020-12-24 00:12:57 translate 8 success
+2020-12-24 00:13:02 Select change from 8 to 9
+2020-12-24 00:13:02 Select change from 9 to 8
+2020-12-24 00:13:03 Select change from 8 to 9
+2020-12-24 00:13:05 translate 9 success
+2020-12-24 00:13:18 copy success select 9
+2020-12-24 00:13:22 Select change from 6 to 6
+2020-12-24 00:13:27 Select change from 3 to 3

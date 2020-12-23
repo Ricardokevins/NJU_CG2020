@@ -326,7 +326,7 @@ class MyCanvas(QGraphicsView):
             self.scene().addItem(self.temp_item)
             self.item_dict[self.temp_id] = self.temp_item
             cglog.log("paste success "+" get item {}".format(self.temp_id))
-            self.list_widget.addItem(self.temp_id)
+            self.list_widget.addItem(str(self.temp_id))
             self.finish_draw()
         elif self.status == 'free':
             self.temp_item = MyItem(self.temp_id, self.status, [[x, y]], self.temp_algorithm, self.col)
