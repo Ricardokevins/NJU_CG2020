@@ -79,6 +79,8 @@
 \subsection{十二月综述}
 \begin{enumerate}
     \item 实现了复制和粘贴功能
+    \item 实现了重置画布的选择大小的窗口和功能
+    \item 实现了裁剪的时候提示框
     \item 实现了删除功能
     \item 实现了日志系统
     \item 实现了多数功能的快捷键添加
@@ -883,6 +885,12 @@ GUI里的重置画布，一个方面需要把当前的画布清空，另一个�
 两个QlineEdit的文本编辑框以及一个确定的按钮，稍作布局。然后就是在函数里
 执行这个对话框dialog.exec()，对应的用户就可以看到这两个对话框了，然后利用canvas
 里的resize以及setSceneRect可以实现对应的功能
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{figure/resetwindow.png}
+	\caption{重置画布实例}
+	\label{fig:resetwindow}
+\end{figure}
 
 \section{附加功能算法介绍}
 \subsection{算法正确性检查模块}
@@ -980,7 +988,13 @@ GUI里的重置画布，一个方面需要把当前的画布清空，另一个�
 
 有了上述的log系统，实现和测试功能的时候只需要添加一行代码，在测试的时候就可以通过
 log文件查看系统的状态和行为，极大的增强了系统的鲁棒性和可调试性
-%TODO：Figure here
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{figure/log.png}
+	\caption{日志系统文件内容实例}
+	\label{fig:log}
+\end{figure}
+
 \subsection{退出前确定算法}
 对于用户经过辛辛苦苦的绘制之后很有可能会忘记保存，导致很多的努力付之东流。
 对于目前的很多主流的编辑器都有退出前询问是否要保存的操作，对应的这里我也做了实现
@@ -990,15 +1004,29 @@ log文件查看系统的状态和行为，极大的增强了系统的鲁棒性�
 整个窗口的closeEvent，实现的基本策略就是函数被调用的时候，使用QMessageBox里面的内置函数
 question来询问用户的选择，捕获到用户的选择后做对应的处理，要么调用已经实现好的文件保存系统
 要么直接退出整个应用，相对而言实现比较简洁，使用起来比较便利
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{figure/comfirm.png}
+	\caption{退出前确认保存实例}
+	\label{fig:comfirmed}
+\end{figure}
 
 \subsection{自由绘制算法}
 自由绘制算法允许用户自由的使用鼠标绘制自己喜欢的图案，实现真正的
 自定义绘图。
-
 自由绘制的基本原理和多边形算法相对相似，随着用户的鼠标点击开始新建图元，随着用户
 的鼠标移动行为，不断的记录新的p\_list，经过初步的尝试，如果是直接把p\_list作为像素点进行绘制
 会导致像素点过于稀疏，导致效果不好，因此把这个图元作为一个多边形，在相对密集的像素点之间再使用
-线段进行连接，结果相对好一些
+线段进行连接，结果相对好一些。
+
+同时比较方便的就是自由绘制的图元同样是支持平移等等的图元操作，甚至是支持复制和粘贴操作，下面
+是一个例子，这个例子使用手绘了一个五角星，然后复制粘贴了若干份
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.4]{figure/freedraw.png}
+	\caption{自由绘图算法实例}
+	\label{fig:freedraw}
+\end{figure}
 
 \subsection{快捷键绑定算法}
 在高频和复杂的图元操作里，为了简化操作，自然需要快捷键的设置，这个也是现有的很多编辑器
@@ -1006,6 +1034,12 @@ question来询问用户的选择，捕获到用户的选择后做对应的处理
 对于快捷键的绑定就需要用到PyQt5里的一些知识来简介的实现
 根据PyQt5的文档得知，快捷键的设置大致在信号槽函数绑定的位置增加函数即可
 具体的实现可以看MainWindow里的init，使用setShortcut进行绑定即可
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.4]{figure/shortcut.png}
+	\caption{快捷键设置}
+	\label{fig:shortcut}
+\end{figure}
 
 \subsection{复制和粘贴算法}
 在做大规模的编辑的时候，有的时候需要把当前的图元完全的拷贝出一份，甚至是
@@ -1021,6 +1055,15 @@ question来询问用户的选择，捕获到用户的选择后做对应的处理
 鼠标操作，鼠标的点击来确定粘贴的具体位置。对应的就是实现了mousePressEvent里面对paste的
 status进行判断即可
 
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.4]{figure/copypaste.png}
+	\caption{复制粘贴算法实例}
+	\label{fig:copypaste}
+\end{figure}
+
+
+
 \subsection{删除算法}
 有的时候不小心的操作失误会带来冗余的图元，感觉到烦恼和麻烦？不要紧
 我实现了删除算法，通过上述实现的鼠标选择或者是列表选择精准的选中对象
@@ -1033,8 +1076,25 @@ status进行判断即可
 这样就可以保证序号仍然是连续的，同时保证了list里以及item\_dict的编号是一一对应的
 
 同时由于我们把所有的编号进行了重新排序，于是窗口的图元开始编号就需要往前移动一位
+下图是具体的删除算法的例子，来源是自由绘制的图像，删除了右下角的一个图元
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.4]{figure/delete.png}
+	\caption{删除算法实例}
+	\label{fig:delete}
+\end{figure}
 
-
+\subsection{裁剪提示框绘制算法}
+在对图元进行裁剪操作的时候，由于裁剪的窗口并不显示，导致了
+裁剪操作相对比较麻烦，所以对应的实现了一个裁剪的提示窗口，使用了一个
+tempItem，来标识这个矩形，在绘制确定的时候把这个提示矩形删除即可
+具体的效果可以查看下图
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.4]{figure/cutshow.png}
+	\caption{裁剪算法提示框实例}
+	\label{fig:cutshow}
+\end{figure}
 
 \section{系统介绍}
 目前的CG2020图形学系统已经支持
@@ -1048,6 +1108,12 @@ status进行判断即可
     \item 在GUI界面操作图元平移
     \item 在GUI界面调整画笔
     \item 在GUI界面保存画布
+    \item 在GUI界面重置画布，并设置画布的大小
+    \item 在GUI界面退出的时候确认是否保存
+    \item 在GUI界面直接使用鼠标自由绘制
+    \item 在GUI界面使用复制和粘贴
+    \item 在GUI界面直接删除图元
+    \item 在GUI界面使用快捷键快速唤起部分实用功能
 \end{itemize}
 
 本系统的特性

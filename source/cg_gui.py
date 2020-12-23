@@ -552,6 +552,14 @@ class MyItem(QGraphicsItem):
         self.finish_draw = False
 
     def paint(self, painter: QPainter, option: QStyleOptionGraphicsItem, widget: Optional[QWidget] = ...) -> None:
+        for i in range(len(self.p_list)):
+            if type(self.p_list[i][0]) != int and type(self.p_list[i][1]) != int:
+                # print(i)
+                # print("Hit error")
+                self.p_list[i]=list(self.p_list[i])
+                self.p_list[i][0] = int(self.p_list[i][0])
+                self.p_list[i][1] = int(self.p_list[i][1])
+            
         if self.item_type == 'line':
             item_pixels = alg.draw_line(self.p_list, self.algorithm)
             for p in item_pixels:

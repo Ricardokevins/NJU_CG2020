@@ -13,3 +13,99 @@
 2020-12-23 11:20:11 clear canvas success
 2020-12-23 11:20:13 draw ellipse success  get item 0
 2020-12-23 11:20:15 draw polygon success  get item 0
+2020-12-23 12:17:18 -----------------------------------
+2020-12-23 12:17:18 Start System
+2020-12-23 12:23:31 clear canvas success
+2020-12-23 14:42:14 -----------------------------------
+2020-12-23 14:42:14 Start System
+2020-12-23 15:15:56 draw ellipse success  get item 0
+2020-12-23 15:15:59 Select change from  to 0
+2020-12-23 15:25:07 copy success select 0
+2020-12-23 15:25:09 paste success  get item 1
+2020-12-23 15:25:13 paste success  get item 2
+2020-12-23 15:25:15 paste success  get item 3
+2020-12-23 15:25:17 paste success  get item 4
+2020-12-23 15:25:18 paste success  get item 5
+2020-12-23 15:25:19 paste success  get item 6
+2020-12-23 15:25:20 paste success  get item 7
+2020-12-23 15:25:21 paste success  get item 8
+2020-12-23 15:25:25 Select change from 0 to 
+2020-12-23 15:25:25 selection change And reset to choose nothing!
+2020-12-23 15:25:25 clear canvas success
+2020-12-23 15:25:28 draw ellipse success  get item 0
+2020-12-23 15:25:31 Select change from  to 0
+2020-12-23 15:25:35 copy success select 0
+2020-12-23 15:25:39 paste success  get item 1
+2020-12-23 15:25:40 paste success  get item 2
+2020-12-23 15:25:41 paste success  get item 3
+2020-12-23 15:25:42 paste success  get item 4
+2020-12-23 15:25:43 paste success  get item 5
+2020-12-23 15:25:43 paste success  get item 6
+2020-12-23 15:25:44 paste success  get item 7
+2020-12-23 15:25:45 paste success  get item 8
+2020-12-23 15:25:46 paste success  get item 9
+2020-12-23 15:25:46 paste success  get item 10
+2020-12-23 15:25:47 paste success  get item 11
+2020-12-23 15:25:48 paste success  get item 12
+2020-12-23 15:25:49 paste success  get item 13
+2020-12-23 15:25:49 paste success  get item 14
+2020-12-23 15:25:50 paste success  get item 15
+2020-12-23 15:25:56 Select change from 0 to 15
+2020-12-23 15:26:00 draw polygon success  get item 16
+2020-12-23 15:28:10 -----------------------------------
+2020-12-23 15:28:10 Start System
+2020-12-23 15:29:27 clear canvas success
+2020-12-23 15:29:39 Select change from  to 0
+2020-12-23 15:29:41 copy success select 0
+2020-12-23 15:29:43 paste success  get item 1
+2020-12-23 15:35:02 -----------------------------------
+2020-12-23 15:35:02 Start System
+2020-12-23 15:35:13 Select change from  to 0
+2020-12-23 15:35:15 copy success select 0
+2020-12-23 15:35:18 paste success  get item 1
+2020-12-23 15:35:40 -----------------------------------
+2020-12-23 15:35:40 Start System
+2020-12-23 15:35:48 Select change from  to 0
+2020-12-23 15:35:49 copy success select 0
+2020-12-23 15:35:50 Hit unknown State in Mousepressed copy
+2020-12-23 15:35:51 paste success  get item 1
+2020-12-23 15:36:21 -----------------------------------
+2020-12-23 15:36:21 Start System
+2020-12-23 15:36:29 Select change from  to 0
+2020-12-23 15:36:29 copy success select 0
+2020-12-23 15:36:31 paste success  get item 1
+2020-12-23 15:38:10 -----------------------------------
+2020-12-23 15:38:10 Start System
+2020-12-23 15:38:16 Select change from  to 0
+2020-12-23 15:38:17 copy success select 0
+2020-12-23 15:38:20 paste success  get item 1
+2020-12-23 15:38:23 Select change from 0 to 1
+2020-12-23 15:38:48 -----------------------------------
+2020-12-23 15:38:48 Start System
+2020-12-23 15:38:58 Select change from  to 0
+2020-12-23 15:38:58 copy success select 0
+2020-12-23 15:39:00 paste success  get item 1
+2020-12-23 15:39:02 paste success  get item 2
+2020-12-23 15:39:04 paste success  get item 3
+2020-12-23 15:39:05 paste success  get item 4
+2020-12-23 15:39:06 paste success  get item 5
+2020-12-23 15:39:09 Select change from 0 to 3
+2020-12-23 15:45:30 Select change from  to 4
+2020-12-23 15:45:30 remove 3 from listwidget
+2020-12-23 15:45:30 Select change from 4 to 
+2020-12-23 15:45:30 selection change And reset to choose nothing!
+2020-12-23 15:45:37 Select change from  to 0
+2020-12-23 15:48:30 -----------------------------------
+2020-12-23 15:48:30 Start System
+2020-12-23 16:45:28 -----------------------------------
+2020-12-23 16:45:28 Start System
+2020-12-23 16:45:32 draw ellipse success  get item 0
+2020-12-23 16:57:20 -----------------------------------
+2020-12-23 16:57:20 Start System
+2020-12-23 16:57:23 draw line success  get item 0
+2020-12-23 16:57:25 Select change from  to 0
+2020-12-23 16:57:28 clip_LB 0 success
+2020-12-23 17:07:21 -----------------------------------
+2020-12-23 17:07:21 Start System
+2020-12-23 17:11:09 -----------------------------------
+2020-12-23 17:11:09 Start System
