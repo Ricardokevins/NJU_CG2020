@@ -1,2 +1,15 @@
 2020-12-23 00:48:23 -----------------------------------
 2020-12-23 00:48:23 Start System
+2020-12-23 11:19:39 -----------------------------------
+2020-12-23 11:19:39 Start System
+2020-12-23 11:19:41 draw ellipse success  get item 0
+2020-12-23 11:19:43 draw ellipse success  get item 1
+2020-12-23 11:19:47 clear canvas success
+2020-12-23 11:19:51 draw ellipse success  get item 0
+2020-12-23 11:19:53 draw ellipse success  get item 1
+2020-12-23 11:20:03 clear canvas success
+2020-12-23 11:20:07 draw ellipse success  get item 0
+2020-12-23 11:20:09 draw ellipse success  get item 1
+2020-12-23 11:20:11 clear canvas success
+2020-12-23 11:20:13 draw ellipse success  get item 0
+2020-12-23 11:20:15 draw polygon success  get item 0

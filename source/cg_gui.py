@@ -680,6 +680,7 @@ class MyItem(QGraphicsItem):
             event.accept()
         else:
             event.ignore()
+
 class MainWindow(QMainWindow):
     """
     主窗口类

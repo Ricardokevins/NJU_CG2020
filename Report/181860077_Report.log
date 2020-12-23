@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.7)  23 DEC 2020 01:03
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.7)  23 DEC 2020 11:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1098,8 +1098,8 @@ File: figure/test.jpg Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[23]
-Underfull \hbox (badness 10000) in paragraph at lines 902--903
+[23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 915--916
 
  []
 
@@ -1109,39 +1109,39 @@ File: figure/test.png Graphic file (type bmp)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 910--913
+Underfull \hbox (badness 10000) in paragraph at lines 923--926
 
  []
 
-[24]
+[25]
 File: figure/choose.png Graphic file (type bmp)
 <figure/choose.png>
 File: figure/choose2.png Graphic file (type bmp)
 <figure/choose2.png>
- [25] [26] [27]
+ [26] [27] [28]
 No file 181860077_Report.bbl.
-[28]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1045.
- [29]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1045.
+[29]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1103.
+ [30]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1103.
  (./181860077_Report.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1045.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1045.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1103.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1103.
 Package rerunfilecheck Info: File `181860077_Report.out' has not changed.
-(rerunfilecheck)             Checksum: 7CEDDD9AABC6D3ADB0AF3C901E542DC1;5610.
+(rerunfilecheck)             Checksum: 42035CB92BBC96FA8B069F82F81490AD;5715.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1045.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1103.
  ) 
 Here is how much of TeX's memory you used:
  18565 strings out of 481358
  378234 string characters out of 5927294
- 663380 words of memory out of 5000000
+ 663496 words of memory out of 5000000
  35645 multiletter control sequences out of 15000+600000
  540528 words of font info for 86 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  56i,12n,68p,434b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 181860077_Report.pdf (29 pages).
+Output written on 181860077_Report.pdf (30 pages).
