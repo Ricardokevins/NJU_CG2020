@@ -1,0 +1,7 @@
+resetCanvas 600 600
+setColor 0 255 0
+drawLine line1 100 100 400 300 DDA
+setColor 0 255 255
+drawLine line2 100 100 400 300 DDA
+rotate line1 100 100 45
+saveCanvas 1

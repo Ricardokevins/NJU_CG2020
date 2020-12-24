@@ -1,2 +1,4 @@
 python cg_cli.py ../testcase/input.txt ../img
 python cg_cli.py ../testcase/curve.txt ../img
+
+python cg_cli.py ../testcase/temp.txt ../img
