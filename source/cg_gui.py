@@ -77,6 +77,7 @@ class MyCanvas(QGraphicsView):
         self.temp_id = ''
         self.temp_item = None
 
+        self.drawing = False
         self.rotating_flag=False
         self.start_point = None
         self.temp_p_list = []
@@ -226,13 +227,15 @@ class MyCanvas(QGraphicsView):
                 self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
                 self.scene().addItem(self.temp_item)
                 self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,True)
-                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,True)
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents, True)
+                self.drawing = True
             else:
                 if self.mousePressDetect(event) == 1:
                     self.temp_item.p_list.append([x, y])
                 else:
                     self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,False)
-                    self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,False)
+                    self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents, False)
+                    self.drawing = False
                     self.list_widget.addItem(self.temp_id)
                     self.temp_item.finish_draw = True
                     self.item_dict[self.temp_id] = self.temp_item
@@ -246,7 +249,8 @@ class MyCanvas(QGraphicsView):
                 self.temp_item = MyItem(self.temp_id, self.status, [[x, y], [x, y]], self.temp_algorithm, self.col)
                 self.scene().addItem(self.temp_item)
                 self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,True)
-                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,True)   
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents, True)
+                self.drawing = True
             else:
                 if self.mousePressDetect(event) == 1:
                     self.temp_item.p_list.append([x, y])
@@ -255,6 +259,7 @@ class MyCanvas(QGraphicsView):
                     self.temp_item.finish_draw = True
                     self.item_dict[self.temp_id] = self.temp_item
                     self.finish_draw()
+                    self.drawing = False
                     self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,False)
                     self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,False)
                     # as soon as press right buttom which means stop
@@ -302,12 +307,14 @@ class MyCanvas(QGraphicsView):
                 self.scene().addItem(self.temp_item1)
                 self.start_point = [x, y]
                 self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,True)
-                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents,True)
+                self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents, True)
+                self.drawing = True
             else:
                 self.temp_p_list = self.temp_item.p_list
                 self.scene().removeItem(self.temp_item1)
                 self.main_window.list_widget.setAttribute(Qt.WA_TransparentForMouseEvents,False)
                 self.main_window.menubar.setAttribute(Qt.WA_TransparentForMouseEvents, False)
+                self.drawing = False
                 if (self.temp_p_list[0] == self.temp_p_list[1]) and (self.temp_p_list[1] == [0, 0]):
                     self.delete_item()
                 #print("Pos",self.temp_p_list)
@@ -473,17 +480,22 @@ class MyCanvas(QGraphicsView):
         self.updateScene([self.sceneRect()])
 
     def copy_item(self):
+        if self.drawing == True:
+            return
         if self.selected_id == '':
             print("Not selecting anything")
             self.status = ''
             return
         self.status = 'copy'
+    
         # temp save the item in copy board and wait for paste
         self.copy_board = self.item_dict[self.selected_id]
         cglog.log("copy success"+" select "+str(self.selected_id))
         return
 
     def paste_item(self):
+        if self.drawing == True:
+            return
         if self.copy_board == None:
             cglog.log("paste failed "+" select nothing ")
             self.status = ''
@@ -491,6 +503,8 @@ class MyCanvas(QGraphicsView):
         self.status = 'paste'
     
     def delete_item(self):
+        if self.drawing == True:
+            return
         if self.selected_id == '':
             cglog.log("delete failed Not selecting anything")
             self.status = ''

@@ -400,3 +400,43 @@
 2020-12-24 00:13:18 copy success select 9
 2020-12-24 00:13:22 Select change from 6 to 6
 2020-12-24 00:13:27 Select change from 3 to 3
+2020-12-24 09:12:49 -----------------------------------
+2020-12-24 09:12:49 Start System
+2020-12-24 09:12:56 draw polygon success  get item 0
+2020-12-24 09:14:00 draw polygon success  get item 1
+2020-12-24 09:14:18 -----------------------------------
+2020-12-24 09:14:18 Start System
+2020-12-24 09:42:43 -----------------------------------
+2020-12-24 09:42:43 Start System
+2020-12-24 09:42:47 draw ellipse success  get item 0
+2020-12-24 09:42:52 draw line success  get item 1
+2020-12-24 09:42:57 clip_LB failed Not select anything yet
+2020-12-24 09:43:00 Select change from  to 2
+2020-12-24 09:43:01 Select change from 2 to 1
+2020-12-24 09:43:04 translate 1 success
+2020-12-24 09:43:07 draw curve success  get item 3
+2020-12-24 09:43:27 Select change from  to 
+2020-12-24 09:43:27 selection change And reset to choose nothing!
+2020-12-24 09:43:27 clear canvas success
+2020-12-24 09:43:29 draw curve success  get item 0
+2020-12-24 09:43:37 draw line success  get item 1
+2020-12-24 09:43:38 Select change from  to 1
+2020-12-24 09:43:40 clip_CS 1 success
+2020-12-24 09:44:02 Select change from 1 to 0
+2020-12-24 09:44:02 Select change from 0 to 1
+2020-12-24 09:44:05 draw curve success  get item 2
+2020-12-24 09:44:26 Select change from  to 2
+2020-12-24 09:44:29 Select change from 2 to 1
+2020-12-24 09:44:31 Select change from 1 to 0
+2020-12-24 09:44:39 -----------------------------------
+2020-12-24 09:44:39 Start System
+2020-12-24 09:44:44 draw polygon success  get item 0
+2020-12-24 09:45:05 Select change from  to 0
+2020-12-24 09:45:05 copy success select 0
+2020-12-24 09:45:07 paste success  get item 1
+2020-12-24 09:45:09 translate 0 success
+2020-12-24 09:45:18 translate 0 success
+2020-12-24 09:45:21 Select change from 0 to 1
+2020-12-24 09:45:22 translate 1 success
+2020-12-24 09:45:29 rotate 1 success
+2020-12-24 09:45:36 translate 1 success
