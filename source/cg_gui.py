@@ -538,7 +538,9 @@ class MyCanvas(QGraphicsView):
         if(self.main_window.item_cnt>0):
             self.main_window.item_cnt -= 1
 
-    def draw_free(self,item_id):
+    def draw_free(self, item_id):
+        if self.drawing == True:
+            return
         self.status = 'free'
         self.temp_id = item_id
         self.temp_algorithm = ''
