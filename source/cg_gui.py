@@ -289,7 +289,7 @@ class MyCanvas(QGraphicsView):
                     self.start_point = [x, y]
                     self.rotating_flag = True
                 else:
-                    pass
+                    pass 
             else:
                 # finish rotating
                 self.rotating_flag = False

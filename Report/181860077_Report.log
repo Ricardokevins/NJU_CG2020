@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.7)  24 DEC 2020 08:40
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.7)  24 DEC 2020 17:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -674,51 +674,47 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 101--105
+Underfull \hbox (badness 10000) in paragraph at lines 104--108
 
  []
 
 [2] [3]
 File: figure/DDA.png Graphic file (type bmp)
 <figure/DDA.png>
+ [4]
 File: figure/DDA_GUI.png Graphic file (type bmp)
 <figure/DDA_GUI.png>
- [4]
 File: figure/bresenham.png Graphic file (type bmp)
 <figure/bresenham.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 223--239
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 225--241
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--239
+Underfull \hbox (badness 10000) in paragraph at lines 225--241
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--249
+Underfull \hbox (badness 10000) in paragraph at lines 246--251
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
 
 File: figure/Bre_GUI.png Graphic file (type bmp)
 <figure/Bre_GUI.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 278--290
+Underfull \hbox (badness 10000) in paragraph at lines 280--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 278--290
+Underfull \hbox (badness 10000) in paragraph at lines 280--292
 
  []
 
@@ -726,12 +722,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 278--290
 File: figure/linetest.png Graphic file (type bmp)
 <figure/linetest.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--304
+Underfull \hbox (badness 10000) in paragraph at lines 302--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--311
+Underfull \hbox (badness 10000) in paragraph at lines 307--313
 
  []
 
@@ -739,41 +735,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 305--311
 File: figure/polytest.png Graphic file (type bmp)
 <figure/polytest.png>
  [9]
-Underfull \hbox (badness 10000) in paragraph at lines 354--358
+Underfull \hbox (badness 10000) in paragraph at lines 356--360
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 354--358
+Underfull \hbox (badness 10000) in paragraph at lines 356--360
 
  []
 
 File: figure/circletest.png Graphic file (type bmp)
 <figure/circletest.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--385
+Underfull \hbox (badness 10000) in paragraph at lines 374--387
 
  []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 [10]
 File: figure/b.png Graphic file (type bmp)
 <figure/b.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--418
-
- []
-
-File: figure/bezier2.png Graphic file (type bmp)
-<figure/bezier2.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 433--434
+Underfull \hbox (badness 10000) in paragraph at lines 417--420
 
  []
 
 [11]
+File: figure/bezier2.png Graphic file (type bmp)
+<figure/bezier2.png>
+
 Underfull \hbox (badness 10000) in paragraph at lines 435--436
 
  []
@@ -798,17 +790,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 443--444
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 445--446
+
+ []
+
 File: figure/bezier.png Graphic file (type bmp)
 <figure/bezier.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[12]
 File: figure/b-spline.png Graphic file (type bmp)
 <figure/b-spline.png>
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 489--490
 
- []
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 491--492
@@ -820,7 +817,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 493--494
 
  []
 
-[13]
+
 Underfull \hbox (badness 10000) in paragraph at lines 495--496
 
  []
@@ -840,15 +837,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 501--502
 
  []
 
-File: figure/b-spline-result.png Graphic file (type bmp)
-<figure/b-spline-result.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--517
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 503--504
 
  []
 
+File: figure/b-spline-result.png Graphic file (type bmp)
+<figure/b-spline-result.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--519
+Underfull \hbox (badness 10000) in paragraph at lines 514--519
 
  []
 
@@ -857,7 +854,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 520--521
 
  []
 
-
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 522--523
 
  []
@@ -867,7 +864,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 524--525
 
  []
 
-[14]
+
 Underfull \hbox (badness 10000) in paragraph at lines 526--527
 
  []
@@ -882,17 +879,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 530--531
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 532--533
+
+ []
+
 File: figure/1.png Graphic file (type bmp)
 <figure/1.png>
 File: figure/rotate.png Graphic file (type bmp)
 <figure/rotate.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 551--552
-
- []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 553--554
@@ -914,7 +911,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 559--560
 
  []
 
-
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 561--562
 
  []
@@ -924,34 +921,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 563--564
 
  []
 
-[15]
+
 Underfull \hbox (badness 10000) in paragraph at lines 565--566
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 567--568
 
  []
 
 File: figure/rotate_test.png Graphic file (type bmp)
 <figure/rotate_test.png>
+[16]
 File: figure/scale.png Graphic file (type bmp)
 <figure/scale.png>
-[16]
 File: figure/2.png Graphic file (type bmp)
 <figure/2.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 594--610
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 611--612
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 613--614
+Underfull \hbox (badness 10000) in paragraph at lines 596--612
 
  []
 
 [17]
+Underfull \hbox (badness 10000) in paragraph at lines 613--614
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 615--616
 
  []
@@ -991,26 +988,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 629--630
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 631--632
+
+ []
+
 File: figure/clip1.png Graphic file (type bmp)
 <figure/clip1.png>
+[18]
 File: figure/example.png Graphic file (type bmp)
 <figure/example.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 642--651
+Underfull \hbox (badness 10000) in paragraph at lines 644--653
 
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[18]
 Missing character: There is no ≥ in font [lmroman10-regular]:mapping=tex-text;!
- [19]
-Underfull \hbox (badness 10000) in paragraph at lines 692--693
-
- []
-
-
+[19]
 Underfull \hbox (badness 10000) in paragraph at lines 694--695
 
  []
@@ -1055,8 +1049,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 710--711
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 712--713
+
+ []
+
 File: figure/clip1.png Graphic file (type bmp)
 <figure/clip1.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [20] [21]
 File: figure/EillpsGUI.png Graphic file (type bmp)
 <figure/EillpsGUI.png>
@@ -1071,37 +1073,29 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: figure/SaveCanvas.png Graphic file (type bmp)
 <figure/SaveCanvas.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+[23]
 File: figure/test.jpg Graphic file (type bmp)
 <figure/test.jpg>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[23]
-File: figure/resetwindow.png Graphic file (type bmp)
-<figure/resetwindow.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 916--917
+File: figure/resetwindow.png Graphic file (type bmp)
+<figure/resetwindow.png>
+ [25]
+Underfull \hbox (badness 10000) in paragraph at lines 920--921
 
  []
 
 File: figure/test.png Graphic file (type bmp)
 <figure/test.png>
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 924--927
+Underfull \hbox (badness 10000) in paragraph at lines 928--931
 
  []
 
-[25]
+[26]
 File: figure/choose.png Graphic file (type bmp)
 <figure/choose.png>
 File: figure/choose2.png Graphic file (type bmp)
@@ -1112,52 +1106,50 @@ File: figure/log.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[27]
 File: figure/comfirm.png Graphic file (type bmp)
 <figure/comfirm.png>
-[26]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 File: figure/freedraw.png Graphic file (type bmp)
 <figure/freedraw.png>
 File: figure/shortcut.png Graphic file (type bmp)
 <figure/shortcut.png>
-[27] [28]
+ [28]
 File: figure/copypaste.png Graphic file (type bmp)
 <figure/copypaste.png>
-File: figure/delete.png Graphic file (type bmp)
-<figure/delete.png>
+ [29]
 File: figure/cutshow.png Graphic file (type bmp)
 <figure/cutshow.png>
- [29] [30] [31] [32]
+ [30] [31]
+File: figure/git1.png Graphic file (type bmp)
+<figure/git1.png>
+
+Overfull \hbox (73.02759pt too wide) in paragraph at lines 1131--1132
+ [][] 
+ []
+
+[32] [33] [34]
 No file 181860077_Report.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1162.
-[33] [34]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1162.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1206.
+[35]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1206.
  (./181860077_Report.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1162.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1162.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1206.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1206.
+Package rerunfilecheck Info: File `181860077_Report.out' has not changed.
+(rerunfilecheck)             Checksum: C0728CA12CF9EC7B20222D7D6EFFEE06;6263.
 
-
-Package rerunfilecheck Warning: File `181860077_Report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `181860077_Report.out':
-(rerunfilecheck)             Before: 21C361DA150F620C8B1C3F098E9EC95F;5943
-(rerunfilecheck)             After:  D2AAC894719D77E59D04AE62440892B1;5845.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1162.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1206.
  ) 
 Here is how much of TeX's memory you used:
- 18620 strings out of 481358
- 379262 string characters out of 5927294
- 664079 words of memory out of 5000000
- 35693 multiletter control sequences out of 15000+600000
+ 18621 strings out of 481358
+ 379264 string characters out of 5927294
+ 664438 words of memory out of 5000000
+ 35694 multiletter control sequences out of 15000+600000
  540528 words of font info for 86 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 56i,12n,68p,434b,484s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,12n,68p,434b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 181860077_Report.pdf (34 pages).
+Output written on 181860077_Report.pdf (35 pages).

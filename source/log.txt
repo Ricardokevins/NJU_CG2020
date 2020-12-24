@@ -478,3 +478,10 @@
 2020-12-24 10:13:53 translate 0 success
 2020-12-24 10:14:01 translate 0 success
 2020-12-24 10:14:04 rotate 0 success
+2020-12-24 10:15:29 -----------------------------------
+2020-12-24 10:15:29 Start System
+2020-12-24 10:15:33 draw ellipse success  get item 0
+2020-12-24 10:15:34 Select change from  to 0
+2020-12-24 10:15:36 rotate 0 success
+2020-12-24 10:15:40 copy success select 0
+2020-12-24 10:15:43 paste success  get item 1
