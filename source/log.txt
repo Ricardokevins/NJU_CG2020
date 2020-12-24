@@ -449,3 +449,32 @@
 2020-12-24 10:08:23 -----------------------------------
 2020-12-24 10:08:23 Start System
 2020-12-24 10:08:27 draw curve success  get item 0
+2020-12-24 10:10:07 -----------------------------------
+2020-12-24 10:10:07 Start System
+2020-12-24 10:10:10 draw ellipse success  get item 0
+2020-12-24 10:10:11 Select change from  to 0
+2020-12-24 10:10:15 translate 0 success
+2020-12-24 10:10:58 draw polygon success  get item 1
+2020-12-24 10:11:00 Select change from  to 1
+2020-12-24 10:11:03 rotate 1 success
+2020-12-24 10:11:14 rotate 1 success
+2020-12-24 10:11:20 rotate 1 success
+2020-12-24 10:11:25 draw ellipse success  get item 2
+2020-12-24 10:11:28 Select change from  to 2
+2020-12-24 10:11:29 Select change from 2 to 1
+2020-12-24 10:11:32 rotate 1 success
+2020-12-24 10:11:49 draw ellipse success  get item 3
+2020-12-24 10:11:51 draw line success  get item 4
+2020-12-24 10:11:53 Select change from  to 4
+2020-12-24 10:11:55 rotate 4 success
+2020-12-24 10:13:08 -----------------------------------
+2020-12-24 10:13:08 Start System
+2020-12-24 10:13:14 draw polygon success  get item 0
+2020-12-24 10:13:17 Select change from  to 0
+2020-12-24 10:13:19 rotate 0 success
+2020-12-24 10:13:42 rotate 0 success
+2020-12-24 10:13:49 translate 0 success
+2020-12-24 10:13:51 rotate 0 success
+2020-12-24 10:13:53 translate 0 success
+2020-12-24 10:14:01 translate 0 success
+2020-12-24 10:14:04 rotate 0 success

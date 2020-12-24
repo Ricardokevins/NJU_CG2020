@@ -292,6 +292,7 @@ class MyCanvas(QGraphicsView):
                     pass
             else:
                 # finish rotating
+                self.rotating_flag = False
                 self.temp_p_list = self.temp_item.p_list
                 self.status = ''
         elif self.status == "scale":
